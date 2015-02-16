@@ -1,0 +1,19 @@
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2013
+Project("{DF66D94F-940B-EB73-D19E-CB1211268EEA}") = "timbre_research", "timbre_research.vcxproj", "{AF223B1A-8E00-73FF-F942-3AAA6D1BA6C8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AF223B1A-8E00-73FF-F942-3AAA6D1BA6C8}.Debug|Win32.ActiveCfg = Debug|Win32
+		{AF223B1A-8E00-73FF-F942-3AAA6D1BA6C8}.Debug|Win32.Build.0 = Debug|Win32
+		{AF223B1A-8E00-73FF-F942-3AAA6D1BA6C8}.Release|Win32.ActiveCfg = Release|Win32
+		{AF223B1A-8E00-73FF-F942-3AAA6D1BA6C8}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
