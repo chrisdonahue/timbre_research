@@ -6,11 +6,15 @@
               companyName="Chris Donahue">
   <MAINGROUP id="lWIu0b" name="timbre_research">
     <GROUP id="{D356937B-E896-924A-B5AB-DEF10E2A9EC7}" name="Source">
-      <GROUP id="{F1BC3765-4201-8892-8A93-B516CC9F94F8}" name="dsp">
-        <FILE id="KGyNHc" name="dsp_primitive.cpp" compile="1" resource="0"
-              file="Source/dsp/dsp_primitive.cpp"/>
-        <FILE id="XuvKGz" name="dsp_primitive.hpp" compile="0" resource="0"
-              file="Source/dsp/dsp_primitive.hpp"/>
+      <GROUP id="{5A8F734A-24B8-CCA4-76DC-8A596943B5B5}" name="cdsp">
+        <GROUP id="{CCA2CDCC-A7E1-C706-362B-9DCAA7C7C51C}" name="oscillator">
+          <FILE id="OdHtjT" name="table_interpolate_4.cpp" compile="1" resource="0"
+                file="Source/cdsp/oscillator/table_interpolate_4.cpp"/>
+          <FILE id="QwEgao" name="table_interpolate_4.hpp" compile="0" resource="0"
+                file="Source/cdsp/oscillator/table_interpolate_4.hpp"/>
+        </GROUP>
+        <FILE id="v6kYOO" name="primitive.cpp" compile="1" resource="0" file="Source/cdsp/primitive.cpp"/>
+        <FILE id="nuwvd6" name="primitive.hpp" compile="0" resource="0" file="Source/cdsp/primitive.hpp"/>
       </GROUP>
       <GROUP id="{2DA222AC-2D63-5EE0-A6FC-7E46933E44B6}" name="dependencies">
         <GROUP id="{3151364B-D029-BD31-DA21-2FC924796763}" name="kiss_fft130">
@@ -71,6 +75,29 @@
         <MODULEPATH id="juce_audio_processors" path="../JUCE/modules"/>
       </MODULEPATHS>
     </LINUX_MAKE>
+    <VS2012 targetFolder="Builds/VisualStudio2012">
+      <CONFIGURATIONS>
+        <CONFIGURATION name="Debug" winWarningLevel="4" generateManifest="1" winArchitecture="32-bit"
+                       isDebug="1" optimisation="1" targetName="timbre_research"/>
+        <CONFIGURATION name="Release" winWarningLevel="4" generateManifest="1" winArchitecture="32-bit"
+                       isDebug="0" optimisation="2" targetName="timbre_research"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_video" path="../JUCE/modules"/>
+        <MODULEPATH id="juce_opengl" path="../JUCE/modules"/>
+        <MODULEPATH id="juce_gui_extra" path="../JUCE/modules"/>
+        <MODULEPATH id="juce_gui_basics" path="../JUCE/modules"/>
+        <MODULEPATH id="juce_graphics" path="../JUCE/modules"/>
+        <MODULEPATH id="juce_events" path="../JUCE/modules"/>
+        <MODULEPATH id="juce_data_structures" path="../JUCE/modules"/>
+        <MODULEPATH id="juce_cryptography" path="../JUCE/modules"/>
+        <MODULEPATH id="juce_core" path="../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_processors" path="../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_formats" path="../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_devices" path="../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_basics" path="../JUCE/modules"/>
+      </MODULEPATHS>
+    </VS2012>
   </EXPORTFORMATS>
   <MODULES>
     <MODULES id="juce_audio_basics" showAllCode="1" useLocalCopy="0"/>
