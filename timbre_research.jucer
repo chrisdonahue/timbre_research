@@ -6,6 +6,12 @@
               companyName="Chris Donahue">
   <MAINGROUP id="lWIu0b" name="timbre_research">
     <GROUP id="{D356937B-E896-924A-B5AB-DEF10E2A9EC7}" name="Source">
+      <GROUP id="{F1BC3765-4201-8892-8A93-B516CC9F94F8}" name="dsp">
+        <FILE id="KGyNHc" name="dsp_primitive.cpp" compile="1" resource="0"
+              file="Source/dsp/dsp_primitive.cpp"/>
+        <FILE id="XuvKGz" name="dsp_primitive.hpp" compile="0" resource="0"
+              file="Source/dsp/dsp_primitive.hpp"/>
+      </GROUP>
       <GROUP id="{2DA222AC-2D63-5EE0-A6FC-7E46933E44B6}" name="dependencies">
         <GROUP id="{3151364B-D029-BD31-DA21-2FC924796763}" name="kiss_fft130">
           <FILE id="E9nXmK" name="_kiss_fft_guts.h" compile="0" resource="0"

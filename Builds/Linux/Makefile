@@ -51,6 +51,7 @@ ifeq ($(CONFIG),Release)
 endif
 
 OBJECTS := \
+  $(OBJDIR)/dsp_primitive_6253481c.o \
   $(OBJDIR)/kiss_fft_eaf1f82e.o \
   $(OBJDIR)/main_8d1161a2.o \
   $(OBJDIR)/juce_audio_basics_181b4cb.o \
@@ -83,6 +84,11 @@ clean:
 strip:
 	@echo Stripping timbre_research
 	-@strip --strip-unneeded $(OUTDIR)/$(TARGET)
+
+$(OBJDIR)/dsp_primitive_6253481c.o: ../../Source/dsp/dsp_primitive.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling dsp_primitive.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
 $(OBJDIR)/kiss_fft_eaf1f82e.o: ../../Source/dependencies/kiss_fft130/kiss_fft.c
 	-@mkdir -p $(OBJDIR)

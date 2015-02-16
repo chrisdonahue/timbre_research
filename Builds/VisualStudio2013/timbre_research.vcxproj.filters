@@ -8,6 +8,9 @@
     <Filter Include="timbre_research\Source">
       <UniqueIdentifier>{118DEB19-5502-44BE-712B-4221DAEE71A1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="timbre_research\Source\dsp">
+      <UniqueIdentifier>{C1CF288E-2072-9DD4-14B3-0CB81B91C5A3}</UniqueIdentifier>
+    </Filter>
     <Filter Include="timbre_research\Source\dependencies">
       <UniqueIdentifier>{C0395816-6CA1-653E-E9A2-5E6737C69589}</UniqueIdentifier>
     </Filter>
@@ -307,6 +310,9 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Source\dsp\dsp_primitive.cpp">
+      <Filter>timbre_research\Source\dsp</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\dependencies\kiss_fft130\kiss_fft.c">
       <Filter>timbre_research\Source\dependencies\kiss_fft130</Filter>
     </ClCompile>
@@ -1521,6 +1527,9 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Source\dsp\dsp_primitive.hpp">
+      <Filter>timbre_research\Source\dsp</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Source\dependencies\kiss_fft130\_kiss_fft_guts.h">
       <Filter>timbre_research\Source\dependencies\kiss_fft130</Filter>
     </ClInclude>

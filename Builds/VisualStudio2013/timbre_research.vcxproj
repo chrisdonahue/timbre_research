@@ -129,6 +129,7 @@
     </Bscmake>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Source\dsp\dsp_primitive.cpp"/>
     <ClCompile Include="..\..\Source\dependencies\kiss_fft130\kiss_fft.c"/>
     <ClCompile Include="..\..\Source\main.cpp"/>
     <ClCompile Include="..\..\..\JUCE\modules\juce_audio_basics\buffers\juce_AudioDataConverters.cpp">
@@ -1238,6 +1239,7 @@
     <ClCompile Include="..\..\..\JUCE\modules\juce_video\juce_video.cpp"/>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Source\dsp\dsp_primitive.hpp"/>
     <ClInclude Include="..\..\Source\dependencies\kiss_fft130\_kiss_fft_guts.h"/>
     <ClInclude Include="..\..\Source\dependencies\kiss_fft130\kiss_fft.h"/>
     <ClInclude Include="..\..\Source\dependencies\kiss_fft130\kissfft.hh"/>
