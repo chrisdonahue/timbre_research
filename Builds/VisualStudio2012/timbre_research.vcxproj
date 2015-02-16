@@ -130,6 +130,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\cdsp\oscillator\table_interpolate_4.cpp"/>
+    <ClCompile Include="..\..\Source\cdsp\helpers.cpp"/>
+    <ClCompile Include="..\..\Source\cdsp\parameter.cpp"/>
     <ClCompile Include="..\..\Source\cdsp\primitive.cpp"/>
     <ClCompile Include="..\..\Source\dependencies\kiss_fft130\kiss_fft.c"/>
     <ClCompile Include="..\..\Source\main.cpp"/>
@@ -1241,6 +1243,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\cdsp\oscillator\table_interpolate_4.hpp"/>
+    <ClInclude Include="..\..\Source\cdsp\helpers.hpp"/>
+    <ClInclude Include="..\..\Source\cdsp\parameter.hpp"/>
+    <ClInclude Include="..\..\Source\cdsp\types.hpp"/>
     <ClInclude Include="..\..\Source\cdsp\primitive.hpp"/>
     <ClInclude Include="..\..\Source\dependencies\kiss_fft130\_kiss_fft_guts.h"/>
     <ClInclude Include="..\..\Source\dependencies\kiss_fft130\kiss_fft.h"/>

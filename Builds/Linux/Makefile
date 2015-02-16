@@ -52,6 +52,8 @@ endif
 
 OBJECTS := \
   $(OBJDIR)/table_interpolate_4_c7998a88.o \
+  $(OBJDIR)/helpers_d53a1e5d.o \
+  $(OBJDIR)/parameter_e0b65cc1.o \
   $(OBJDIR)/primitive_366fe6ff.o \
   $(OBJDIR)/kiss_fft_eaf1f82e.o \
   $(OBJDIR)/main_8d1161a2.o \
@@ -89,6 +91,16 @@ strip:
 $(OBJDIR)/table_interpolate_4_c7998a88.o: ../../Source/cdsp/oscillator/table_interpolate_4.cpp
 	-@mkdir -p $(OBJDIR)
 	@echo "Compiling table_interpolate_4.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/helpers_d53a1e5d.o: ../../Source/cdsp/helpers.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling helpers.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/parameter_e0b65cc1.o: ../../Source/cdsp/parameter.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling parameter.cpp"
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
 $(OBJDIR)/primitive_366fe6ff.o: ../../Source/cdsp/primitive.cpp
