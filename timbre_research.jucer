@@ -7,12 +7,17 @@
   <MAINGROUP id="lWIu0b" name="timbre_research">
     <GROUP id="{D356937B-E896-924A-B5AB-DEF10E2A9EC7}" name="Source">
       <GROUP id="{5A8F734A-24B8-CCA4-76DC-8A596943B5B5}" name="cdsp">
-        <GROUP id="{CCA2CDCC-A7E1-C706-362B-9DCAA7C7C51C}" name="oscillator">
-          <FILE id="OdHtjT" name="table_interpolate_4.cpp" compile="1" resource="0"
-                file="Source/cdsp/oscillator/table_interpolate_4.cpp"/>
-          <FILE id="QwEgao" name="table_interpolate_4.hpp" compile="0" resource="0"
-                file="Source/cdsp/oscillator/table_interpolate_4.hpp"/>
+        <GROUP id="{D6B5F2AE-AE2C-8B43-F51B-DECF52F3CD7B}" name="primitive">
+          <GROUP id="{7F6D5628-31BE-6FC3-0FF7-E3101C4EEB7E}" name="oscillator">
+            <FILE id="WXam9k" name="table_interpolate_4.cpp" compile="1" resource="0"
+                  file="Source/cdsp/primitive/oscillator/table_interpolate_4.cpp"/>
+            <FILE id="E7PEHz" name="table_interpolate_4.hpp" compile="0" resource="0"
+                  file="Source/cdsp/primitive/oscillator/table_interpolate_4.hpp"/>
+          </GROUP>
+          <FILE id="xLP9h0" name="primitive.cpp" compile="1" resource="0" file="Source/cdsp/primitive/primitive.cpp"/>
+          <FILE id="HUwtSa" name="primitive.hpp" compile="0" resource="0" file="Source/cdsp/primitive/primitive.hpp"/>
         </GROUP>
+        <FILE id="JDRxMA" name="values.hpp" compile="0" resource="0" file="Source/cdsp/values.hpp"/>
         <FILE id="roXvEp" name="exceptions.cpp" compile="1" resource="0" file="Source/cdsp/exceptions.cpp"/>
         <FILE id="wwXRrp" name="exceptions.hpp" compile="0" resource="0" file="Source/cdsp/exceptions.hpp"/>
         <FILE id="b5WLvG" name="helpers.cpp" compile="1" resource="0" file="Source/cdsp/helpers.cpp"/>
@@ -20,8 +25,6 @@
         <FILE id="cAaCqC" name="parameter.cpp" compile="1" resource="0" file="Source/cdsp/parameter.cpp"/>
         <FILE id="x5W9hv" name="parameter.hpp" compile="0" resource="0" file="Source/cdsp/parameter.hpp"/>
         <FILE id="egKpX9" name="types.hpp" compile="0" resource="0" file="Source/cdsp/types.hpp"/>
-        <FILE id="v6kYOO" name="primitive.cpp" compile="1" resource="0" file="Source/cdsp/primitive.cpp"/>
-        <FILE id="nuwvd6" name="primitive.hpp" compile="0" resource="0" file="Source/cdsp/primitive.hpp"/>
       </GROUP>
       <GROUP id="{2DA222AC-2D63-5EE0-A6FC-7E46933E44B6}" name="dependencies">
         <GROUP id="{3151364B-D029-BD31-DA21-2FC924796763}" name="kiss_fft130">

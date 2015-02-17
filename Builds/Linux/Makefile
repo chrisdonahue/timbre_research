@@ -51,11 +51,11 @@ ifeq ($(CONFIG),Release)
 endif
 
 OBJECTS := \
-  $(OBJDIR)/table_interpolate_4_c7998a88.o \
+  $(OBJDIR)/table_interpolate_4_636b870.o \
+  $(OBJDIR)/primitive_628cd817.o \
   $(OBJDIR)/exceptions_f38e2436.o \
   $(OBJDIR)/helpers_d53a1e5d.o \
   $(OBJDIR)/parameter_e0b65cc1.o \
-  $(OBJDIR)/primitive_366fe6ff.o \
   $(OBJDIR)/kiss_fft_eaf1f82e.o \
   $(OBJDIR)/main_8d1161a2.o \
   $(OBJDIR)/juce_audio_basics_181b4cb.o \
@@ -89,9 +89,14 @@ strip:
 	@echo Stripping timbre_research
 	-@strip --strip-unneeded $(OUTDIR)/$(TARGET)
 
-$(OBJDIR)/table_interpolate_4_c7998a88.o: ../../Source/cdsp/oscillator/table_interpolate_4.cpp
+$(OBJDIR)/table_interpolate_4_636b870.o: ../../Source/cdsp/primitive/oscillator/table_interpolate_4.cpp
 	-@mkdir -p $(OBJDIR)
 	@echo "Compiling table_interpolate_4.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/primitive_628cd817.o: ../../Source/cdsp/primitive/primitive.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling primitive.cpp"
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
 $(OBJDIR)/exceptions_f38e2436.o: ../../Source/cdsp/exceptions.cpp
@@ -107,11 +112,6 @@ $(OBJDIR)/helpers_d53a1e5d.o: ../../Source/cdsp/helpers.cpp
 $(OBJDIR)/parameter_e0b65cc1.o: ../../Source/cdsp/parameter.cpp
 	-@mkdir -p $(OBJDIR)
 	@echo "Compiling parameter.cpp"
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/primitive_366fe6ff.o: ../../Source/cdsp/primitive.cpp
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling primitive.cpp"
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
 $(OBJDIR)/kiss_fft_eaf1f82e.o: ../../Source/dependencies/kiss_fft130/kiss_fft.c

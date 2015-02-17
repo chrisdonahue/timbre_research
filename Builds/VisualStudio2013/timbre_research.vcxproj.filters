@@ -11,8 +11,11 @@
     <Filter Include="timbre_research\Source\cdsp">
       <UniqueIdentifier>{63F57FF6-9A85-0741-2C10-0694505460E2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="timbre_research\Source\cdsp\oscillator">
-      <UniqueIdentifier>{18E012B5-8AC9-6868-CF75-F3463EE01DFA}</UniqueIdentifier>
+    <Filter Include="timbre_research\Source\cdsp\primitive">
+      <UniqueIdentifier>{036E7B12-7805-79F9-43F1-D6E5DC12F781}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="timbre_research\Source\cdsp\primitive\oscillator">
+      <UniqueIdentifier>{357C96F4-14B6-19C1-4D76-AFB1A5CEBAF8}</UniqueIdentifier>
     </Filter>
     <Filter Include="timbre_research\Source\dependencies">
       <UniqueIdentifier>{C0395816-6CA1-653E-E9A2-5E6737C69589}</UniqueIdentifier>
@@ -313,8 +316,11 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Source\cdsp\oscillator\table_interpolate_4.cpp">
-      <Filter>timbre_research\Source\cdsp\oscillator</Filter>
+    <ClCompile Include="..\..\Source\cdsp\primitive\oscillator\table_interpolate_4.cpp">
+      <Filter>timbre_research\Source\cdsp\primitive\oscillator</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\cdsp\primitive\primitive.cpp">
+      <Filter>timbre_research\Source\cdsp\primitive</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\cdsp\exceptions.cpp">
       <Filter>timbre_research\Source\cdsp</Filter>
@@ -323,9 +329,6 @@
       <Filter>timbre_research\Source\cdsp</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\cdsp\parameter.cpp">
-      <Filter>timbre_research\Source\cdsp</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\cdsp\primitive.cpp">
       <Filter>timbre_research\Source\cdsp</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\dependencies\kiss_fft130\kiss_fft.c">
@@ -1542,8 +1545,14 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Source\cdsp\oscillator\table_interpolate_4.hpp">
-      <Filter>timbre_research\Source\cdsp\oscillator</Filter>
+    <ClInclude Include="..\..\Source\cdsp\primitive\oscillator\table_interpolate_4.hpp">
+      <Filter>timbre_research\Source\cdsp\primitive\oscillator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\cdsp\primitive\primitive.hpp">
+      <Filter>timbre_research\Source\cdsp\primitive</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\cdsp\values.hpp">
+      <Filter>timbre_research\Source\cdsp</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\cdsp\exceptions.hpp">
       <Filter>timbre_research\Source\cdsp</Filter>
@@ -1555,9 +1564,6 @@
       <Filter>timbre_research\Source\cdsp</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\cdsp\types.hpp">
-      <Filter>timbre_research\Source\cdsp</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\cdsp\primitive.hpp">
       <Filter>timbre_research\Source\cdsp</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\dependencies\kiss_fft130\_kiss_fft_guts.h">
