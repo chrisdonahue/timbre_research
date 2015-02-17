@@ -1,7 +1,7 @@
 #include "table_interpolate_4.hpp"
 
-cdsp::oscillator::table_interpolate_4::table_interpolate_4() :
-	cdsp::primitive(),
+cdsp::primitive::oscillator::table_interpolate_4::table_interpolate_4() :
+	cdsp::primitive::base(),
 	table_length(0),
 	table_mask(0),
 	table(nullptr),
@@ -9,7 +9,7 @@ cdsp::oscillator::table_interpolate_4::table_interpolate_4() :
 {
 };
 
-void cdsp::oscillator::table_interpolate_4::perform(types::disc_32_u block_size, types::sample** channels_input, types::sample** channels_output) {
+void cdsp::primitive::oscillator::table_interpolate_4::perform(types::disc_32_u block_size, types::sample** channels_input, types::sample** channels_output) {
 		channels_input;
 
 		// check to make sure we have a table to interpolate
@@ -72,11 +72,11 @@ void cdsp::oscillator::table_interpolate_4::perform(types::disc_32_u block_size,
 		}
 };
 
-void cdsp::oscillator::table_interpolate_4::parameters_add() {
+void cdsp::primitive::oscillator::table_interpolate_4::parameters_add() {
 	parameter_add("frequency", 0.0f, 0.0f, 1.0f);
 }
 
-void cdsp::oscillator::table_interpolate_4::table_set(types::disc_32_u _table_size, types::cont_32* _table) {
+void cdsp::primitive::oscillator::table_interpolate_4::table_set(types::disc_32_u _table_size, types::cont_32* _table) {
 	if (!cdsp::helpers::is_power_of_two(_table_size)) {
 		throw cdsp::exceptions::runtime("cdsp::oscillator::table_interpolate_4: table_set called with a table_size that wasn't a power of two");
 	}

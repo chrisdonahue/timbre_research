@@ -130,7 +130,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\cdsp\primitive\oscillator\table_interpolate_4.cpp"/>
-    <ClCompile Include="..\..\Source\cdsp\primitive\primitive.cpp"/>
+    <ClCompile Include="..\..\Source\cdsp\primitive\base.cpp"/>
     <ClCompile Include="..\..\Source\cdsp\exceptions.cpp"/>
     <ClCompile Include="..\..\Source\cdsp\helpers.cpp"/>
     <ClCompile Include="..\..\Source\cdsp\parameter.cpp"/>
@@ -1244,7 +1244,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\cdsp\primitive\oscillator\table_interpolate_4.hpp"/>
-    <ClInclude Include="..\..\Source\cdsp\primitive\primitive.hpp"/>
+    <ClInclude Include="..\..\Source\cdsp\primitive\base.hpp"/>
+    <ClInclude Include="..\..\Source\cdsp\cdsp.hpp"/>
     <ClInclude Include="..\..\Source\cdsp\values.hpp"/>
     <ClInclude Include="..\..\Source\cdsp\exceptions.hpp"/>
     <ClInclude Include="..\..\Source\cdsp\helpers.hpp"/>

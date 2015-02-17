@@ -319,7 +319,7 @@
     <ClCompile Include="..\..\Source\cdsp\primitive\oscillator\table_interpolate_4.cpp">
       <Filter>timbre_research\Source\cdsp\primitive\oscillator</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\cdsp\primitive\primitive.cpp">
+    <ClCompile Include="..\..\Source\cdsp\primitive\base.cpp">
       <Filter>timbre_research\Source\cdsp\primitive</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\cdsp\exceptions.cpp">
@@ -1548,8 +1548,11 @@
     <ClInclude Include="..\..\Source\cdsp\primitive\oscillator\table_interpolate_4.hpp">
       <Filter>timbre_research\Source\cdsp\primitive\oscillator</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\cdsp\primitive\primitive.hpp">
+    <ClInclude Include="..\..\Source\cdsp\primitive\base.hpp">
       <Filter>timbre_research\Source\cdsp\primitive</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\cdsp\cdsp.hpp">
+      <Filter>timbre_research\Source\cdsp</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\cdsp\values.hpp">
       <Filter>timbre_research\Source\cdsp</Filter>

@@ -4,10 +4,10 @@
 #include <math.h>
 
 #include "../../helpers.hpp"
-#include "../primitive.hpp"
+#include "../base.hpp"
 
-namespace cdsp { namespace oscillator {
-	class table_interpolate_4 : public cdsp::primitive {
+namespace cdsp { namespace primitive { namespace oscillator {
+	class table_interpolate_4 : public cdsp::primitive::base {
 	public:
 		table_interpolate_4();
 
@@ -24,6 +24,6 @@ namespace cdsp { namespace oscillator {
 
 		types::cont_64 phase;
 	};
-}}
+}}}
 
 #endif

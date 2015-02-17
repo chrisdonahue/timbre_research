@@ -52,7 +52,7 @@ endif
 
 OBJECTS := \
   $(OBJDIR)/table_interpolate_4_636b870.o \
-  $(OBJDIR)/primitive_628cd817.o \
+  $(OBJDIR)/base_c25da42b.o \
   $(OBJDIR)/exceptions_f38e2436.o \
   $(OBJDIR)/helpers_d53a1e5d.o \
   $(OBJDIR)/parameter_e0b65cc1.o \
@@ -94,9 +94,9 @@ $(OBJDIR)/table_interpolate_4_636b870.o: ../../Source/cdsp/primitive/oscillator/
 	@echo "Compiling table_interpolate_4.cpp"
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
-$(OBJDIR)/primitive_628cd817.o: ../../Source/cdsp/primitive/primitive.cpp
+$(OBJDIR)/base_c25da42b.o: ../../Source/cdsp/primitive/base.cpp
 	-@mkdir -p $(OBJDIR)
-	@echo "Compiling primitive.cpp"
+	@echo "Compiling base.cpp"
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
 $(OBJDIR)/exceptions_f38e2436.o: ../../Source/cdsp/exceptions.cpp

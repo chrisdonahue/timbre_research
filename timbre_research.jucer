@@ -14,9 +14,10 @@
             <FILE id="E7PEHz" name="table_interpolate_4.hpp" compile="0" resource="0"
                   file="Source/cdsp/primitive/oscillator/table_interpolate_4.hpp"/>
           </GROUP>
-          <FILE id="xLP9h0" name="primitive.cpp" compile="1" resource="0" file="Source/cdsp/primitive/primitive.cpp"/>
-          <FILE id="HUwtSa" name="primitive.hpp" compile="0" resource="0" file="Source/cdsp/primitive/primitive.hpp"/>
+          <FILE id="xLP9h0" name="base.cpp" compile="1" resource="0" file="Source/cdsp/primitive/base.cpp"/>
+          <FILE id="HUwtSa" name="base.hpp" compile="0" resource="0" file="Source/cdsp/primitive/base.hpp"/>
         </GROUP>
+        <FILE id="gbdWKP" name="cdsp.hpp" compile="0" resource="0" file="Source/cdsp/cdsp.hpp"/>
         <FILE id="JDRxMA" name="values.hpp" compile="0" resource="0" file="Source/cdsp/values.hpp"/>
         <FILE id="roXvEp" name="exceptions.cpp" compile="1" resource="0" file="Source/cdsp/exceptions.cpp"/>
         <FILE id="wwXRrp" name="exceptions.hpp" compile="0" resource="0" file="Source/cdsp/exceptions.hpp"/>

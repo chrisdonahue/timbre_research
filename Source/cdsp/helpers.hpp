@@ -4,6 +4,7 @@
 #include <map>
 #include <math.h>
 
+#include "exceptions.hpp"
 #include "types.hpp"
 #include "values.hpp"
 
