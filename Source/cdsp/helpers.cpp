@@ -26,3 +26,7 @@ void cdsp::helpers::sine_sum(std::map<types::cont_32, types::cont_32> partials, 
 		index_value += index_increment;
 	}
 }
+
+void cdsp::helpers::io::wav_file_save(std::string file_path, types::cont_64 sample_rate, types::disc_32_u buffer_length, types::sample* buffer) {
+	// TODO
+}

@@ -15,6 +15,10 @@ namespace cdsp { namespace helpers {
 
 	// wavetable helpers
 	extern void sine_sum(std::map<types::cont_32, types::cont_32> partials, types::disc_32_u buffer_length, types::sample* buffer);
+
+	namespace io {
+		extern void wav_file_save(std::string file_path, types::cont_64 sample_rate, types::disc_32_u buffer_length, types::sample* buffer);
+	}
 }}
 
 #endif
