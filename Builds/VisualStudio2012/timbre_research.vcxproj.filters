@@ -316,6 +316,9 @@
     <ClCompile Include="..\..\Source\cdsp\oscillator\table_interpolate_4.cpp">
       <Filter>timbre_research\Source\cdsp\oscillator</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\cdsp\exceptions.cpp">
+      <Filter>timbre_research\Source\cdsp</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\cdsp\helpers.cpp">
       <Filter>timbre_research\Source\cdsp</Filter>
     </ClCompile>
@@ -1541,6 +1544,9 @@
   <ItemGroup>
     <ClInclude Include="..\..\Source\cdsp\oscillator\table_interpolate_4.hpp">
       <Filter>timbre_research\Source\cdsp\oscillator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\cdsp\exceptions.hpp">
+      <Filter>timbre_research\Source\cdsp</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\cdsp\helpers.hpp">
       <Filter>timbre_research\Source\cdsp</Filter>

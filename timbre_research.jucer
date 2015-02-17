@@ -13,6 +13,8 @@
           <FILE id="QwEgao" name="table_interpolate_4.hpp" compile="0" resource="0"
                 file="Source/cdsp/oscillator/table_interpolate_4.hpp"/>
         </GROUP>
+        <FILE id="roXvEp" name="exceptions.cpp" compile="1" resource="0" file="Source/cdsp/exceptions.cpp"/>
+        <FILE id="wwXRrp" name="exceptions.hpp" compile="0" resource="0" file="Source/cdsp/exceptions.hpp"/>
         <FILE id="b5WLvG" name="helpers.cpp" compile="1" resource="0" file="Source/cdsp/helpers.cpp"/>
         <FILE id="nCzPjF" name="helpers.hpp" compile="0" resource="0" file="Source/cdsp/helpers.hpp"/>
         <FILE id="cAaCqC" name="parameter.cpp" compile="1" resource="0" file="Source/cdsp/parameter.cpp"/>

@@ -4,7 +4,7 @@
 #include "types.hpp"
 
 namespace cdsp {
-	template <class T> class parameter {
+	template <typename T> class parameter {
 	public:
 		parameter(T value_initial) {
 			value = value_initial;
@@ -28,7 +28,7 @@ namespace cdsp {
 		T value;
 	};
 
-	template <class T> class parameter_dezippered : public parameter < T > {
+	template <typename T> class parameter_dezippered : public parameter < T > {
 	public:
 		parameter_dezippered(T value_initial) : parameter(value_initial) {
 			value_next = value_initial;
