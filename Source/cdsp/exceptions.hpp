@@ -15,6 +15,11 @@ namespace cdsp { namespace exceptions {
 	public:
 		template_specialization(const std::string& msg) : std::runtime_error(msg) {};
 	};
+
+	class subclass_specialization : public std::runtime_error {
+	public:
+		subclass_specialization(const std::string& msg) : std::runtime_error(msg) {};
+	};
 }}
 
 #endif

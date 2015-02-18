@@ -1,6 +1,10 @@
 #ifndef CDSP_TYPES
 #define CDSP_TYPES
 
+#include <map>
+#include <string>
+#include <unordered_map>
+
 #include "defines.hpp"
 
 namespace cdsp { namespace types {
@@ -15,6 +19,7 @@ namespace cdsp { namespace types {
 #else
 	typedef cont_32 sample;
 #endif
+	typedef std::string string;
 }}
 
 #endif

@@ -1,6 +1,8 @@
 #ifndef CDSP_DEFINES
 #define CDSP_DEFINES
 
+//#define CDSP_DEBUG
+
 #ifdef _WIN32
 #define CDSP_WIN32
 #ifdef _WIN64
@@ -17,5 +19,9 @@
 #endif
 
 #define CDSP_SAMPLE_32
+//#define CDSP_SAMPLE_64
+
+//#define CDSP_MEMORY_LOW
+#define CDSP_MEMORY_HIGH
 
 #endif

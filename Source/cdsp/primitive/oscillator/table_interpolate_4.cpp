@@ -9,9 +9,16 @@ cdsp::primitive::oscillator::table_interpolate_4::table_interpolate_4() :
 	// set num input and ouput channels
 	channels_input_num = 0;
 	channels_output_num = 1;
+};
 
-	// add parameters
-	parameter_add("frequency", 0.0f, 0.0f, 1.0f);
+void cdsp::primitive::oscillator::table_interpolate_4::table_set(types::disc_32_u _table_length, const types::cont_32* _table) {
+	if (!cdsp::helpers::is_power_of_two(_table_length)) {
+		throw cdsp::exceptions::runtime("cdsp::primitive::oscillator::table_interpolate_4: table_set called with a table_size that was not a power of two");
+	}
+
+	table_length = _table_length;
+	table_mask = table_length - 1;
+	table = _table;
 };
 
 void cdsp::primitive::oscillator::table_interpolate_4::perform(sample_buffer& buffer) {
@@ -21,7 +28,8 @@ void cdsp::primitive::oscillator::table_interpolate_4::perform(sample_buffer& bu
 		}
 
 		// get parameter values
-		types::cont_32 frequency = parameter_get<types::cont_32>("frequency");
+		types::cont_32 frequency = 0.01f;
+		//parameter_get<types::cont_32>("frequency");
 
 		// create temporaries
 		types::cont_32 frequency_current;
@@ -74,14 +82,4 @@ void cdsp::primitive::oscillator::table_interpolate_4::perform(sample_buffer& bu
 		while (phase < 0.0) {
 			phase = phase + static_cast<types::cont_64>(table_length);
 		}
-};
-
-void cdsp::primitive::oscillator::table_interpolate_4::table_set(types::disc_32_u _table_length, const types::cont_32* _table) {
-	if (!cdsp::helpers::is_power_of_two(_table_length)) {
-		throw cdsp::exceptions::runtime("cdsp::primitive::oscillator::table_interpolate_4: table_set called with a table_size that was not a power of two");
-	}
-
-	table_length = _table_length;
-	table_mask = table_length - 1;
-	table = _table;
 };

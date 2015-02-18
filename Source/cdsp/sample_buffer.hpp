@@ -9,8 +9,12 @@
 namespace cdsp {
 	class sample_buffer {
 	public:
+		sample_buffer();
 		sample_buffer(types::disc_32_u channels_num, types::disc_32_u channel_buffer_length);
 		~sample_buffer();
+
+		// resize
+		void resize(types::disc_32_u _channels_num, types::disc_32_u _channel_buffer_length);
 
 		// meta data accessors
 		types::disc_32_u channels_num_get();
@@ -40,6 +44,10 @@ namespace cdsp {
 		void normalize_independent();
 
 	private:
+		// buffer memory management
+		void buffer_reallocate();
+		void buffer_free();
+
 		types::disc_32_u channels_num;
 		types::disc_32_u channel_buffer_length;
 		types::disc_32_u buffer_length;

@@ -1,7 +1,7 @@
 #ifndef CDSP_BASE
 #define CDSP_BASE
 
-#include <map>
+#include <unordered_map>
 #include <utility>
 
 #include "../exceptions.hpp"
@@ -15,59 +15,31 @@ namespace cdsp { namespace primitive {
 		base();
 		~base();
 
-		// parameter get
-		template<typename T> T parameter_get(const char* parameter_specifier) {
-			throw exceptions::template_specialization("cdsp::base: parameter_get called on unexpected type");
-		};
-		template<> types::cont_32 parameter_get<types::cont_32>(const char* parameter_specifier) {
-			auto it = parameters_cont_32.find(parameter_specifier);
-			if (it == parameters_cont_32.end()) {
-				throw exceptions::runtime("cdsp::base: parameter_get<types::cont_32> called on unexpected parameter specifier");
-			}
-			return (it->second).value_get();
-		};
-
-		// parameter set
-		template<typename T> void parameter_set(const char* parameter_specifier, T value_new, types::cont_64 delay_ms) {
-			delay_ms;
-			throw exceptions::template_specialization("cdsp::base: parameter_set called on unexpected type");
-		};
-		template<> void parameter_set<types::cont_32>(const char* parameter_specifier, types::cont_32 value_new, types::cont_64 delay_ms) {
-			delay_ms;
-			auto it = parameters_cont_32.find(parameter_specifier);
-			if (it == parameters_cont_32.end()) {
-				throw exceptions::runtime("cdsp::base: parameter_set<types::cont_32> called on unexpected parameter specifier");
-			}
-			(it->second).value_next_set(value_new);
-		};
-
 		// dsp 
 		virtual void prepare(types::cont_64 sample_rate, types::disc_32_u block_size);
 		virtual void release();
 		virtual void perform(sample_buffer& buffer) = 0;
 
 	protected:
-		// parameter add
-		template<typename T> void parameter_add(const char* parameter_specifier, T value_initial, T value_min, T value_max) {
-			value_min;
-			value_max;
-			throw exceptions::template_specialization("cdsp::base: parameter_add called on unexpected type");
-		};
-		template<> void parameter_add<types::cont_32>(const char* parameter_specifier, types::cont_32 value_initial, types::cont_32 value_min, types::cont_32 value_max) {
-			value_min;
-			value_max;
-			auto it = parameters_cont_32.find(parameter_specifier);
-			if (it != parameters_cont_32.end()) {
-				throw exceptions::runtime("cdsp::base: parameter_add<types::cont_32> called for an already existing parameter specifier");
-			}
-			parameters_cont_32.insert(std::make_pair(std::string(parameter_specifier), parameter<types::cont_32>(value_initial)));
-		};
-
 		types::disc_32_u channels_input_num;
 		types::disc_32_u channels_output_num;
 
+		// block parameters
+		template<typename T> void parameter_rate_block_add(std::string parameter_specifier, T value_initial, T value_min, T value_max) {
+			throw exceptions::template_specialization("cdsp::primitive::base: parameter_block_add called on unexpected type");
+		};
+		template<> void parameter_rate_block_add(std::string parameter_specifier, types::disc_32 value_initial, types::disc_32 value_min, types::disc_32 value_max) {
+			parameter::rate_block<types::disc_32> myp(value_initial, value_min, value_max);
+			//parameters_rate_block_disc_32.insert(std::make_pair(parameter_specifier,);
+		};
+
+		// real-time parameters
+
 	private:
-		std::map<std::string, parameter<types::cont_32> > parameters_cont_32;
+		std::unordered_map<std::string, parameter::rate_block<types::disc_32>&> parameters_rate_block_disc_32;
+		std::unordered_map<std::string, parameter::rate_block<types::cont_32>&> parameters_rate_block_cont_32;
+		std::unordered_map<std::string, parameter::ramp_linear&> parameters_rate_audio_ramp_linear;
+		std::unordered_map<std::string, parameter::signal&> parameters_rate_audio_signal;
 	};
 }}
 

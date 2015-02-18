@@ -20,7 +20,7 @@ int main (int argc, char* argv[]) {
 	sample_buffer output_buffer(1, output_buffer_length);
 
 	// perform
-	oscillator.parameter_set("frequency", 0.00249433106f, 0.0f);
+	//oscillator.parameter_set("frequency", 0.00249433106f, 0.0f);
 	oscillator.perform(output_buffer);
 
 	// save

@@ -1,14 +1,47 @@
 #include "sample_buffer.hpp"
 
+cdsp::sample_buffer::sample_buffer() {
+	channels_num = 0;
+	channel_buffer_length = 0;
+	buffer_length = 0;
+	buffer = nullptr;
+}
+
+
 cdsp::sample_buffer::sample_buffer(types::disc_32_u _channels_num, types::disc_32_u _channel_buffer_length) {
 	channels_num = _channels_num;
 	channel_buffer_length = _channel_buffer_length;
-	buffer_length = channels_num * channel_buffer_length;
-	buffer = static_cast<types::sample*>(malloc(sizeof(types::sample) * buffer_length));
+	buffer_length = 0;
+	buffer = nullptr;
+	buffer_reallocate();
 }
 
 cdsp::sample_buffer::~sample_buffer() {
-	free(buffer);
+	buffer_free();
+}
+
+void cdsp::sample_buffer::buffer_reallocate() {
+	buffer_length = channels_num * channel_buffer_length;
+	buffer = reinterpret_cast<types::sample*>(malloc(sizeof(types::sample) * buffer_length));
+}
+
+void cdsp::sample_buffer::buffer_free() {
+	channels_num = 0;
+	channel_buffer_length = 0;
+	if (buffer != nullptr) {
+		buffer_length = 0;
+		free(buffer);
+		buffer = nullptr;
+	}
+}
+
+void cdsp::sample_buffer::resize(types::disc_32_u _channels_num, types::disc_32_u _channel_buffer_length) {
+	buffer_free();
+	channels_num = _channels_num;
+	channel_buffer_length = _channel_buffer_length;
+	if (!(channels_num & channel_buffer_length)) {
+		buffer_reallocate();
+	}
 }
 
 cdsp::types::disc_32_u cdsp::sample_buffer::channels_num_get() {
