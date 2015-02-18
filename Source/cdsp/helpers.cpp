@@ -27,6 +27,85 @@ void cdsp::helpers::sine_sum(std::map<types::cont_32, types::cont_32> partials, 
 	}
 }
 
-void cdsp::helpers::io::wav_file_save(std::string file_path, types::cont_64 sample_rate, types::disc_32_u buffer_length, types::sample* buffer) {
-	// TODO
+template <typename T>
+void write(std::ofstream& stream, const T& t) {
+	stream.write((const char*)&t, sizeof(T));
+}
+
+void cdsp::helpers::io::wav_file_save(std::string file_path, types::disc_32_u sample_rate, types::disc_32_u sample_bit_depth, sample_buffer& buffer) {
+	// TODO: use sample bit depth
+	sample_bit_depth;
+
+	// adapt my signature
+	size_t bufSize = buffer.buffer_size_get();
+	short channels = static_cast<short>(buffer.channels_num_get());
+	int sampleRate = sample_rate;
+	typedef types::sample SampleType;
+	const types::sample* buf = buffer.channel_pointer_read(0);
+
+	// open
+    std::ofstream stream(file_path.c_str(), std::ios::binary);      // Open file stream at "outFile" location
+
+	// http://stackoverflow.com/questions/22226872/two-problems-when-writing-to-wav-c
+    /* Header */
+    stream.write("RIFF", 4);                                        // sGroupID (RIFF = Resource Interchange File Format)
+    write<int>(stream, 36 + bufSize);                               // dwFileLength
+    stream.write("WAVE", 4);                                        // sRiffType
+
+    /* Format Chunk */
+    stream.write("fmt ", 4);                                        // sGroupID (fmt = format)
+    write<int>(stream, 16);                                         // Chunk size (of Format Chunk)
+    write<short>(stream, 3);                                        // Format (1 = PCM, 3 = Float)
+    write<short>(stream, channels);                                 // Channels
+    write<int>(stream, sampleRate);                                 // Sample Rate
+    write<int>(stream, sampleRate * channels * sizeof(SampleType)); // Byterate
+    write<short>(stream, channels * sizeof(SampleType));            // Frame size aka Block align
+    write<short>(stream, 8 * sizeof(SampleType));                   // Bits per sample
+
+    /* Data Chunk */
+    stream.write("data", 4);                                        // sGroupID (data)
+    stream.write((const char*)&bufSize, 4);                         // Chunk size (of Data, and thus of bufferSize)
+    stream.write((const char*)buf, bufSize);                        // The samples DATA!!!
+
+	// close
+	stream.close();
+
+	/*
+	// create wav file header
+	wav_file_header header;
+#ifdef CDSP_WIN32
+	strncpy_s(header.m_lpcChunkId, 4, "RIFF", _TRUNCATE);
+#else
+	strncpy(header.m_lpcChunkId, "RIFF", 4);
+#endif
+	header.m_iChunkSize = static_cast<int>(sizeof(header) + (buffer.buffer_size_get()) - 8);
+#ifdef CDSP_WIN32
+	strncpy_s(header.m_lpcFormat, 4, "WAVE", _TRUNCATE);
+#else
+	strncpy(header.m_lpcFormat, "WAVE", 4);
+#endif
+#ifdef CDSP_WIN32
+	strncpy_s(header.m_lpcSubChunkFmt, 4, "fmt", _TRUNCATE);
+#else
+	strncpy(header.m_lpcSubChunkFmt, "fmt", 4);
+#endif
+	header.m_iSubChunkFmtSize = 16;
+	header.m_siAudioFormat = 1;
+	header.m_siNumChannels = static_cast<short int>(buffer.channels_num_get());
+	header.m_iSampleRate = static_cast<int>(sample_rate);
+	header.m_iByteRate = (sample_rate * sample_bit_depth * buffer.channels_num_get()) / 8;
+	header.m_siBlockAlign = 4;
+	header.m_siBitsPerSample = static_cast<short int>(sample_bit_depth);
+#ifdef CDSP_WIN32
+	strncpy_s(header.m_lpcChunkData, 4, "data", _TRUNCATE);
+#else
+	strncpy(header.m_lpcChunkData, "data", 4);
+#endif
+	header.m_iSubChunkDataSize = buffer.buffer_length_get();
+
+	FILE* fid = fopen(file_path.c_str(), "wb");
+	fwrite(&header, sizeof(char), sizeof(wav_file_header), fid);
+	fwrite(buffer.channel_pointer_read(0), sizeof(char), buffer.buffer_size_get(), fid);
+	fclose(fid);
+	*/
 }

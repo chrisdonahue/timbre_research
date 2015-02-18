@@ -1,10 +1,14 @@
 #ifndef CDSP_HELPERS
 #define CDSP_HELPERS
 
+#include <fstream>
 #include <map>
-#include <math.h>
+#include <cmath>
+#include <cstdio>
 
+#include "defines.hpp"
 #include "exceptions.hpp"
+#include "sample_buffer.hpp"
 #include "types.hpp"
 #include "values.hpp"
 
@@ -17,7 +21,7 @@ namespace cdsp { namespace helpers {
 	extern void sine_sum(std::map<types::cont_32, types::cont_32> partials, types::disc_32_u buffer_length, types::sample* buffer);
 
 	namespace io {
-		extern void wav_file_save(std::string file_path, types::cont_64 sample_rate, types::disc_32_u buffer_length, types::sample* buffer);
+		extern void wav_file_save(std::string file_path, types::disc_32_u sample_rate, types::disc_32_u sample_bit_depth, sample_buffer& sample_buffer);
 	}
 }}
 

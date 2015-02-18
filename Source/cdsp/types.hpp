@@ -7,6 +7,7 @@ namespace cdsp { namespace types {
 	typedef float cont_32;
 	typedef double cont_64;
 	typedef bool boolean;
+	typedef size_t size;
 	typedef cont_32 sample;
 }}
 

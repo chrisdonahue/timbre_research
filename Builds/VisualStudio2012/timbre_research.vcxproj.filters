@@ -322,6 +322,9 @@
     <ClCompile Include="..\..\Source\cdsp\primitive\base.cpp">
       <Filter>timbre_research\Source\cdsp\primitive</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\cdsp\sample_buffer.cpp">
+      <Filter>timbre_research\Source\cdsp</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\cdsp\exceptions.cpp">
       <Filter>timbre_research\Source\cdsp</Filter>
     </ClCompile>
@@ -1552,6 +1555,12 @@
       <Filter>timbre_research\Source\cdsp\primitive</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\cdsp\cdsp.hpp">
+      <Filter>timbre_research\Source\cdsp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\cdsp\defines.hpp">
+      <Filter>timbre_research\Source\cdsp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\cdsp\sample_buffer.hpp">
       <Filter>timbre_research\Source\cdsp</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\cdsp\values.hpp">

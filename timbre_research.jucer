@@ -18,6 +18,11 @@
           <FILE id="HUwtSa" name="base.hpp" compile="0" resource="0" file="Source/cdsp/primitive/base.hpp"/>
         </GROUP>
         <FILE id="gbdWKP" name="cdsp.hpp" compile="0" resource="0" file="Source/cdsp/cdsp.hpp"/>
+        <FILE id="XLTCMI" name="defines.hpp" compile="0" resource="0" file="Source/cdsp/defines.hpp"/>
+        <FILE id="KrDO1z" name="sample_buffer.cpp" compile="1" resource="0"
+              file="Source/cdsp/sample_buffer.cpp"/>
+        <FILE id="laIoga" name="sample_buffer.hpp" compile="0" resource="0"
+              file="Source/cdsp/sample_buffer.hpp"/>
         <FILE id="JDRxMA" name="values.hpp" compile="0" resource="0" file="Source/cdsp/values.hpp"/>
         <FILE id="roXvEp" name="exceptions.cpp" compile="1" resource="0" file="Source/cdsp/exceptions.cpp"/>
         <FILE id="wwXRrp" name="exceptions.hpp" compile="0" resource="0" file="Source/cdsp/exceptions.hpp"/>
