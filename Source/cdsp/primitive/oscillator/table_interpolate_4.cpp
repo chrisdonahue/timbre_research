@@ -9,6 +9,9 @@ cdsp::primitive::oscillator::table_interpolate_4::table_interpolate_4() :
 	// set num input and ouput channels
 	channels_input_num = 0;
 	channels_output_num = 1;
+
+	// create parameters
+	parameter_rate_audio_add("frequency", static_cast<types::sample>(0.0), static_cast<types::sample>(0.0), static_cast<types::sample>(1.0));
 };
 
 void cdsp::primitive::oscillator::table_interpolate_4::table_set(types::disc_32_u _table_length, const types::cont_32* _table) {
@@ -20,6 +23,14 @@ void cdsp::primitive::oscillator::table_interpolate_4::table_set(types::disc_32_
 	table_mask = table_length - 1;
 	table = _table;
 };
+
+void cdsp::primitive::oscillator::table_interpolate_4::phase_set(types::cont_64 _phase) {
+	phase = _phase;
+}
+
+void cdsp::primitive::oscillator::table_interpolate_4::frequency_set() {
+
+}
 
 void cdsp::primitive::oscillator::table_interpolate_4::perform(sample_buffer& buffer) {
 		// check to make sure we have a table to interpolate

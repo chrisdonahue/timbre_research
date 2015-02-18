@@ -45,8 +45,20 @@ namespace cdsp { namespace parameter {
 			value_max = _value_max;
 		};
 		
-		virtual void prepare(types::cont_64 sample_rate, types::disc_32_u block_size) {};
+		virtual void prepare(types::cont_64 sample_rate, types::disc_32_u block_size) {
+			sample_rate;
+			block_size;
+		};
+
 		virtual void release() {};
+
+		T value_min_get() {
+			return value_min;
+		}
+
+		T value_max_get() {
+			return value_max;
+		}
 
 		T value_get() {
 			return value;
@@ -66,12 +78,16 @@ namespace cdsp { namespace parameter {
 	template <typename T>
 	class rate_block : public base<T> {
 	public:
-		using base::base;
+		rate_block(T value_initial) : base(value_initial) {};
+		rate_block(T value_min, T value_max) : base(value_min, value_max) {};
+		rate_block(T value_initial, T value_min, T value_max) : base(value_initial, value_min, value_max) {};
 	};
 
 	class rate_audio : public base<types::sample> {
 	public:
-		using base::base;
+		rate_audio(types::sample value_initial) : base(value_initial) {};
+		rate_audio(types::sample value_min, types::sample value_max) : base(value_min, value_max) {};
+		rate_audio(types::sample value_initial, types::sample value_min, types::sample value_max) : base(value_initial, value_min, value_max) {};
 
 		virtual void prepare(types::cont_64 _sample_rate, types::disc_32_u _block_size) {
 			sample_rate = _sample_rate;
@@ -89,7 +105,9 @@ namespace cdsp { namespace parameter {
 
 	class ramp_linear : public rate_audio {
 	public:
-		using rate_audio::rate_audio;
+		ramp_linear(types::sample value_initial) : rate_audio(value_initial) {};
+		ramp_linear(types::sample value_min, types::sample value_max) : rate_audio(value_min, value_max) {};
+		ramp_linear(types::sample value_initial, types::sample value_min, types::sample value_max) : rate_audio(value_initial, value_min, value_max) {};
 
 		void prepare(types::cont_64 _sample_rate, types::disc_32_u _block_size) {
 			rate_audio::prepare(_sample_rate, _block_size);
@@ -184,13 +202,15 @@ namespace cdsp { namespace parameter {
 
 	class signal : public rate_audio {
 	public:
-		using rate_audio::rate_audio;
+		signal(types::sample value_min, types::sample value_max) : rate_audio(value_min, value_max) {};
 
 		void value_buffer_set(const types::sample* _value_buffer) {
 			value_buffer = _value_buffer;
 		};
 
-		const types::sample* value_buffer_get() {
+		const types::sample* value_buffer_get(types::disc_32_u block_size_leq) {
+			block_size_leq;
+
 			return value_buffer;
 		};
 
