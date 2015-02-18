@@ -16,4 +16,6 @@
 #define CDSP_POSIX
 #endif
 
+#define CDSP_SAMPLE_32
+
 #endif

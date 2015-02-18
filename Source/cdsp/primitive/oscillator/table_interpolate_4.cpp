@@ -17,7 +17,7 @@ cdsp::primitive::oscillator::table_interpolate_4::table_interpolate_4() :
 void cdsp::primitive::oscillator::table_interpolate_4::perform(sample_buffer& buffer) {
 		// check to make sure we have a table to interpolate
 		if (table == nullptr) {
-			throw cdsp::exceptions::runtime("cdsp::oscillator::table_interpolate_4: perform called before set_table");
+			throw cdsp::exceptions::runtime("cdsp::primitive::oscillator::table_interpolate_4: perform called before set_table");
 		}
 
 		// get parameter values
@@ -78,7 +78,7 @@ void cdsp::primitive::oscillator::table_interpolate_4::perform(sample_buffer& bu
 
 void cdsp::primitive::oscillator::table_interpolate_4::table_set(types::disc_32_u _table_length, const types::cont_32* _table) {
 	if (!cdsp::helpers::is_power_of_two(_table_length)) {
-		throw cdsp::exceptions::runtime("cdsp::oscillator::table_interpolate_4: table_set called with a table_size that was not a power of two");
+		throw cdsp::exceptions::runtime("cdsp::primitive::oscillator::table_interpolate_4: table_set called with a table_size that was not a power of two");
 	}
 
 	table_length = _table_length;

@@ -1,6 +1,8 @@
 #ifndef CDSP_PARAMETER
 #define CDSP_PARAMETER
 
+#include <limits>
+
 #include "types.hpp"
 
 namespace cdsp {
@@ -8,6 +10,34 @@ namespace cdsp {
 	public:
 		parameter(T value_initial) {
 			value = value_initial;
+
+#ifdef CDSP_WIN32
+			__pragma(warning(push))
+			__pragma(warning(disable:4127))
+#endif
+			if (std::numeric_limits<T>::has_infinity) {
+				value_max = std::numeric_limits<T>::infinity();
+				value_min = static_cast<T>(-1.0) * value_max;
+			}
+			else {
+				value_max = std::numeric_limits<T>::min();
+				value_max = std::numeric_limits<T>::max();
+			}
+#ifdef CDSP_WIN32
+			__pragma(warning(pop))
+#endif
+		};
+
+		parameter(T _value_min, T _value_max) {
+			value = (_value_min + _value_max) / dynamic_cast<T>(2.0);
+			value_min = _value_min;
+			value_max = _value_max;
+		};
+
+		parameter(T value_initial, T _value_min, T _value_max) {
+			value = value_initial;
+			value_min = _value_min;
+			value_max = _value_max;
 		};
 
 		~parameter() {};
@@ -16,21 +46,24 @@ namespace cdsp {
 			return value;
 		};
 
-		T value_next_get() {
-			return value;
+		void value_set(T value_new) {
+			value = value_new;
 		};
 
 		void value_next_set(T value_next_new) {
 			value = value_next_new;
 		};
 
-	protected:
+	private:
 		T value;
+
+		T value_min;
+		T value_max;
 	};
 
-	template <typename T> class parameter_dezippered : public parameter < T > {
+	template <typename T> class parameter_rate_block : public parameter < T > {
 	public:
-		parameter_dezippered(T value_initial) : parameter(value_initial) {
+		parameter_rate_block(T value_initial) : parameter(value_initial) {
 			value_next = value_initial;
 		};
 

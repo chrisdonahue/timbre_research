@@ -1,6 +1,8 @@
 #ifndef CDSP_TYPES
 #define CDSP_TYPES
 
+#include "defines.hpp"
+
 namespace cdsp { namespace types {
 	typedef unsigned disc_32_u;
 	typedef int disc_32;
@@ -8,7 +10,11 @@ namespace cdsp { namespace types {
 	typedef double cont_64;
 	typedef bool boolean;
 	typedef size_t size;
+#ifdef CDSP_SAMPLE_64
+	typedef cont_64 sample;
+#else
 	typedef cont_32 sample;
+#endif
 }}
 
 #endif
