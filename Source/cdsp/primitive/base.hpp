@@ -24,6 +24,7 @@ namespace cdsp { namespace primitive {
 		types::disc_32_u channels_input_num;
 		types::disc_32_u channels_output_num;
 
+		/*
 		// block-time parameter add
 		template<typename T> void parameter_rate_block_add(std::string parameter_specifier, T value_initial, T value_min, T value_max) {
 			throw exceptions::template_specialization("cdsp::primitive::base: parameter_block_add called on unexpected type");
@@ -55,7 +56,7 @@ namespace cdsp { namespace primitive {
 					// TODO raise error
 				}
 				else {
-					it2->second.value_buffer_set(buffer);
+					*it2->second.value_buffer_set(buffer);
 				}
 			}
 			else {
@@ -66,13 +67,13 @@ namespace cdsp { namespace primitive {
 				signal.value_buffer_set(buffer);
 				parameters_rate_audio_signal.insert(std::make_pair(parameter_specifier, signal));
 			}
-		};
+		};*/
 
 	private:
-		std::unordered_map<std::string, parameter::rate_block<types::disc_32>&> parameters_rate_block_disc_32;
-		std::unordered_map<std::string, parameter::rate_block<types::cont_32>&> parameters_rate_block_cont_32;
-		std::unordered_map<std::string, parameter::ramp_linear&> parameters_rate_audio_ramp_linear;
-		std::unordered_map<std::string, parameter::signal&> parameters_rate_audio_signal;
+		std::unordered_map<std::string, parameter::rate_block<types::disc_32>*> parameters_rate_block_disc_32;
+		std::unordered_map<std::string, parameter::rate_block<types::cont_32>*> parameters_rate_block_cont_32;
+		std::unordered_map<std::string, parameter::ramp_linear*> parameters_rate_audio_ramp_linear;
+		std::unordered_map<std::string, parameter::signal*> parameters_rate_audio_signal;
 	};
 }}
 

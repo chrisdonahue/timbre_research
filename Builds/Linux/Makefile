@@ -51,12 +51,14 @@ ifeq ($(CONFIG),Release)
 endif
 
 OBJECTS := \
-  $(OBJDIR)/table_interpolate_4_636b870.o \
   $(OBJDIR)/base_c25da42b.o \
-  $(OBJDIR)/sample_buffer_1d88820d.o \
+  $(OBJDIR)/table_interpolate_4_636b870.o \
+  $(OBJDIR)/base_2d36e443.o \
   $(OBJDIR)/exceptions_f38e2436.o \
+  $(OBJDIR)/graph_a29df966.o \
   $(OBJDIR)/helpers_d53a1e5d.o \
   $(OBJDIR)/parameter_e0b65cc1.o \
+  $(OBJDIR)/sample_buffer_1d88820d.o \
   $(OBJDIR)/kiss_fft_eaf1f82e.o \
   $(OBJDIR)/main_8d1161a2.o \
   $(OBJDIR)/juce_audio_basics_181b4cb.o \
@@ -90,24 +92,29 @@ strip:
 	@echo Stripping timbre_research
 	-@strip --strip-unneeded $(OUTDIR)/$(TARGET)
 
-$(OBJDIR)/table_interpolate_4_636b870.o: ../../Source/cdsp/primitive/oscillator/table_interpolate_4.cpp
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling table_interpolate_4.cpp"
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
 $(OBJDIR)/base_c25da42b.o: ../../Source/cdsp/primitive/base.cpp
 	-@mkdir -p $(OBJDIR)
 	@echo "Compiling base.cpp"
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
-$(OBJDIR)/sample_buffer_1d88820d.o: ../../Source/cdsp/sample_buffer.cpp
+$(OBJDIR)/table_interpolate_4_636b870.o: ../../Source/cdsp/primitive/oscillator/table_interpolate_4.cpp
 	-@mkdir -p $(OBJDIR)
-	@echo "Compiling sample_buffer.cpp"
+	@echo "Compiling table_interpolate_4.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/base_2d36e443.o: ../../Source/cdsp/base.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling base.cpp"
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
 $(OBJDIR)/exceptions_f38e2436.o: ../../Source/cdsp/exceptions.cpp
 	-@mkdir -p $(OBJDIR)
 	@echo "Compiling exceptions.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/graph_a29df966.o: ../../Source/cdsp/graph.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling graph.cpp"
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
 $(OBJDIR)/helpers_d53a1e5d.o: ../../Source/cdsp/helpers.cpp
@@ -118,6 +125,11 @@ $(OBJDIR)/helpers_d53a1e5d.o: ../../Source/cdsp/helpers.cpp
 $(OBJDIR)/parameter_e0b65cc1.o: ../../Source/cdsp/parameter.cpp
 	-@mkdir -p $(OBJDIR)
 	@echo "Compiling parameter.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/sample_buffer_1d88820d.o: ../../Source/cdsp/sample_buffer.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling sample_buffer.cpp"
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
 $(OBJDIR)/kiss_fft_eaf1f82e.o: ../../Source/dependencies/kiss_fft130/kiss_fft.c

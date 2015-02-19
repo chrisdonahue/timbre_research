@@ -6,19 +6,24 @@
 #include <stdexcept>
 
 namespace cdsp { namespace exceptions {
-	class runtime : public std::runtime_error {
+	class base : public std::runtime_error {
 	public:
-		runtime(const std::string& msg) : std::runtime_error(msg) {};
+		base(const std::string& msg) : std::runtime_error(msg) {};
 	};
 
-	class template_specialization : public std::runtime_error {
+	class runtime : public base {
 	public:
-		template_specialization(const std::string& msg) : std::runtime_error(msg) {};
+		runtime(const std::string& msg) : base(msg) {};
 	};
 
-	class subclass_specialization : public std::runtime_error {
+	class template_specialization : public base {
 	public:
-		subclass_specialization(const std::string& msg) : std::runtime_error(msg) {};
+		template_specialization(const std::string& msg) : base(msg) {};
+	};
+
+	class subclass_specialization : public base {
+	public:
+		subclass_specialization(const std::string& msg) : base(msg) {};
 	};
 }}
 

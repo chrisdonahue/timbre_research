@@ -19,7 +19,7 @@ namespace cdsp { namespace types {
 #else
 	typedef cont_32 sample;
 #endif
-	//typedef std::string string;
+	typedef std::string string;
 }}
 
 #endif

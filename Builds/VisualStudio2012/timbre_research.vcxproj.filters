@@ -316,22 +316,28 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Source\cdsp\primitive\oscillator\table_interpolate_4.cpp">
-      <Filter>timbre_research\Source\cdsp\primitive\oscillator</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Source\cdsp\primitive\base.cpp">
       <Filter>timbre_research\Source\cdsp\primitive</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\cdsp\sample_buffer.cpp">
+    <ClCompile Include="..\..\Source\cdsp\primitive\oscillator\table_interpolate_4.cpp">
+      <Filter>timbre_research\Source\cdsp\primitive\oscillator</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\cdsp\base.cpp">
       <Filter>timbre_research\Source\cdsp</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\cdsp\exceptions.cpp">
+      <Filter>timbre_research\Source\cdsp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\cdsp\graph.cpp">
       <Filter>timbre_research\Source\cdsp</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\cdsp\helpers.cpp">
       <Filter>timbre_research\Source\cdsp</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\cdsp\parameter.cpp">
+      <Filter>timbre_research\Source\cdsp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\cdsp\sample_buffer.cpp">
       <Filter>timbre_research\Source\cdsp</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\dependencies\kiss_fft130\kiss_fft.c">
@@ -1548,11 +1554,14 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Source\cdsp\primitive\base.hpp">
+      <Filter>timbre_research\Source\cdsp\primitive</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Source\cdsp\primitive\oscillator\table_interpolate_4.hpp">
       <Filter>timbre_research\Source\cdsp\primitive\oscillator</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\cdsp\primitive\base.hpp">
-      <Filter>timbre_research\Source\cdsp\primitive</Filter>
+    <ClInclude Include="..\..\Source\cdsp\base.hpp">
+      <Filter>timbre_research\Source\cdsp</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\cdsp\cdsp.hpp">
       <Filter>timbre_research\Source\cdsp</Filter>
@@ -1560,13 +1569,10 @@
     <ClInclude Include="..\..\Source\cdsp\defines.hpp">
       <Filter>timbre_research\Source\cdsp</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\cdsp\sample_buffer.hpp">
-      <Filter>timbre_research\Source\cdsp</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\cdsp\values.hpp">
-      <Filter>timbre_research\Source\cdsp</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Source\cdsp\exceptions.hpp">
+      <Filter>timbre_research\Source\cdsp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\cdsp\graph.hpp">
       <Filter>timbre_research\Source\cdsp</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\cdsp\helpers.hpp">
@@ -1575,7 +1581,13 @@
     <ClInclude Include="..\..\Source\cdsp\parameter.hpp">
       <Filter>timbre_research\Source\cdsp</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\cdsp\sample_buffer.hpp">
+      <Filter>timbre_research\Source\cdsp</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Source\cdsp\types.hpp">
+      <Filter>timbre_research\Source\cdsp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\cdsp\values.hpp">
       <Filter>timbre_research\Source\cdsp</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\dependencies\kiss_fft130\_kiss_fft_guts.h">

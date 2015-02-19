@@ -11,7 +11,7 @@ cdsp::primitive::oscillator::table_interpolate_4::table_interpolate_4() :
 	channels_output_num = 1;
 
 	// create parameters
-	parameter_rate_audio_add("frequency", static_cast<types::sample>(0.0), static_cast<types::sample>(0.0), static_cast<types::sample>(1.0));
+	//parameter_rate_audio_add("frequency", static_cast<types::sample>(0.0), static_cast<types::sample>(0.0), static_cast<types::sample>(1.0));
 };
 
 void cdsp::primitive::oscillator::table_interpolate_4::table_set(types::disc_32_u _table_length, const types::cont_32* _table) {
