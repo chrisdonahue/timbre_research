@@ -1,17 +1,18 @@
 #include "table_interpolate_4.hpp"
 
 cdsp::primitive::oscillator::table_interpolate_4::table_interpolate_4() :
+	phase(0.0),
+	frequency(static_cast<types::sample>(0.01), static_cast<types::sample>(0.0), static_cast<types::sample>(1.0)),
 	table_length(0),
 	table_mask(0),
-	table(nullptr),
-	phase(0.0)
+	table(nullptr)
 {
 	// set num input and ouput channels
 	channels_input_num = 0;
 	channels_output_num = 1;
 
 	// create parameters
-	//parameter_rate_audio_add("frequency", static_cast<types::sample>(0.0), static_cast<types::sample>(0.0), static_cast<types::sample>(1.0));
+	parameter_plug_register("frequency");
 };
 
 void cdsp::primitive::oscillator::table_interpolate_4::table_set(types::disc_32_u _table_length, const types::cont_32* _table) {
@@ -39,6 +40,11 @@ void cdsp::primitive::oscillator::table_interpolate_4::perform(sample_buffer& bu
 		}
 
 		// get parameter values
+		types::boolean frequency_plugged = false;
+		parameter::signal* frequency_plug;
+		if (frequency_plug = parameter_plug_get("frequency")) {
+			frequency_plugged = true;
+		}
 		types::cont_32 frequency = 0.01f;
 		//parameter_get<types::cont_32>("frequency");
 

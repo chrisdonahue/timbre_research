@@ -17,12 +17,12 @@ namespace cdsp {
 			block_size = _block_size;
 		}
 		virtual void release();
-
 		virtual void perform(sample_buffer& buffer) = 0;
+
 	protected:
 		types::cont_64 sample_rate;
 		types::disc_32_u block_size;
-	}
+	};
 }
 
 #endif

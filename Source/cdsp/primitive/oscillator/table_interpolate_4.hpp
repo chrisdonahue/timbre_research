@@ -19,6 +19,7 @@ namespace cdsp { namespace primitive { namespace oscillator {
 
 	private:
 		types::cont_64 phase;
+		parameter::ramp_linear_automatic frequency;
 
 		types::disc_32_u table_length;
 		types::disc_32_u table_mask;

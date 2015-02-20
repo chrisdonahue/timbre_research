@@ -4,6 +4,7 @@
 #include <limits>
 #include <unordered_map>
 
+#include "base.hpp"
 #include "helpers.hpp"
 #include "types.hpp"
 
@@ -76,38 +77,31 @@ namespace cdsp { namespace parameter {
 	};
 
 	template <typename T>
-	class rate_block : public base<T> {
+	class rate_block : public parameter::base<T> {
 	public:
-		rate_block(T value_initial) : base(value_initial) {};
-		rate_block(T value_min, T value_max) : base(value_min, value_max) {};
-		rate_block(T value_initial, T value_min, T value_max) : base(value_initial, value_min, value_max) {};
+		rate_block(T value_initial) : parameter::base<T>(value_initial) {};
+		rate_block(T value_min, T value_max) : parameter::base<T>(value_min, value_max) {};
+		rate_block(T value_initial, T value_min, T value_max) : parameter::base<T>(value_initial, value_min, value_max) {};
 	};
 
-	class rate_audio : public base<types::sample> {
+	class rate_audio : public base<types::sample>, public dsp {
 	public:
-		rate_audio(types::sample value_initial) : base(value_initial) {};
-		rate_audio(types::sample value_min, types::sample value_max) : base(value_min, value_max) {};
-		rate_audio(types::sample value_initial, types::sample value_min, types::sample value_max) : base(value_initial, value_min, value_max) {};
+		rate_audio(types::sample value_initial) : parameter::base<types::sample>(value_initial) {};
+		rate_audio(types::sample value_min, types::sample value_max) : parameter::base<types::sample>(value_min, value_max) {};
+		rate_audio(types::sample value_initial, types::sample value_min, types::sample value_max) : parameter::base<types::sample>(value_initial, value_min, value_max) {};
 
-		virtual void prepare(types::cont_64 _sample_rate, types::disc_32_u _block_size) {
-			sample_rate = _sample_rate;
-			block_size = _block_size;
+		void prepare(types::cont_64 _sample_rate, types::disc_32_u _block_size) {
+			dsp::prepare(_sample_rate, _block_size);
 		};
-
-		virtual void release() {};
-
-		virtual const types::sample* value_buffer_get(types::disc_32_u block_size_leq) = 0;
-
-	protected:
-		types::cont_64 sample_rate;
-		types::disc_32_u block_size;
+		void release() {};
+		void perform(sample_buffer& buffer) {buffer;};
 	};
 
-	class ramp_linear : public rate_audio {
+	class ramp_linear_manual : public rate_audio {
 	public:
-		ramp_linear(types::sample value_initial) : rate_audio(value_initial) {};
-		ramp_linear(types::sample value_min, types::sample value_max) : rate_audio(value_min, value_max) {};
-		ramp_linear(types::sample value_initial, types::sample value_min, types::sample value_max) : rate_audio(value_initial, value_min, value_max) {};
+		ramp_linear_manual(types::sample value_initial) : rate_audio(value_initial) {};
+		ramp_linear_manual(types::sample value_min, types::sample value_max) : rate_audio(value_min, value_max) {};
+		ramp_linear_manual(types::sample value_initial, types::sample value_min, types::sample value_max) : rate_audio(value_initial, value_min, value_max) {};
 
 		void prepare(types::cont_64 _sample_rate, types::disc_32_u _block_size) {
 			rate_audio::prepare(_sample_rate, _block_size);
@@ -117,41 +111,7 @@ namespace cdsp { namespace parameter {
 #else
 			block_size_inverse = 1.0 / block_size;
 #endif
-			buffer.resize(1, _block_size);
-			dezipper_buffer = buffer.channel_pointer_write(0);
 		}
-
-		void release() {
-			buffer.resize(0, 0);
-		};
-
-		const types::sample* value_buffer_get(types::disc_32_u block_size_leq) {
-			types::sample* buffer = dezipper_buffer;
-			types::disc_32_u buffer_samples_remaining = block_size_leq;
-
-			// dezipper
-			types::disc_32_u dezipper_samples_completed;
-			types::disc_32_u dezipper_samples_remaining;
-			types::sample dezipper_increment;
-			types::sample value_current = value;
-			value_dezipper_start(dezipper_samples_completed, dezipper_increment);
-			dezipper_samples_completed = dezipper_samples_completed > buffer_samples_remaining ? buffer_samples_remaining : dezipper_samples_completed;
-			dezipper_samples_remaining = dezipper_samples_completed;
-			while (dezipper_samples_remaining--) {
-				*(buffer++) = value;
-				value += dezipper_increment;
-				buffer_samples_remaining--;
-			}
-			value_dezipper_end(dezipper_samples_completed, value_current);
-
-			// fill rest of buffer
-			while (buffer_samples_remaining--) {
-				*(buffer++) = value;
-			}
-
-			// return dezippered buffer
-			return const_cast<types::sample*>(dezipper_buffer);
-		};
 
 		void value_next_set(types::sample value_next, types::cont_64 delay_s) {
 			value_next = value;
@@ -173,8 +133,6 @@ namespace cdsp { namespace parameter {
 			dezipper_increment = static_cast<types::sample>(block_size_inverse * value_difference);
 		};
 
-	private:
-		// TODO: inline these
 		void value_dezipper_start(types::disc_32_u& _dezipper_samples_num, types::sample& _dezipper_increment) {
 			_dezipper_samples_num = dezipper_samples_num;
 			_dezipper_increment = dezipper_increment;
@@ -190,6 +148,57 @@ namespace cdsp { namespace parameter {
 			}
 		};
 
+	protected:
+		types::cont_64 block_size_inverse;
+
+		types::sample value_next;
+
+		types::disc_32_u dezipper_samples_num;
+		types::sample dezipper_increment;
+	};
+
+	class ramp_linear_automatic : public ramp_linear_manual {
+	public:
+		ramp_linear_automatic(types::sample value_initial) : ramp_linear_manual(value_initial) {};
+		ramp_linear_automatic(types::sample value_min, types::sample value_max) : ramp_linear_manual(value_min, value_max) {};
+		ramp_linear_automatic(types::sample value_initial, types::sample value_min, types::sample value_max) : ramp_linear_manual(value_initial, value_min, value_max) {};
+
+		void prepare(types::cont_64 _sample_rate, types::disc_32_u _block_size) {
+			ramp_linear_manual::prepare(_sample_rate, _block_size);
+			buffer.resize(1, _block_size);
+			dezipper_buffer = buffer.channel_pointer_write(0);
+		};
+
+		void release() {
+			buffer.resize(0, 0);
+		};
+
+		void perform(sample_buffer& sample_buffer) {
+			types::sample* buffer = sample_buffer.channel_pointer_write(0);
+			types::disc_32_u buffer_samples_remaining = sample_buffer.channel_buffer_length_get();
+
+			// dezipper
+			types::disc_32_u dezipper_samples_completed;
+			types::disc_32_u dezipper_samples_remaining;
+			types::sample dezipper_increment;
+			types::sample value_current = value;
+			value_dezipper_start(dezipper_samples_completed, dezipper_increment);
+			dezipper_samples_completed = dezipper_samples_completed > buffer_samples_remaining ? buffer_samples_remaining : dezipper_samples_completed;
+			dezipper_samples_remaining = dezipper_samples_completed;
+			while (dezipper_samples_remaining--) {
+				*(buffer++) = value;
+				value += dezipper_increment;
+				buffer_samples_remaining--;
+			}
+			value_dezipper_end(dezipper_samples_completed, value_current);
+
+			// fill rest of buffer
+			while (buffer_samples_remaining--) {
+				*(buffer++) = value;
+			}
+		};
+
+	private:
 		types::cont_64 block_size_inverse;
 
 		sample_buffer buffer;
@@ -202,20 +211,20 @@ namespace cdsp { namespace parameter {
 
 	class signal : public rate_audio {
 	public:
-		signal(types::sample value_min, types::sample value_max) : rate_audio(value_min, value_max) {};
-
-		void value_buffer_set(const types::sample* _value_buffer) {
-			value_buffer = _value_buffer;
+		signal(types::sample value_min, types::sample value_max) : rate_audio(value_min, value_max) {
+			buffer = nullptr;
 		};
 
-		const types::sample* value_buffer_get(types::disc_32_u block_size_leq) {
-			block_size_leq;
+		void buffer_set(const sample_buffer* _buffer) {
+			buffer = _buffer;
+		};
 
-			return value_buffer;
+		const sample_buffer* buffer_get() {
+			return buffer;
 		};
 
 	private:
-		const types::sample* value_buffer;
+		const sample_buffer* buffer;
 	};
 }}
 

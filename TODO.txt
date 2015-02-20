@@ -1,0 +1,8 @@
+parameters.hpp:
+	ramp_linear as abstract parent class with different API for ramp_linear_manual and ramp_linear_automatic
+
+graph.hpp:
+	pretty much everything
+
+table_interpolate_4.cpp:
+	working on dsp routine

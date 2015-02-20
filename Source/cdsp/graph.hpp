@@ -4,6 +4,7 @@
 #include <unordered_map>
 #include <vector>
 
+#include "base.hpp"
 #include "defines.hpp"
 #include "exceptions.hpp"
 #include "types.hpp"
@@ -12,7 +13,7 @@
 #include "primitive/base.hpp"
 
 namespace cdsp {
-	class graph {
+	class graph : public dsp {
 	public:
 		graph();
 		~graph();
