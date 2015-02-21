@@ -1,6 +1,7 @@
 #include "table_interpolate_4.hpp"
 
 cdsp::primitive::oscillator::table_interpolate_4::table_interpolate_4() :
+	primitive::base(),
 	phase(0.0),
 	frequency(static_cast<types::sample>(0.01), static_cast<types::sample>(0.0), static_cast<types::sample>(1.0)),
 	table_length(0),
@@ -29,24 +30,26 @@ void cdsp::primitive::oscillator::table_interpolate_4::phase_set(types::cont_64 
 	phase = _phase;
 }
 
-void cdsp::primitive::oscillator::table_interpolate_4::frequency_set() {
-
+void cdsp::primitive::oscillator::table_interpolate_4::frequency_set(types::sample _frequency) {
+	frequency.value_next_set(_frequency);
 }
 
-void cdsp::primitive::oscillator::table_interpolate_4::perform(sample_buffer& buffer) {
+void cdsp::primitive::oscillator::table_interpolate_4::perform(sample_buffer& buffer, types::disc_32_u block_size_leq, types::channel channel_input, types::channel channel_output, types::disc_32_u offset) {
 		// check to make sure we have a table to interpolate
 		if (table == nullptr) {
 			throw cdsp::exceptions::runtime("cdsp::primitive::oscillator::table_interpolate_4: perform called before set_table");
 		}
 
 		// get parameter values
-		types::boolean frequency_plugged = false;
 		parameter::signal* frequency_plug;
-		if (frequency_plug = parameter_plug_get("frequency")) {
-			frequency_plugged = true;
+		const types::sample* frequency_buffer;
+		if ((frequency_plug = parameter_plug_get("frequency")) == nullptr) {
+			frequency.perform(buffer, block_size_leq, channel_input, channel_input, offset);
+			frequency_buffer = buffer.channel_pointer_read(0, offset);
 		}
-		types::cont_32 frequency = 0.01f;
-		//parameter_get<types::cont_32>("frequency");
+		else {
+			frequency_buffer = frequency_plug->buffer_get()->channel_pointer_read(channel_output, offset);
+		}
 
 		// create temporaries
 		types::cont_32 frequency_current;
@@ -59,10 +62,9 @@ void cdsp::primitive::oscillator::table_interpolate_4::perform(sample_buffer& bu
 		types::sample inp2;
 
 		// perform
-		types::disc_32_u block_size = buffer.channel_buffer_length_get();
-		for (types::disc_32_u i = 0; i < block_size; i++) {
+		for (types::disc_32_u i = 0; i < block_size_leq; i++) {
 			// find current frequency (TODO: dezippered)
-			frequency_current = frequency;
+			frequency_current = frequency_buffer[i];
 
 			// calculate phase increment
 			phase_increment = frequency_current * table_length;
@@ -81,7 +83,7 @@ void cdsp::primitive::oscillator::table_interpolate_4::perform(sample_buffer& bu
 
 			// calculate interpolated output
 			for (types::disc_32_u channel = 0; channel < channels_output_num; channel++) {
-				buffer.channel_pointer_write(channel)[i] = static_cast<types::sample>(
+				buffer.channel_pointer_write(channel, offset)[i] = static_cast<types::sample>(
 					in0 + 0.5 * fraction * (inp1 - inm1 + 
 					fraction * (4.0 * inp1 + 2.0 * inm1 - 5.0 * in0 - inp2 +
 					fraction * (3.0 * (in0 - inp1) - inm1 + inp2)))

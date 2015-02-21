@@ -8,7 +8,7 @@ cdsp::sample_buffer::sample_buffer() {
 }
 
 
-cdsp::sample_buffer::sample_buffer(types::disc_32_u _channels_num, types::disc_32_u _channel_buffer_length) {
+cdsp::sample_buffer::sample_buffer(types::channel _channels_num, types::disc_32_u _channel_buffer_length) {
 	channels_num = _channels_num;
 	channel_buffer_length = _channel_buffer_length;
 	buffer_length = 0;
@@ -35,7 +35,7 @@ void cdsp::sample_buffer::buffer_free() {
 	}
 }
 
-void cdsp::sample_buffer::resize(types::disc_32_u _channels_num, types::disc_32_u _channel_buffer_length) {
+void cdsp::sample_buffer::resize(types::channel _channels_num, types::disc_32_u _channel_buffer_length) {
 	buffer_free();
 	channels_num = _channels_num;
 	channel_buffer_length = _channel_buffer_length;
@@ -60,15 +60,15 @@ cdsp::types::size cdsp::sample_buffer::buffer_size_get() {
 	return sizeof(types::sample) * buffer_length;
 }
 
-const cdsp::types::sample* cdsp::sample_buffer::channel_pointer_read(types::disc_32_u channel) {
-	return static_cast<const types::sample*>(buffer + (channel * buffer_length));
+const cdsp::types::sample* cdsp::sample_buffer::channel_pointer_read(types::channel channel, types::disc_32_u offset) const {
+	return const_cast<types::sample*>(buffer + (channel * buffer_length) + offset);
 }
 
-cdsp::types::sample* cdsp::sample_buffer::channel_pointer_write(types::disc_32_u channel) {
-	return buffer + (channel * buffer_length);
+cdsp::types::sample* cdsp::sample_buffer::channel_pointer_write(types::channel channel, types::disc_32_u offset) {
+	return buffer + (channel * buffer_length) + offset;
 }
 
-void cdsp::sample_buffer::channel_clear(types::disc_32_u channel) {
+void cdsp::sample_buffer::channel_clear(types::channel channel) {
 	types::sample* channel_buffer = channel_pointer_write(channel);
 	types::disc_32_u samples_remaining = channel_buffer_length;
 	while (samples_remaining--) {
@@ -82,7 +82,7 @@ void cdsp::sample_buffer::clear() {
 	}
 }
 
-void cdsp::sample_buffer::channel_gain_apply(types::disc_32_u channel, types::sample gain) {
+void cdsp::sample_buffer::channel_gain_apply(types::channel channel, types::sample gain) {
 	types::sample* channel_buffer = channel_pointer_write(channel);
 	types::disc_32_u samples_remaining = channel_buffer_length;
 	while (samples_remaining--) {
@@ -96,7 +96,7 @@ void cdsp::sample_buffer::gain_apply(types::sample gain) {
 	}
 }
 
-void cdsp::sample_buffer::channel_dc_filter(types::disc_32_u channel, types::sample r) {
+void cdsp::sample_buffer::channel_dc_filter(types::channel channel, types::sample r) {
 	// https://ccrma.stanford.edu/~jos/filters/DC_Blocker.html
 	types::sample xm1 = values::sample_silence;
 	types::sample ym1 = values::sample_silence;
@@ -118,7 +118,7 @@ void cdsp::sample_buffer::dc_filter() {
 	}
 }
 
-void cdsp::sample_buffer::channel_normalize(types::disc_32_u channel) {
+void cdsp::sample_buffer::channel_normalize(types::channel channel) {
 	const types::sample* channel_buffer = channel_pointer_read(channel);
 
 	// find max

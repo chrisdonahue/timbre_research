@@ -19,6 +19,7 @@ namespace cdsp { namespace types {
 #else
 	typedef cont_32 sample;
 #endif
+	typedef disc_32_u channel;
 	typedef std::string string;
 }}
 

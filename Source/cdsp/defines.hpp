@@ -1,7 +1,7 @@
 #ifndef CDSP_DEFINES
 #define CDSP_DEFINES
 
-//#define CDSP_DEBUG
+#define CDSP_DEBUG
 
 #ifdef _WIN32
 #define CDSP_WIN32

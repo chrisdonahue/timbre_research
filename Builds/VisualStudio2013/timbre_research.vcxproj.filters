@@ -316,7 +316,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Source\cdsp\primitive\base.cpp">
+    <ClCompile Include="..\..\Source\cdsp\primitive\primitive_base.cpp">
       <Filter>timbre_research\Source\cdsp\primitive</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\cdsp\primitive\oscillator\table_interpolate_4.cpp">
@@ -1554,7 +1554,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Source\cdsp\primitive\base.hpp">
+    <ClInclude Include="..\..\Source\cdsp\primitive\primitive_base.hpp">
       <Filter>timbre_research\Source\cdsp\primitive</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\cdsp\primitive\oscillator\table_interpolate_4.hpp">

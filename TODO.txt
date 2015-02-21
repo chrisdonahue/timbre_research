@@ -1,8 +1,16 @@
+base.hpp:
+	consider changing signature of perform:
+		sample_buffer, block_size_leq, offset_channel, offset_sample
+		dsp::perform does:
+			make sure sample_buffer > max(channels_input_num, channels_output_num) + offset_channel
+
 parameters.hpp:
-	ramp_linear as abstract parent class with different API for ramp_linear_manual and ramp_linear_automatic
 
 graph.hpp:
 	pretty much everything
 
 table_interpolate_4.cpp:
-	working on dsp routine
+
+questions:
+	figure out using for constructors
+	initialization list used by all constructors?

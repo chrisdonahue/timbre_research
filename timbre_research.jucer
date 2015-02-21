@@ -8,8 +8,10 @@
     <GROUP id="{D356937B-E896-924A-B5AB-DEF10E2A9EC7}" name="Source">
       <GROUP id="{5A8F734A-24B8-CCA4-76DC-8A596943B5B5}" name="cdsp">
         <GROUP id="{9F833F29-26A2-61E8-4C2E-6479BEAB9B55}" name="primitive">
-          <FILE id="b575a5" name="base.cpp" compile="1" resource="0" file="Source/cdsp/primitive/base.cpp"/>
-          <FILE id="cpk2Ok" name="base.hpp" compile="0" resource="0" file="Source/cdsp/primitive/base.hpp"/>
+          <FILE id="b575a5" name="primitive_base.cpp" compile="1" resource="0"
+                file="Source/cdsp/primitive/primitive_base.cpp"/>
+          <FILE id="cpk2Ok" name="primitive_base.hpp" compile="0" resource="0"
+                file="Source/cdsp/primitive/primitive_base.hpp"/>
           <GROUP id="{A35E9265-638A-B2A7-9782-3C41214D6FE8}" name="oscillator">
             <FILE id="GQ1efP" name="table_interpolate_4.cpp" compile="1" resource="0"
                   file="Source/cdsp/primitive/oscillator/table_interpolate_4.cpp"/>

@@ -45,14 +45,14 @@ void write(std::ofstream& stream, const T& t) {
 	stream.write((const char*)&t, sizeof(T));
 }
 
-void cdsp::helpers::io::wav_file_save(std::string file_path, types::disc_32_u sample_rate, types::disc_32_u sample_bit_depth, sample_buffer& buffer) {
+void cdsp::helpers::io::wav_file_save(std::string file_path, types::cont_64 sample_rate, types::disc_32_u sample_bit_depth, sample_buffer& buffer) {
 	// TODO: use sample bit depth
 	sample_bit_depth;
 
 	// adapt my signature
 	size_t bufSize = buffer.buffer_size_get();
 	short channels = static_cast<short>(buffer.channels_num_get());
-	int sampleRate = sample_rate;
+	int sampleRate = static_cast<int>(sample_rate);
 	typedef types::sample SampleType;
 	const types::sample* buf = buffer.channel_pointer_read(0);
 

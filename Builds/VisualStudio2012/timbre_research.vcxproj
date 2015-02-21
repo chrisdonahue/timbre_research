@@ -129,7 +129,7 @@
     </Bscmake>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Source\cdsp\primitive\base.cpp"/>
+    <ClCompile Include="..\..\Source\cdsp\primitive\primitive_base.cpp"/>
     <ClCompile Include="..\..\Source\cdsp\primitive\oscillator\table_interpolate_4.cpp"/>
     <ClCompile Include="..\..\Source\cdsp\base.cpp"/>
     <ClCompile Include="..\..\Source\cdsp\exceptions.cpp"/>
@@ -1246,7 +1246,7 @@
     <ClCompile Include="..\..\..\JUCE\modules\juce_video\juce_video.cpp"/>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Source\cdsp\primitive\base.hpp"/>
+    <ClInclude Include="..\..\Source\cdsp\primitive\primitive_base.hpp"/>
     <ClInclude Include="..\..\Source\cdsp\primitive\oscillator\table_interpolate_4.hpp"/>
     <ClInclude Include="..\..\Source\cdsp\base.hpp"/>
     <ClInclude Include="..\..\Source\cdsp\cdsp.hpp"/>

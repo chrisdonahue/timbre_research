@@ -10,7 +10,7 @@
 #include "types.hpp"
 #include "values.hpp"
 
-#include "primitive/base.hpp"
+#include "primitive/primitive_base.hpp"
 
 namespace cdsp {
 	class graph : public dsp {

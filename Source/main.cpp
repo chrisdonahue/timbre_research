@@ -16,15 +16,31 @@ int main (int argc, char* argv[]) {
 	oscillator.table_set(table_length, table.channel_pointer_read(0));
 
 	// create output buffer
-	types::disc_32_u output_buffer_length = 44100;
+	types::disc_32_u output_buffer_length = 1024 * 16;
 	sample_buffer output_buffer(1, output_buffer_length);
+	output_buffer.clear();
+
+	// prepare
+	types::cont_64 sample_rate = 44100.0;
+	types::disc_32_u block_size = 1024;
+	oscillator.prepare(sample_rate, block_size);
 
 	// perform
-	//oscillator.parameter_set("frequency", 0.00249433106f, 0.0f);
-	oscillator.perform(output_buffer);
+	oscillator.frequency_set(static_cast<types::sample>(0.01f));
+	int i;
+	for (i = 0; i < 7; i++) {
+		oscillator.perform(output_buffer, block_size, 0, 0, block_size * i);
+	}
+	oscillator.frequency_set(static_cast<types::sample>(0.02f));
+	for (; i < 16; i++) {
+		oscillator.perform(output_buffer, block_size, 0, 0, block_size * i);
+	}
+
+	// release
+	oscillator.release();
 
 	// save
-	helpers::io::wav_file_save("output.wav", 44100, 32, output_buffer);
+	helpers::io::wav_file_save("output.wav", sample_rate, 32, output_buffer);
 
     return 0;
 }

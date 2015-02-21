@@ -51,7 +51,7 @@ ifeq ($(CONFIG),Release)
 endif
 
 OBJECTS := \
-  $(OBJDIR)/base_c25da42b.o \
+  $(OBJDIR)/primitive_base_fd787243.o \
   $(OBJDIR)/table_interpolate_4_636b870.o \
   $(OBJDIR)/base_2d36e443.o \
   $(OBJDIR)/exceptions_f38e2436.o \
@@ -92,9 +92,9 @@ strip:
 	@echo Stripping timbre_research
 	-@strip --strip-unneeded $(OUTDIR)/$(TARGET)
 
-$(OBJDIR)/base_c25da42b.o: ../../Source/cdsp/primitive/base.cpp
+$(OBJDIR)/primitive_base_fd787243.o: ../../Source/cdsp/primitive/primitive_base.cpp
 	-@mkdir -p $(OBJDIR)
-	@echo "Compiling base.cpp"
+	@echo "Compiling primitive_base.cpp"
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
 $(OBJDIR)/table_interpolate_4_636b870.o: ../../Source/cdsp/primitive/oscillator/table_interpolate_4.cpp
