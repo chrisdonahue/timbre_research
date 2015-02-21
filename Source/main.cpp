@@ -20,32 +20,27 @@ int main (int argc, char* argv[]) {
 	carrier.table_set(table_length, table.channel_pointer_read(0));
 
 	// create output buffer
-	types::disc_32_u output_buffer_length = 1024 * 16;
+	types::cont_64 sample_rate = 44100.0;
+	types::disc_32_u block_size = 4;
+	types::disc_32_u output_buffer_length = block_size * 4;
 	sample_buffer output_buffer(1, output_buffer_length);
 	output_buffer.clear();
 
 	// connect
-	parameter::signal fm(-1.0f, 1.0f);
-	fm.buffer_set(const_cast<sample_buffer*>(&output_buffer));
+	//parameter::signal fm(0, -1.0f, 1.0f, static_cast<types::sample>(55.0 / sample_rate), static_cast<types::sample>(440.0 / sample_rate));
+	parameter::signal fm(0, -1.0f, 1.0f, -0.25f, 0.25f);
 	carrier.parameter_plug("frequency", &fm);
 
 	// prepare
-	types::cont_64 sample_rate = 44100.0;
-	types::disc_32_u block_size = 1024;
 	modulator.prepare(sample_rate, block_size);
 	carrier.prepare(sample_rate, block_size);
 
 	// perform
-	modulator.frequency_set(static_cast<types::sample>(0.00002267573f));
-	carrier.frequency_set(static_cast<types::sample>(0.01f));
-	int i;
-	for (i = 0; i < 7; i++) {
-		modulator.perform(output_buffer, block_size, 0, 0, block_size * i);
-		carrier.perform(output_buffer, block_size, 0, 0, block_size * i);
-	}
-	for (; i < 16; i++) {
-		modulator.perform(output_buffer, block_size, 0, 0, block_size * i);
-		carrier.perform(output_buffer, block_size, 0, 0, block_size * i);
+	modulator.frequency_set(static_cast<types::sample>(1.0 / sample_rate));
+	types::disc_32_u i;
+	for (i = 0; i < output_buffer_length / block_size; i++) {
+		modulator.perform(output_buffer, block_size, 0, block_size * i);
+		carrier.perform(output_buffer, block_size, 0, block_size * i);
 	}
 
 	// release

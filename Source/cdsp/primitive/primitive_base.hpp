@@ -16,8 +16,16 @@ namespace cdsp { namespace primitive {
 		base() : dsp() {};
 
 		// dsp
-		virtual void perform(sample_buffer& buffer, types::disc_32_u block_size_leq, types::channel channel_input = 0, types::channel channel_output = 0, types::disc_32_u offset = 0) = 0 {
-			dsp::perform(buffer, block_size_leq, channel_input, channel_output, offset);
+		virtual void prepare(types::cont_64 _sample_rate, types::disc_32_u _block_size) {
+			dsp::prepare(_sample_rate, _block_size);
+			for (auto it : parameter_plugs) {
+				(it.second)->prepare(_sample_rate, _block_size);
+			}
+		};
+		virtual void release() {
+			for (auto it : parameter_plugs) {
+				(it.second)->release();
+			}
 		};
 
 		// plugs

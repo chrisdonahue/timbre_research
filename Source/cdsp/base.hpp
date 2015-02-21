@@ -1,6 +1,7 @@
 #ifndef CDSP_BASE
 #define CDSP_BASE
 
+#include "defines.hpp"
 #include "exceptions.hpp"
 #include "sample_buffer.hpp"
 #include "types.hpp"
@@ -31,12 +32,12 @@ namespace cdsp {
 			prepared = false;
 #endif
 		};
-		virtual void perform(sample_buffer& buffer, types::disc_32_u block_size_leq, types::channel channel_input = 0, types::channel channel_output = 0, types::disc_32_u offset = 0) = 0 {
-			buffer;
-			block_size_leq;
-			channel_input;
-			channel_output;
-			offset;
+		virtual void perform(sample_buffer& buffer, types::disc_32_u block_size_leq, types::channel offset_channel = 0, types::disc_32_u offset_sample = 0) = 0 {
+			CDSP_UNUSED_PARAMETER(buffer);
+			CDSP_UNUSED_PARAMETER(block_size_leq);
+			CDSP_UNUSED_PARAMETER(offset_channel);
+			CDSP_UNUSED_PARAMETER(offset_sample);
+
 #ifdef CDSP_DEBUG
 			if (!prepared) {
 				throw exceptions::runtime("cdsp::dsp: perform called while not prepared");

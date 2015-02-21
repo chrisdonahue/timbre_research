@@ -1,21 +1,26 @@
 base.hpp:
 	consider changing signature of perform:
-		sample_buffer, block_size_leq, offset_channel, offset_sample
 		dsp::perform does:
 			make sure sample_buffer > max(channels_input_num, channels_output_num) + offset_channel
-		range_defined
-		get_min
-		get_max
 			
 parameters.hpp:
-	parameter_signal no longer has sample_buffer pointer
-	instead:
-		parameter_signal(buffer_channel, signal_min, signal_max, parameter_min, parameter_max)
 
 graph.hpp:
 	pretty much everything
 
+primitive/primitive_base.hpp:
+	set_output_channels_max
+	get_output_channels_max
+	set_input_channels_max
+	etc.
+
+	parameter_plugs<types::string specifier, parameter::signal& signal>
+
 table_interpolate_4.cpp:
+	frequency_set()
+	frequency_next_set()
+	frequency_next_set(time)
+	constructor with initial frequency
 
 questions:
 	figure out using for constructors

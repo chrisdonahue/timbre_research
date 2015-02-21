@@ -20,7 +20,7 @@ namespace cdsp { namespace primitive { namespace oscillator {
 		void phase_set(types::cont_64 _phase);
 		void frequency_set(types::sample frequency);
 
-		void perform(sample_buffer& buffer, types::disc_32_u block_size_leq, types::channel channel_input = 0, types::channel channel_output = 0, types::disc_32_u offset = 0);
+		void perform(sample_buffer& buffer, types::disc_32_u block_size_leq, types::channel offset_channel = 0, types::disc_32_u offset_sample = 0);
 
 	private:
 		types::cont_64 phase;

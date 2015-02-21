@@ -34,8 +34,8 @@ void cdsp::primitive::oscillator::table_interpolate_4::frequency_set(types::samp
 	frequency.value_next_set(_frequency);
 }
 
-void cdsp::primitive::oscillator::table_interpolate_4::perform(sample_buffer& buffer, types::disc_32_u block_size_leq, types::channel channel_input, types::channel channel_output, types::disc_32_u offset) {
-	primitive::base::perform(buffer, block_size_leq, channel_input, channel_output, offset);
+void cdsp::primitive::oscillator::table_interpolate_4::perform(sample_buffer& buffer, types::disc_32_u block_size_leq, types::channel offset_channel, types::disc_32_u offset_sample) {
+	primitive::base::perform(buffer, block_size_leq, offset_channel, offset_sample);
 
 	// check to make sure we have a table to interpolate
 	if (table == nullptr) {
@@ -46,11 +46,12 @@ void cdsp::primitive::oscillator::table_interpolate_4::perform(sample_buffer& bu
 	parameter::signal* frequency_plug;
 	const types::sample* frequency_buffer;
 	if ((frequency_plug = parameter_plug_get("frequency")) == nullptr) {
-		frequency.perform(buffer, block_size_leq, channel_input, channel_input, offset);
-		frequency_buffer = buffer.channel_pointer_read(0, offset);
+		frequency.perform(buffer, block_size_leq);
+		frequency_buffer = buffer.channel_pointer_read(0, offset_sample);
 	}
 	else {
-		frequency_buffer = frequency_plug->buffer_get()->channel_pointer_read(channel_output, offset);
+		frequency_plug->perform(buffer, block_size_leq);
+		frequency_buffer = buffer.channel_pointer_read(frequency_plug->channel_get(), offset_sample);
 	}
 
 	// create temporaries
@@ -88,7 +89,7 @@ void cdsp::primitive::oscillator::table_interpolate_4::perform(sample_buffer& bu
 
 		// calculate interpolated output
 		for (types::disc_32_u channel = 0; channel < channels_output_num; channel++) {
-			buffer.channel_pointer_write(channel, offset)[i] = static_cast<types::sample>(
+			buffer.channel_pointer_write(offset_channel + channel, offset_sample)[i] = static_cast<types::sample>(
 				in0 + 0.5 * fraction * (inp1 - inm1 + 
 				fraction * (4.0 * inp1 + 2.0 * inm1 - 5.0 * in0 - inp2 +
 				fraction * (3.0 * (in0 - inp1) - inm1 + inp2)))
