@@ -241,6 +241,11 @@ namespace cdsp { namespace parameter {
 			buffer = nullptr;
 		};
 
+		void perform(sample_buffer& buffer, types::disc_32_u block_size_leq, types::channel channel_input = 0, types::channel channel_output = 0, types::disc_32_u offset = 0) {
+			rate_audio::perform(buffer, block_size_leq, channel_input, channel_output, offset);
+			buffer; block_size_leq; channel_input; channel_output; offset;
+		};
+
 		void buffer_set(const sample_buffer* _buffer) {
 			buffer = _buffer;
 		};

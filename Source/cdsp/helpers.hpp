@@ -21,6 +21,12 @@ namespace cdsp { namespace helpers {
 	// wavetable helpers
 	extern void sine_sum(std::map<types::cont_32, types::cont_32> partials, types::disc_32_u buffer_length, types::sample* buffer);
 
+	// range mappers
+	template <typename T> void range_map_linear(T w, T x, T y, T z, T& m, T& b) {
+		m = (z - y) / (x - w);
+		b = (y - (w * m));
+	};
+
 	// memoized divide
 #ifdef CDSP_MEMORY_HIGH
 	static std::unordered_map<types::cont_64, types::cont_32> inverse_memoize;

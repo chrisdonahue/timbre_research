@@ -3,8 +3,14 @@ base.hpp:
 		sample_buffer, block_size_leq, offset_channel, offset_sample
 		dsp::perform does:
 			make sure sample_buffer > max(channels_input_num, channels_output_num) + offset_channel
-
+		range_defined
+		get_min
+		get_max
+			
 parameters.hpp:
+	parameter_signal no longer has sample_buffer pointer
+	instead:
+		parameter_signal(buffer_channel, signal_min, signal_max, parameter_min, parameter_max)
 
 graph.hpp:
 	pretty much everything
