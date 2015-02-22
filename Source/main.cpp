@@ -21,14 +21,14 @@ int main (int argc, char* argv[]) {
 
 	// create output buffer
 	types::cont_64 sample_rate = 44100.0;
-	types::disc_32_u block_size = 4;
-	types::disc_32_u output_buffer_length = block_size * 4;
+	types::disc_32_u block_size = 1024;
+	types::disc_32_u output_buffer_length = block_size * 155040;
 	sample_buffer output_buffer(1, output_buffer_length);
 	output_buffer.clear();
 
 	// connect
-	//parameter::signal fm(0, -1.0f, 1.0f, static_cast<types::sample>(55.0 / sample_rate), static_cast<types::sample>(440.0 / sample_rate));
-	parameter::signal fm(0, -1.0f, 1.0f, -0.25f, 0.25f);
+	parameter::signal fm(0, -1.0f, 1.0f, static_cast<types::sample>(55.0 / sample_rate), static_cast<types::sample>(440.0 / sample_rate));
+	//parameter::signal fm(0, -1.0f, 1.0f, 0.1f, 0.2f);
 	carrier.parameter_plug("frequency", &fm);
 
 	// prepare
@@ -44,6 +44,7 @@ int main (int argc, char* argv[]) {
 	}
 
 	// release
+	modulator.release();
 	carrier.release();
 
 	// save

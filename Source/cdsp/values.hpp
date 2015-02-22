@@ -13,6 +13,10 @@ namespace cdsp { namespace values {
 	const types::cont_64 two_pi_64			= 6.2831853071795864769252867665590057683943387987502;
 	const types::cont_32 two_pi_32			= 6.283185307179586f;
 
+	// zero
+	const types::cont_32 zero_32			= 0.0f;
+	const types::cont_64 zero_64			= 0.0;
+
 	// infinity
 	const types::cont_32 infinity_n_32		= -1.0f * std::numeric_limits<types::cont_32>::infinity();
 	const types::cont_32 infinity_32		= std::numeric_limits<types::cont_32>::infinity();

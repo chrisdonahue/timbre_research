@@ -3,6 +3,7 @@
 
 // DEBUG FLAG
 #define CDSP_DEBUG
+#define CDSP_DEBUG_DSP
 
 // OS FLAGS
 #ifdef _WIN32

@@ -67,7 +67,7 @@ namespace cdsp { namespace parameter {
 			return value;
 		};
 
-		T value_set(T _value) {
+		void value_set(T _value) {
 			value = _value;
 		};
 
@@ -121,12 +121,29 @@ namespace cdsp { namespace parameter {
 #endif
 		};
 
-		void perform(sample_buffer& buffer, types::disc_32_u block_size_leq, types::channel offset_channel = 0, types::disc_32_u offset_sample = 0) { rate_audio::perform(buffer, block_size_leq, offset_channel, offset_sample);};
+		void perform(sample_buffer& buffer, types::disc_32_u block_size_leq, types::channel offset_channel = 0, types::disc_32_u offset_sample = 0) {
+			rate_audio::perform(buffer, block_size_leq, offset_channel, offset_sample);
+		};
+
+		void value_set(types::sample _value) {
+			value = _value;
+			value_next = _value;
+			dezipper_samples_num = 0;
+			dezipper_increment = values::sample_silence;
+		};
 
 		void value_next_set(types::sample _value_next, types::cont_64 delay_s) {
+#ifdef CDSP_DEBUG
+			if (delay_s <= values::zero_64) {
+				throw exceptions::runtime("cdsp::parameter::ramp_linear: value_next_set called with a negative delay_s");
+			}
+			else if (delay_s == values::zero_64) {
+				return;
+			}
 			if (_value_next == value) {
 				return;
 			}
+#endif
 
 			value_next = _value_next;
 			types::cont_64 value_difference = static_cast<types::cont_64>(value_next - value);

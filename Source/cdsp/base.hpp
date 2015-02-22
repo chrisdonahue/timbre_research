@@ -38,7 +38,7 @@ namespace cdsp {
 			CDSP_UNUSED_PARAMETER(offset_channel);
 			CDSP_UNUSED_PARAMETER(offset_sample);
 
-#ifdef CDSP_DEBUG
+#ifdef CDSP_DEBUG_DSP
 			if (!prepared) {
 				throw exceptions::runtime("cdsp::dsp: perform called while not prepared");
 			}

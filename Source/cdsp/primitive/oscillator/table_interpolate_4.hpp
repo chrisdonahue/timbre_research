@@ -11,16 +11,16 @@ namespace cdsp { namespace primitive { namespace oscillator {
 	public:
 		table_interpolate_4();
 
-		void prepare(types::cont_64 _sample_rate, types::disc_32_u _block_size) {
-			primitive::base::prepare(_sample_rate, _block_size);
-			frequency.prepare(_sample_rate, _block_size);
-		}
-
 		void table_set(types::disc_32_u _table_length, const types::sample* _table);
-		void phase_set(types::cont_64 _phase);
-		void frequency_set(types::sample frequency);
 
+		void prepare(types::cont_64 _sample_rate, types::disc_32_u _block_size);
 		void perform(sample_buffer& buffer, types::disc_32_u block_size_leq, types::channel offset_channel = 0, types::disc_32_u offset_sample = 0);
+
+		void phase_set(types::cont_64 _phase);
+		  
+		void frequency_set(types::sample frequency);
+		void frequency_next_set(types::sample frequency_next);
+		void frequency_next_set(types::sample frequency_next, types::cont_64 delay_s);
 
 	private:
 		types::cont_64 phase;
