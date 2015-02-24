@@ -1,5 +1,7 @@
 #include "../JuceLibraryCode/JuceHeader.h"
 
+#include <vector>
+
 #include "cdsp/cdsp.hpp"
 
 int main (int argc, char* argv[]) {
@@ -7,12 +9,13 @@ int main (int argc, char* argv[]) {
 	argv;
 
 	using namespace cdsp;
-
+	
+	/*
 	// create modulator
 	primitive::oscillator::table_interpolate_4 modulator;
 	types::disc_32_u table_length = 1024;
 	sample_buffer table(1, table_length);
-	helpers::sine_sum(std::map<types::cont_32, types::cont_32>(), table_length, table.channel_pointer_write(0));
+	helpers::sine_sum(std::unordered_map<types::cont_32, types::cont_32>(), table_length, table.channel_pointer_write(0));
 	modulator.table_set(table_length, table.channel_pointer_read(0));
 
 	// create carrier
@@ -46,9 +49,38 @@ int main (int argc, char* argv[]) {
 	// release
 	modulator.release();
 	carrier.release();
+	*/
+
+	// create control signal
+	std::vector<types::disc_32_u> harmonics_max = { 1, 1024, 1024 * 2, 1024 * 3, 1024 * 4};
+	types::disc_32_u table_length = 2048;
+
+	// create table
+	types::disc_32_u table_length_total = harmonics_max.size() * table_length;
+	sample_buffer table(1, table_length_total + 3);
+	table.clear();
+	types::sample* table_buffer = table.channel_pointer_write(0, 0);
+	table_buffer[0] = values::sample_silence;
+	table_buffer[table_length_total - 1] = values::sample_silence;
+	table_buffer[table_length_total - 2] = values::sample_silence;
+
+	std::set<std::tuple<types::cont_64, types::cont_64, types::cont_64> > harmonics;
+	types::disc_32_u i = 0;
+	for (auto it : harmonics_max) {
+		types::disc_32_u harmonic_max = it;
+		harmonics.clear();
+		for (types::disc_32_u h = 1; h <= harmonic_max; h++) {
+			types::cont_64 harmonic_freq = static_cast<types::cont_64>(h);
+			types::cont_64 harmonic_amp = 1.0 / harmonic_freq;
+			harmonics.insert(std::make_tuple(harmonic_freq, harmonic_amp, 0.5));
+		}
+		helpers::sine_sum(harmonics, table_length, table.channel_pointer_write(0, 1 + (i * table_length)));
+		i += 1;
+	}
 
 	// save
-	helpers::io::wav_file_save("output.wav", sample_rate, 32, output_buffer);
+	types::cont_64 sample_rate = 44100.0;
+	helpers::io::wav_file_save("envelope.wav", sample_rate, 32, table);
 
     return 0;
 }
