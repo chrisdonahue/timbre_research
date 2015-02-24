@@ -5,6 +5,8 @@
 #include <cstdio>
 #include <fstream>
 #include <map>
+#include <set>
+#include <tuple>
 #include <unordered_map>
 
 #include "defines.hpp"
@@ -19,7 +21,7 @@ namespace cdsp { namespace helpers {
 	extern types::boolean is_power_of_two(types::disc_32_u n);
 
 	// wavetable helpers
-	extern void sine_sum(std::map<types::cont_32, types::cont_32> partials, types::disc_32_u buffer_length, types::sample* buffer);
+	extern void sine_sum(std::set<std::tuple<types::cont_64, types::cont_64, types::cont_64> > partials, types::disc_32_u buffer_length, types::sample* buffer);
 
 	// range mappers
 	template <typename T> void range_map_linear(T w, T x, T y, T z, T& m, T& b) {

@@ -13,17 +13,42 @@ cdsp::types::boolean cdsp::helpers::is_power_of_two(types::disc_32_u n) {
 	return true;
 };
 
-void cdsp::helpers::sine_sum(std::map<types::cont_32, types::cont_32> partials, types::disc_32_u buffer_length, types::sample* buffer) {
+void cdsp::helpers::sine_sum(std::set<std::tuple<types::cont_64, types::cont_64, types::cont_64> > partials, types::disc_32_u buffer_length, types::sample* buffer) {
 	if (buffer_length == 0) {
 		throw exceptions::runtime("cdsp::helpers::sine_sum: buffer_length is 0");
 	}
 
-	// TODO: partials
-	types::cont_64 index_value = 0.0;
-	types::cont_64 index_increment = values::two_pi_64 / static_cast<types::cont_64>(buffer_length);
+	// clear
 	for (types::disc_32_u i = 0; i < buffer_length; i++) {
-		buffer[i] = sinf(static_cast<types::sample>(index_value));
-		index_value += index_increment;
+		buffer[i] = values::sample_silence;
+	}
+
+	// fill
+	for (auto it : partials) {
+		std::tuple<types::cont_64, types::cont_64, types::cont_64>& partial = it;
+		types::cont_64 harmonic_freq = std::get<0>(partial);
+		types::cont_64 harmonic_amp = std::get<1>(partial);
+		types::cont_64 harmonic_phase = std::get<2>(partial);
+		types::cont_64 index_value = values::two_pi_64 * harmonic_phase;
+		types::cont_64 index_increment = (values::two_pi_64 / static_cast<types::cont_64>(buffer_length)) * harmonic_freq;
+		for (types::disc_32_u i = 0; i < buffer_length; i++) {
+			buffer[i] += static_cast<types::sample>(harmonic_amp * sin(index_value));
+			index_value += index_increment;
+		}
+	}
+
+	// normalize
+	types::sample max = values::sample_infinity_n;
+	for (types::disc_32_u i = 0; i < buffer_length; i++) {
+		if (buffer[i] > max) {
+			max = buffer[i];
+		}
+	}
+	if (max > values::sample_infinity_n) {
+		types::sample max_inverse = values::sample_line_level / max;
+		for (types::disc_32_u i = 0; i < buffer_length; i++) {
+			buffer[i] *= max_inverse;
+		}
 	}
 }
 
