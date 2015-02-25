@@ -1,0 +1,3 @@
+[submodule "Source/cdsp"]
+	path = Source/cdsp
+	url = git@github.com:chrisdonahue/cdsp.git
