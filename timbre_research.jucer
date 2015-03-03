@@ -7,36 +7,48 @@
   <MAINGROUP id="lWIu0b" name="timbre_research">
     <GROUP id="{D356937B-E896-924A-B5AB-DEF10E2A9EC7}" name="Source">
       <GROUP id="{5A8F734A-24B8-CCA4-76DC-8A596943B5B5}" name="cdsp">
-        <GROUP id="{9F833F29-26A2-61E8-4C2E-6479BEAB9B55}" name="primitive">
-          <FILE id="b575a5" name="primitive_base.cpp" compile="1" resource="0"
-                file="Source/cdsp/primitive/primitive_base.cpp"/>
-          <FILE id="cpk2Ok" name="primitive_base.hpp" compile="0" resource="0"
-                file="Source/cdsp/primitive/primitive_base.hpp"/>
-          <GROUP id="{A35E9265-638A-B2A7-9782-3C41214D6FE8}" name="oscillator">
-            <FILE id="GQ1efP" name="table_interpolate_4.cpp" compile="1" resource="0"
-                  file="Source/cdsp/primitive/oscillator/table_interpolate_4.cpp"/>
-            <FILE id="UNPLhi" name="table_interpolate_4.hpp" compile="0" resource="0"
-                  file="Source/cdsp/primitive/oscillator/table_interpolate_4.hpp"/>
+        <FILE id="DgBe5x" name="base.cpp" compile="1" resource="0" file="Source/cdsp/base.cpp"/>
+        <FILE id="P9Wadm" name="base.hpp" compile="0" resource="0" file="Source/cdsp/base.hpp"/>
+        <FILE id="pSMKux" name="cdsp.hpp" compile="0" resource="0" file="Source/cdsp/cdsp.hpp"/>
+        <FILE id="pq6oUj" name="defines.hpp" compile="0" resource="0" file="Source/cdsp/defines.hpp"/>
+        <FILE id="GnX7h0" name="exceptions.cpp" compile="1" resource="0" file="Source/cdsp/exceptions.cpp"/>
+        <FILE id="wdDDsZ" name="exceptions.hpp" compile="0" resource="0" file="Source/cdsp/exceptions.hpp"/>
+        <FILE id="C33hCD" name="graph.cpp" compile="1" resource="0" file="Source/cdsp/graph.cpp"/>
+        <FILE id="Nw0rsD" name="graph.hpp" compile="0" resource="0" file="Source/cdsp/graph.hpp"/>
+        <FILE id="cpum7D" name="helpers.cpp" compile="1" resource="0" file="Source/cdsp/helpers.cpp"/>
+        <FILE id="v1pQJh" name="helpers.hpp" compile="0" resource="0" file="Source/cdsp/helpers.hpp"/>
+        <FILE id="J5DF9k" name="parameter.cpp" compile="1" resource="0" file="Source/cdsp/parameter.cpp"/>
+        <FILE id="yINb6W" name="parameter.hpp" compile="0" resource="0" file="Source/cdsp/parameter.hpp"/>
+        <GROUP id="{25CDBC2B-2FF5-099A-9819-1D875B011BFB}" name="primitives">
+          <GROUP id="{DDD6AE0E-725A-D83B-FF2F-0C3DABA8C26F}" name="envelopes">
+            <FILE id="Nxj3bN" name="adsr.cpp" compile="1" resource="0" file="Source/cdsp/primitives/envelopes/adsr.cpp"/>
+            <FILE id="Wvmsfi" name="adsr.hpp" compile="0" resource="0" file="Source/cdsp/primitives/envelopes/adsr.hpp"/>
           </GROUP>
+          <GROUP id="{20F99000-69EA-0718-1C03-03B7048B53C2}" name="math">
+            <FILE id="lTdnl9" name="add.cpp" compile="1" resource="0" file="Source/cdsp/primitives/math/add.cpp"/>
+            <FILE id="rqwxWF" name="add.hpp" compile="0" resource="0" file="Source/cdsp/primitives/math/add.hpp"/>
+            <FILE id="bKxgyI" name="multiply.cpp" compile="1" resource="0" file="Source/cdsp/primitives/math/multiply.cpp"/>
+            <FILE id="eTLLIN" name="multiply.hpp" compile="0" resource="0" file="Source/cdsp/primitives/math/multiply.hpp"/>
+          </GROUP>
+          <GROUP id="{8CD5C740-2329-077A-3A22-CDD00E1CBD98}" name="oscillators">
+            <FILE id="Jt14yH" name="phasor.cpp" compile="1" resource="0" file="Source/cdsp/primitives/oscillators/phasor.cpp"/>
+            <FILE id="y9NsKj" name="phasor.hpp" compile="0" resource="0" file="Source/cdsp/primitives/oscillators/phasor.hpp"/>
+            <FILE id="ouZgWC" name="table_interpolate_4.cpp" compile="1" resource="0"
+                  file="Source/cdsp/primitives/oscillators/table_interpolate_4.cpp"/>
+            <FILE id="VcGqUS" name="table_interpolate_4.hpp" compile="0" resource="0"
+                  file="Source/cdsp/primitives/oscillators/table_interpolate_4.hpp"/>
+          </GROUP>
+          <FILE id="IttRWN" name="primitive_base.cpp" compile="1" resource="0"
+                file="Source/cdsp/primitives/primitive_base.cpp"/>
+          <FILE id="awhtnS" name="primitive_base.hpp" compile="0" resource="0"
+                file="Source/cdsp/primitives/primitive_base.hpp"/>
         </GROUP>
-        <FILE id="eaYO0P" name="base.cpp" compile="1" resource="0" file="Source/cdsp/base.cpp"/>
-        <FILE id="O0cDWR" name="base.hpp" compile="0" resource="0" file="Source/cdsp/base.hpp"/>
-        <FILE id="IpQSyu" name="cdsp.hpp" compile="0" resource="0" file="Source/cdsp/cdsp.hpp"/>
-        <FILE id="YGqyyD" name="defines.hpp" compile="0" resource="0" file="Source/cdsp/defines.hpp"/>
-        <FILE id="KplSiX" name="exceptions.cpp" compile="1" resource="0" file="Source/cdsp/exceptions.cpp"/>
-        <FILE id="x6fwfg" name="exceptions.hpp" compile="0" resource="0" file="Source/cdsp/exceptions.hpp"/>
-        <FILE id="xjx9TR" name="graph.cpp" compile="1" resource="0" file="Source/cdsp/graph.cpp"/>
-        <FILE id="zFPowb" name="graph.hpp" compile="0" resource="0" file="Source/cdsp/graph.hpp"/>
-        <FILE id="q739f6" name="helpers.cpp" compile="1" resource="0" file="Source/cdsp/helpers.cpp"/>
-        <FILE id="bNZL8I" name="helpers.hpp" compile="0" resource="0" file="Source/cdsp/helpers.hpp"/>
-        <FILE id="uvpNhJ" name="parameter.cpp" compile="1" resource="0" file="Source/cdsp/parameter.cpp"/>
-        <FILE id="OAhmrQ" name="parameter.hpp" compile="0" resource="0" file="Source/cdsp/parameter.hpp"/>
-        <FILE id="d9ENJ2" name="sample_buffer.cpp" compile="1" resource="0"
+        <FILE id="WWdqOw" name="sample_buffer.cpp" compile="1" resource="0"
               file="Source/cdsp/sample_buffer.cpp"/>
-        <FILE id="PPFmFd" name="sample_buffer.hpp" compile="0" resource="0"
+        <FILE id="o4GKe0" name="sample_buffer.hpp" compile="0" resource="0"
               file="Source/cdsp/sample_buffer.hpp"/>
-        <FILE id="u7GOiU" name="types.hpp" compile="0" resource="0" file="Source/cdsp/types.hpp"/>
-        <FILE id="VBdt8k" name="values.hpp" compile="0" resource="0" file="Source/cdsp/values.hpp"/>
+        <FILE id="W4rRug" name="types.hpp" compile="0" resource="0" file="Source/cdsp/types.hpp"/>
+        <FILE id="YZTekp" name="values.hpp" compile="0" resource="0" file="Source/cdsp/values.hpp"/>
       </GROUP>
       <GROUP id="{2DA222AC-2D63-5EE0-A6FC-7E46933E44B6}" name="dependencies">
         <GROUP id="{3151364B-D029-BD31-DA21-2FC924796763}" name="kiss_fft130">

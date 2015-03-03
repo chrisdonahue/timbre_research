@@ -129,13 +129,17 @@
     </Bscmake>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Source\cdsp\primitive\primitive_base.cpp"/>
-    <ClCompile Include="..\..\Source\cdsp\primitive\oscillator\table_interpolate_4.cpp"/>
     <ClCompile Include="..\..\Source\cdsp\base.cpp"/>
     <ClCompile Include="..\..\Source\cdsp\exceptions.cpp"/>
     <ClCompile Include="..\..\Source\cdsp\graph.cpp"/>
     <ClCompile Include="..\..\Source\cdsp\helpers.cpp"/>
     <ClCompile Include="..\..\Source\cdsp\parameter.cpp"/>
+    <ClCompile Include="..\..\Source\cdsp\primitives\envelopes\adsr.cpp"/>
+    <ClCompile Include="..\..\Source\cdsp\primitives\math\add.cpp"/>
+    <ClCompile Include="..\..\Source\cdsp\primitives\math\multiply.cpp"/>
+    <ClCompile Include="..\..\Source\cdsp\primitives\oscillators\phasor.cpp"/>
+    <ClCompile Include="..\..\Source\cdsp\primitives\oscillators\table_interpolate_4.cpp"/>
+    <ClCompile Include="..\..\Source\cdsp\primitives\primitive_base.cpp"/>
     <ClCompile Include="..\..\Source\cdsp\sample_buffer.cpp"/>
     <ClCompile Include="..\..\Source\dependencies\kiss_fft130\kiss_fft.c"/>
     <ClCompile Include="..\..\Source\main.cpp"/>
@@ -1246,8 +1250,6 @@
     <ClCompile Include="..\..\..\JUCE\modules\juce_video\juce_video.cpp"/>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Source\cdsp\primitive\primitive_base.hpp"/>
-    <ClInclude Include="..\..\Source\cdsp\primitive\oscillator\table_interpolate_4.hpp"/>
     <ClInclude Include="..\..\Source\cdsp\base.hpp"/>
     <ClInclude Include="..\..\Source\cdsp\cdsp.hpp"/>
     <ClInclude Include="..\..\Source\cdsp\defines.hpp"/>
@@ -1255,6 +1257,12 @@
     <ClInclude Include="..\..\Source\cdsp\graph.hpp"/>
     <ClInclude Include="..\..\Source\cdsp\helpers.hpp"/>
     <ClInclude Include="..\..\Source\cdsp\parameter.hpp"/>
+    <ClInclude Include="..\..\Source\cdsp\primitives\envelopes\adsr.hpp"/>
+    <ClInclude Include="..\..\Source\cdsp\primitives\math\add.hpp"/>
+    <ClInclude Include="..\..\Source\cdsp\primitives\math\multiply.hpp"/>
+    <ClInclude Include="..\..\Source\cdsp\primitives\oscillators\phasor.hpp"/>
+    <ClInclude Include="..\..\Source\cdsp\primitives\oscillators\table_interpolate_4.hpp"/>
+    <ClInclude Include="..\..\Source\cdsp\primitives\primitive_base.hpp"/>
     <ClInclude Include="..\..\Source\cdsp\sample_buffer.hpp"/>
     <ClInclude Include="..\..\Source\cdsp\types.hpp"/>
     <ClInclude Include="..\..\Source\cdsp\values.hpp"/>
