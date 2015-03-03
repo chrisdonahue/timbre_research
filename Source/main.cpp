@@ -12,7 +12,7 @@ int main (int argc, char* argv[]) {
 	primitive::oscillator::table_interpolate_4 modulator;
 	types::disc_32_u table_length = 1024;
 	sample_buffer table(1, table_length);
-	helpers::sine_sum(std::map<types::cont_32, types::cont_32>(), table_length, table.channel_pointer_write(0));
+	helpers::generators::cosine(table_length, table.channel_pointer_write(0));
 	modulator.table_set(table_length, table.channel_pointer_read(0));
 
 	// create carrier
