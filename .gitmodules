@@ -4,3 +4,4 @@
 [submodule "Source/dependencies/libcmaes"]
 	path = Source/dependencies/libcmaes
 	url = git@github.com:beniz/libcmaes.git
+	ignore = dirty
