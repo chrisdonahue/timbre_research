@@ -5,8 +5,12 @@ helpers.hpp
 	inverse_memoized change to inverse with better type signature
 	find all references and remove IF CDSP_HIGH_MEM stuff
 
+adsr.hpp:
+	think about API for release and reset (maybe release at a certain time like line 16... look at javascript AudioParameter again)
+	
 questions:
 	figure out using for constructors
 	initialization list used by all constructors?
 	shared_ptr for shared tables? (table_interpolate_4)
 	references instead of pointers for parameter_plugs in primitive_base.hpp?
+	list of times for value_next_set (so we can set value at a time rather than one at a time)
