@@ -1,8 +1,21 @@
 #include "../JuceLibraryCode/JuceHeader.h"
 
+#include "cmaes.h"
+#include <iostream>
+
 #include "cdsp/cdsp.hpp"
 
+using namespace libcmaes;
+
 using namespace cdsp;
+
+FitFunc fsphere = [](const double *x, const int N)
+{
+	double val = 0.0;
+	for (int i=0;i<N;i++)
+		val += x[i]*x[i];
+	return val;
+};
 
 void two_sine_waves() {
 	// create wavetable
@@ -98,7 +111,19 @@ int main (int argc, char* argv[]) {
 
 	//two_sine_waves();
 
-	phasor();
+	//phasor();
 
-    return 0;
+	// test cmaes
+	int dim = 10; // problem dimensions.
+	std::vector<double> x0(dim,10.0);
+	double sigma = 0.1;
+	//int lambda = 100; // offsprings at each generation.
+	CMAParameters<> cmaparams(dim,&x0.front(),sigma);
+	//cmaparams.set_algo(BIPOP_CMAES);
+	CMASolutions cmasols = cmaes<>(fsphere,cmaparams);
+	std::cout << "best solution: " << cmasols << std::endl;
+	std::cout << "optimization took " << cmasols.elapsed_time() / 1000.0 << " seconds\n";
+	return cmasols.run_status();
+
+    //return 0;
 };
