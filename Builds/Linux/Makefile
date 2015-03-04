@@ -57,8 +57,9 @@ OBJECTS := \
   $(OBJDIR)/helpers_d53a1e5d.o \
   $(OBJDIR)/parameter_e0b65cc1.o \
   $(OBJDIR)/adsr_70cfcc9.o \
-  $(OBJDIR)/add_58a952b5.o \
-  $(OBJDIR)/multiply_a6efca5a.o \
+  $(OBJDIR)/base_2ff2662c.o \
+  $(OBJDIR)/add_d0d8a8f0.o \
+  $(OBJDIR)/multiply_199420ff.o \
   $(OBJDIR)/phasor_1e9aabe4.o \
   $(OBJDIR)/table_interpolate_4_bf0c1518.o \
   $(OBJDIR)/primitive_base_fffe40c4.o \
@@ -126,12 +127,17 @@ $(OBJDIR)/adsr_70cfcc9.o: ../../Source/cdsp/primitives/envelopes/adsr.cpp
 	@echo "Compiling adsr.cpp"
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
-$(OBJDIR)/add_58a952b5.o: ../../Source/cdsp/primitives/math/add.cpp
+$(OBJDIR)/base_2ff2662c.o: ../../Source/cdsp/primitives/operators/base.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling base.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/add_d0d8a8f0.o: ../../Source/cdsp/primitives/operators/add.cpp
 	-@mkdir -p $(OBJDIR)
 	@echo "Compiling add.cpp"
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
-$(OBJDIR)/multiply_a6efca5a.o: ../../Source/cdsp/primitives/math/multiply.cpp
+$(OBJDIR)/multiply_199420ff.o: ../../Source/cdsp/primitives/operators/multiply.cpp
 	-@mkdir -p $(OBJDIR)
 	@echo "Compiling multiply.cpp"
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"

@@ -9,14 +9,14 @@ int main (int argc, char* argv[]) {
 	using namespace cdsp;
 
 	// create modulator
-	primitive::oscillator::table_interpolate_4 modulator;
+	primitives::oscillators::table_interpolate_4 modulator;
 	types::disc_32_u table_length = 1024;
 	sample_buffer table(1, table_length);
 	helpers::generators::cosine(table_length, table.channel_pointer_write(0));
 	modulator.table_set(table_length, table.channel_pointer_read(0));
 
 	// create carrier
-	primitive::oscillator::table_interpolate_4 carrier;
+	primitives::oscillators::table_interpolate_4 carrier;
 	carrier.table_set(table_length, table.channel_pointer_read(0));
 
 	// create output buffer

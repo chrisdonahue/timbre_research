@@ -135,8 +135,9 @@
     <ClCompile Include="..\..\Source\cdsp\helpers.cpp"/>
     <ClCompile Include="..\..\Source\cdsp\parameter.cpp"/>
     <ClCompile Include="..\..\Source\cdsp\primitives\envelopes\adsr.cpp"/>
-    <ClCompile Include="..\..\Source\cdsp\primitives\math\add.cpp"/>
-    <ClCompile Include="..\..\Source\cdsp\primitives\math\multiply.cpp"/>
+    <ClCompile Include="..\..\Source\cdsp\primitives\operators\base.cpp"/>
+    <ClCompile Include="..\..\Source\cdsp\primitives\operators\add.cpp"/>
+    <ClCompile Include="..\..\Source\cdsp\primitives\operators\multiply.cpp"/>
     <ClCompile Include="..\..\Source\cdsp\primitives\oscillators\phasor.cpp"/>
     <ClCompile Include="..\..\Source\cdsp\primitives\oscillators\table_interpolate_4.cpp"/>
     <ClCompile Include="..\..\Source\cdsp\primitives\primitive_base.cpp"/>
@@ -1258,8 +1259,9 @@
     <ClInclude Include="..\..\Source\cdsp\helpers.hpp"/>
     <ClInclude Include="..\..\Source\cdsp\parameter.hpp"/>
     <ClInclude Include="..\..\Source\cdsp\primitives\envelopes\adsr.hpp"/>
-    <ClInclude Include="..\..\Source\cdsp\primitives\math\add.hpp"/>
-    <ClInclude Include="..\..\Source\cdsp\primitives\math\multiply.hpp"/>
+    <ClInclude Include="..\..\Source\cdsp\primitives\operators\base.hpp"/>
+    <ClInclude Include="..\..\Source\cdsp\primitives\operators\add.hpp"/>
+    <ClInclude Include="..\..\Source\cdsp\primitives\operators\multiply.hpp"/>
     <ClInclude Include="..\..\Source\cdsp\primitives\oscillators\phasor.hpp"/>
     <ClInclude Include="..\..\Source\cdsp\primitives\oscillators\table_interpolate_4.hpp"/>
     <ClInclude Include="..\..\Source\cdsp\primitives\primitive_base.hpp"/>

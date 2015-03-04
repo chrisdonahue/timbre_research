@@ -24,11 +24,13 @@
             <FILE id="Nxj3bN" name="adsr.cpp" compile="1" resource="0" file="Source/cdsp/primitives/envelopes/adsr.cpp"/>
             <FILE id="Wvmsfi" name="adsr.hpp" compile="0" resource="0" file="Source/cdsp/primitives/envelopes/adsr.hpp"/>
           </GROUP>
-          <GROUP id="{20F99000-69EA-0718-1C03-03B7048B53C2}" name="math">
-            <FILE id="lTdnl9" name="add.cpp" compile="1" resource="0" file="Source/cdsp/primitives/math/add.cpp"/>
-            <FILE id="rqwxWF" name="add.hpp" compile="0" resource="0" file="Source/cdsp/primitives/math/add.hpp"/>
-            <FILE id="bKxgyI" name="multiply.cpp" compile="1" resource="0" file="Source/cdsp/primitives/math/multiply.cpp"/>
-            <FILE id="eTLLIN" name="multiply.hpp" compile="0" resource="0" file="Source/cdsp/primitives/math/multiply.hpp"/>
+          <GROUP id="{0F27287E-3BEC-4259-AFDD-289D71CDFB58}" name="operators">
+            <FILE id="eaFTuE" name="base.cpp" compile="1" resource="0" file="Source/cdsp/primitives/operators/base.cpp"/>
+            <FILE id="BO9uLL" name="base.hpp" compile="0" resource="0" file="Source/cdsp/primitives/operators/base.hpp"/>
+            <FILE id="grezX9" name="add.cpp" compile="1" resource="0" file="Source/cdsp/primitives/operators/add.cpp"/>
+            <FILE id="Vy6p88" name="add.hpp" compile="0" resource="0" file="Source/cdsp/primitives/operators/add.hpp"/>
+            <FILE id="xU5P2g" name="multiply.cpp" compile="1" resource="0" file="Source/cdsp/primitives/operators/multiply.cpp"/>
+            <FILE id="kgFCWg" name="multiply.hpp" compile="0" resource="0" file="Source/cdsp/primitives/operators/multiply.hpp"/>
           </GROUP>
           <GROUP id="{8CD5C740-2329-077A-3A22-CDD00E1CBD98}" name="oscillators">
             <FILE id="Jt14yH" name="phasor.cpp" compile="1" resource="0" file="Source/cdsp/primitives/oscillators/phasor.cpp"/>
