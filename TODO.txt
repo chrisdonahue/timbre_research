@@ -1,27 +1,12 @@
-base.hpp:
-	consider changing signature of perform:
-		dsp::perform does:
-			make sure sample_buffer > max(channels_input_num, channels_output_num) + offset_channel
-			
-parameters.hpp:
-
 graph.hpp:
 	pretty much everything
-
-primitive/primitive_base.hpp:
-	set_output_channels_max
-	get_output_channels_max
-	set_input_channels_max
-	etc.
-
-	parameter_plugs<types::string specifier, parameter::signal& signal>
-
-table_interpolate_4.cpp:
-	constructor with initial frequency and/or phase?
-
-values.hpp:
-	values::channel_max std::limits<types::channel> etc
+	
+helpers.hpp
+	inverse_memoized change to inverse with better type signature
+	find all references and remove IF CDSP_HIGH_MEM stuff
 
 questions:
 	figure out using for constructors
 	initialization list used by all constructors?
+	shared_ptr for shared tables? (table_interpolate_4)
+	references instead of pointers for parameter_plugs in primitive_base.hpp?

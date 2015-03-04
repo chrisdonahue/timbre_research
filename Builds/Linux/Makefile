@@ -57,12 +57,13 @@ OBJECTS := \
   $(OBJDIR)/helpers_d53a1e5d.o \
   $(OBJDIR)/parameter_e0b65cc1.o \
   $(OBJDIR)/adsr_70cfcc9.o \
-  $(OBJDIR)/base_2ff2662c.o \
+  $(OBJDIR)/operators_base_63305c9c.o \
   $(OBJDIR)/add_d0d8a8f0.o \
   $(OBJDIR)/multiply_199420ff.o \
+  $(OBJDIR)/oscillators_base_6a377994.o \
   $(OBJDIR)/phasor_1e9aabe4.o \
   $(OBJDIR)/table_interpolate_4_bf0c1518.o \
-  $(OBJDIR)/primitive_base_fffe40c4.o \
+  $(OBJDIR)/primitives_base_233d00d3.o \
   $(OBJDIR)/sample_buffer_1d88820d.o \
   $(OBJDIR)/kiss_fft_eaf1f82e.o \
   $(OBJDIR)/main_8d1161a2.o \
@@ -127,9 +128,9 @@ $(OBJDIR)/adsr_70cfcc9.o: ../../Source/cdsp/primitives/envelopes/adsr.cpp
 	@echo "Compiling adsr.cpp"
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
-$(OBJDIR)/base_2ff2662c.o: ../../Source/cdsp/primitives/operators/base.cpp
+$(OBJDIR)/operators_base_63305c9c.o: ../../Source/cdsp/primitives/operators/operators_base.cpp
 	-@mkdir -p $(OBJDIR)
-	@echo "Compiling base.cpp"
+	@echo "Compiling operators_base.cpp"
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
 $(OBJDIR)/add_d0d8a8f0.o: ../../Source/cdsp/primitives/operators/add.cpp
@@ -142,6 +143,11 @@ $(OBJDIR)/multiply_199420ff.o: ../../Source/cdsp/primitives/operators/multiply.c
 	@echo "Compiling multiply.cpp"
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
+$(OBJDIR)/oscillators_base_6a377994.o: ../../Source/cdsp/primitives/oscillators/oscillators_base.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling oscillators_base.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
 $(OBJDIR)/phasor_1e9aabe4.o: ../../Source/cdsp/primitives/oscillators/phasor.cpp
 	-@mkdir -p $(OBJDIR)
 	@echo "Compiling phasor.cpp"
@@ -152,9 +158,9 @@ $(OBJDIR)/table_interpolate_4_bf0c1518.o: ../../Source/cdsp/primitives/oscillato
 	@echo "Compiling table_interpolate_4.cpp"
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
-$(OBJDIR)/primitive_base_fffe40c4.o: ../../Source/cdsp/primitives/primitive_base.cpp
+$(OBJDIR)/primitives_base_233d00d3.o: ../../Source/cdsp/primitives/primitives_base.cpp
 	-@mkdir -p $(OBJDIR)
-	@echo "Compiling primitive_base.cpp"
+	@echo "Compiling primitives_base.cpp"
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
 $(OBJDIR)/sample_buffer_1d88820d.o: ../../Source/cdsp/sample_buffer.cpp
