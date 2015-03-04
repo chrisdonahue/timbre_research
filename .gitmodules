@@ -1,3 +1,6 @@
 [submodule "Source/cdsp"]
 	path = Source/cdsp
 	url = git@github.com:chrisdonahue/cdsp.git
+[submodule "Source/dependencies/libcmaes"]
+	path = Source/dependencies/libcmaes
+	url = git@github.com:beniz/libcmaes.git
