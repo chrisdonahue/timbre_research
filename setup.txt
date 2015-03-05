@@ -1,0 +1,14 @@
+JUCE
+	install JUCE to ../
+		git clone --depth 1 git@github.com:julianstorer/JUCE.git
+	install JUCE prereqs
+	build extras/Introjucer
+	open>save project (transfers modules to JuceLibraryCode)
+
+libcmaes
+	sudo apt-get install autoconf automake libtool libgoogle-glog-dev libgflags-dev libeigen3-dev
+	./autogen.sh
+	./configure
+	make (takes forever for some reason)
+	sudo make install
+	sudo ldconfig -v
