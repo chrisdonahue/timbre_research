@@ -52,6 +52,9 @@ void two_sine_waves() {
 	// create ramp
 	primitives::envelopes::interpolate_linear envelope;
 
+	// create multiplier_3
+	primitives::operators::multiply multiplier_3(static_cast<types::channel>(2));
+
 	// prepare
 	oscillator_1.prepare(sample_rate, block_size);
 	multiplier_1.prepare(sample_rate, block_size);
@@ -59,6 +62,7 @@ void two_sine_waves() {
 	multiplier_2.prepare(sample_rate, block_size);
 	adder.prepare(sample_rate, block_size);
 	envelope.prepare(sample_rate, block_size);
+	multiplier_3.prepare(sample_rate, block_size);
 
 	// add envelope points
 	envelope.point_add(1.0, 1.0);
@@ -73,7 +77,8 @@ void two_sine_waves() {
 		oscillator_2.perform(output_buffer, block_size, 1, block_size * i);
 		multiplier_2.perform(output_buffer, block_size, 1, block_size * i);
 		adder.perform(output_buffer, block_size, 0, block_size * i);
-		envelope.perform(output_buffer, block_size, 0, block_size * i);
+		envelope.perform(output_buffer, block_size, 1, block_size * i);
+		multiplier_3.perform(output_buffer, block_size, 0, block_size * i);
 	}
 
 	// release
@@ -83,6 +88,7 @@ void two_sine_waves() {
 	multiplier_2.release();
 	adder.release();
 	envelope.release();
+	multiplier_3.release();
 
 	// resize
 	output_buffer.resize(1, output_buffer_length);

@@ -1,12 +1,18 @@
 graph.hpp:
 	pretty much everything
-	
-helpers.hpp
-	inverse_memoized change to inverse with better type signature
-	find all references and remove IF CDSP_HIGH_MEM stuff
 
-adsr.hpp:
-	think about API for release and reset (maybe release at a certain time like line 16... look at javascript AudioParameter again)
+interpolate_linear.hpp
+	change name to linear.hpp
+	consider interface (using in realtime/adding points)
+	create increments at prepare time
+
+everything:
+	transfer extra hpp stuff to cpp
+	create parameter/ folder
+	move everything to src/ folder
+	create README.md
+	create Makefile to compile it as a library for static linking
+	create TODO in cdsp
 	
 questions:
 	figure out using for constructors
