@@ -1,14 +1,15 @@
 #include "../JuceLibraryCode/JuceHeader.h"
 
-#include "cmaes.h"
+//#include "cmaes.h"
 #include <iostream>
 
 #include "cdsp/cdsp.hpp"
 
-using namespace libcmaes;
+//using namespace libcmaes;
 
 using namespace cdsp;
 
+/*
 FitFunc fsphere = [](const double *x, const int N)
 {
 	double val = 0.0;
@@ -16,6 +17,7 @@ FitFunc fsphere = [](const double *x, const int N)
 		val += x[i]*x[i];
 	return val;
 };
+*/
 
 void two_sine_waves() {
 	// create wavetable
@@ -26,7 +28,7 @@ void two_sine_waves() {
 	// create output buffer
 	types::cont_64 sample_rate = 44100.0;
 	types::disc_32_u block_size = 1024;
-	types::disc_32_u output_buffer_length = block_size * 32;
+	types::disc_32_u output_buffer_length = block_size * 128;
 	sample_buffer output_buffer(2, output_buffer_length);
 	output_buffer.clear();
 
@@ -47,12 +49,21 @@ void two_sine_waves() {
 	// create adder
 	primitives::operators::add adder(static_cast<types::channel>(2));
 
+	// create ramp
+	primitives::envelopes::interpolate_linear envelope;
+
 	// prepare
 	oscillator_1.prepare(sample_rate, block_size);
 	multiplier_1.prepare(sample_rate, block_size);
 	oscillator_2.prepare(sample_rate, block_size);
 	multiplier_2.prepare(sample_rate, block_size);
 	adder.prepare(sample_rate, block_size);
+	envelope.prepare(sample_rate, block_size);
+
+	// add envelope points
+	envelope.point_add(1.0, 1.0);
+	envelope.point_add(0.2, 0.5);
+	envelope.point_add(0.8, 0.0);
 
 	// perform
 	types::disc_32_u i;
@@ -62,6 +73,7 @@ void two_sine_waves() {
 		oscillator_2.perform(output_buffer, block_size, 1, block_size * i);
 		multiplier_2.perform(output_buffer, block_size, 1, block_size * i);
 		adder.perform(output_buffer, block_size, 0, block_size * i);
+		envelope.perform(output_buffer, block_size, 0, block_size * i);
 	}
 
 	// release
@@ -70,6 +82,7 @@ void two_sine_waves() {
 	oscillator_2.release();
 	multiplier_2.release();
 	adder.release();
+	envelope.release();
 
 	// resize
 	output_buffer.resize(1, output_buffer_length);
@@ -109,11 +122,12 @@ int main (int argc, char* argv[]) {
 	argc;
 	argv;
 
-	//two_sine_waves();
+	two_sine_waves();
 
 	//phasor();
 
 	// test cmaes
+	/*
 	int dim = 10; // problem dimensions.
 	std::vector<double> x0(dim,10.0);
 	double sigma = 0.1;
@@ -124,6 +138,7 @@ int main (int argc, char* argv[]) {
 	std::cout << "best solution: " << cmasols << std::endl;
 	std::cout << "optimization took " << cmasols.elapsed_time() / 1000.0 << " seconds\n";
 	return cmasols.run_status();
+	*/
 
     //return 0;
 };
