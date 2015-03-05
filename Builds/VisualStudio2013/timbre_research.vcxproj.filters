@@ -193,7 +193,10 @@
     <ClCompile Include="..\..\Source\cdsp\parameter.cpp">
       <Filter>timbre_research\Source\cdsp</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\cdsp\primitives\envelopes\adsr.cpp">
+    <ClCompile Include="..\..\Source\cdsp\primitives\envelopes\envelopes_base.cpp">
+      <Filter>timbre_research\Source\cdsp\primitives\envelopes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\cdsp\primitives\envelopes\interpolate_linear.cpp">
       <Filter>timbre_research\Source\cdsp\primitives\envelopes</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\cdsp\primitives\operators\operators_base.cpp">
@@ -783,7 +786,10 @@
     <ClInclude Include="..\..\Source\cdsp\parameter.hpp">
       <Filter>timbre_research\Source\cdsp</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\cdsp\primitives\envelopes\adsr.hpp">
+    <ClInclude Include="..\..\Source\cdsp\primitives\envelopes\envelopes_base.hpp">
+      <Filter>timbre_research\Source\cdsp\primitives\envelopes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\cdsp\primitives\envelopes\interpolate_linear.hpp">
       <Filter>timbre_research\Source\cdsp\primitives\envelopes</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\cdsp\primitives\operators\operators_base.hpp">

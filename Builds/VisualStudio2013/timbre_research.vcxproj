@@ -134,7 +134,8 @@
     <ClCompile Include="..\..\Source\cdsp\graph.cpp"/>
     <ClCompile Include="..\..\Source\cdsp\helpers.cpp"/>
     <ClCompile Include="..\..\Source\cdsp\parameter.cpp"/>
-    <ClCompile Include="..\..\Source\cdsp\primitives\envelopes\adsr.cpp"/>
+    <ClCompile Include="..\..\Source\cdsp\primitives\envelopes\envelopes_base.cpp"/>
+    <ClCompile Include="..\..\Source\cdsp\primitives\envelopes\interpolate_linear.cpp"/>
     <ClCompile Include="..\..\Source\cdsp\primitives\operators\operators_base.cpp"/>
     <ClCompile Include="..\..\Source\cdsp\primitives\operators\add.cpp"/>
     <ClCompile Include="..\..\Source\cdsp\primitives\operators\multiply.cpp"/>
@@ -647,7 +648,8 @@
     <ClInclude Include="..\..\Source\cdsp\graph.hpp"/>
     <ClInclude Include="..\..\Source\cdsp\helpers.hpp"/>
     <ClInclude Include="..\..\Source\cdsp\parameter.hpp"/>
-    <ClInclude Include="..\..\Source\cdsp\primitives\envelopes\adsr.hpp"/>
+    <ClInclude Include="..\..\Source\cdsp\primitives\envelopes\envelopes_base.hpp"/>
+    <ClInclude Include="..\..\Source\cdsp\primitives\envelopes\interpolate_linear.hpp"/>
     <ClInclude Include="..\..\Source\cdsp\primitives\operators\operators_base.hpp"/>
     <ClInclude Include="..\..\Source\cdsp\primitives\operators\add.hpp"/>
     <ClInclude Include="..\..\Source\cdsp\primitives\operators\multiply.hpp"/>

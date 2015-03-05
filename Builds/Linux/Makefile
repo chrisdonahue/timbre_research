@@ -56,7 +56,8 @@ OBJECTS := \
   $(OBJDIR)/graph_a29df966.o \
   $(OBJDIR)/helpers_d53a1e5d.o \
   $(OBJDIR)/parameter_e0b65cc1.o \
-  $(OBJDIR)/adsr_70cfcc9.o \
+  $(OBJDIR)/envelopes_base_d4cad5f4.o \
+  $(OBJDIR)/interpolate_linear_79514f2a.o \
   $(OBJDIR)/operators_base_63305c9c.o \
   $(OBJDIR)/add_d0d8a8f0.o \
   $(OBJDIR)/multiply_199420ff.o \
@@ -117,9 +118,14 @@ $(OBJDIR)/parameter_e0b65cc1.o: ../../Source/cdsp/parameter.cpp
 	@echo "Compiling parameter.cpp"
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
-$(OBJDIR)/adsr_70cfcc9.o: ../../Source/cdsp/primitives/envelopes/adsr.cpp
+$(OBJDIR)/envelopes_base_d4cad5f4.o: ../../Source/cdsp/primitives/envelopes/envelopes_base.cpp
 	-@mkdir -p $(OBJDIR)
-	@echo "Compiling adsr.cpp"
+	@echo "Compiling envelopes_base.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/interpolate_linear_79514f2a.o: ../../Source/cdsp/primitives/envelopes/interpolate_linear.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling interpolate_linear.cpp"
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
 $(OBJDIR)/operators_base_63305c9c.o: ../../Source/cdsp/primitives/operators/operators_base.cpp

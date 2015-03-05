@@ -21,8 +21,14 @@
         <FILE id="yINb6W" name="parameter.hpp" compile="0" resource="0" file="Source/cdsp/parameter.hpp"/>
         <GROUP id="{25CDBC2B-2FF5-099A-9819-1D875B011BFB}" name="primitives">
           <GROUP id="{DDD6AE0E-725A-D83B-FF2F-0C3DABA8C26F}" name="envelopes">
-            <FILE id="Nxj3bN" name="adsr.cpp" compile="1" resource="0" file="Source/cdsp/primitives/envelopes/adsr.cpp"/>
-            <FILE id="Wvmsfi" name="adsr.hpp" compile="0" resource="0" file="Source/cdsp/primitives/envelopes/adsr.hpp"/>
+            <FILE id="KbT89C" name="envelopes_base.cpp" compile="1" resource="0"
+                  file="Source/cdsp/primitives/envelopes/envelopes_base.cpp"/>
+            <FILE id="ZxfwHv" name="envelopes_base.hpp" compile="0" resource="0"
+                  file="Source/cdsp/primitives/envelopes/envelopes_base.hpp"/>
+            <FILE id="ce6CII" name="interpolate_linear.cpp" compile="1" resource="0"
+                  file="Source/cdsp/primitives/envelopes/interpolate_linear.cpp"/>
+            <FILE id="sbZZnN" name="interpolate_linear.hpp" compile="0" resource="0"
+                  file="Source/cdsp/primitives/envelopes/interpolate_linear.hpp"/>
           </GROUP>
           <GROUP id="{0F27287E-3BEC-4259-AFDD-289D71CDFB58}" name="operators">
             <FILE id="eaFTuE" name="operators_base.cpp" compile="1" resource="0"
