@@ -13,6 +13,7 @@ everything:
 	create README.md
 	create Makefile to compile it as a library for static linking
 	create TODO in cdsp
+	move primitives_base to cdsp/... oscillators_base to primitives/... etc;
 	
 questions:
 	figure out using for constructors

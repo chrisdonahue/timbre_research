@@ -33,14 +33,14 @@ void two_sine_waves() {
 	output_buffer.clear();
 
 	// create oscillator_1
-	primitives::oscillators::table_interpolate_4 oscillator_1(values::sample_zero, static_cast<types::sample>(440.0 / sample_rate));
+	primitives::tables::oscillator::interpolate_4 oscillator_1(values::sample_zero, static_cast<types::sample>(440.0 / sample_rate));
 	oscillator_1.table_set(table_length, table.channel_pointer_read(0));
 
 	// create multiplier_1
 	primitives::operators::multiply multiplier_1(static_cast<types::sample>(0.5f));
 
 	// create oscillator_2
-	primitives::oscillators::table_interpolate_4 oscillator_2(values::sample_zero, static_cast<types::sample>(220.0 / sample_rate));
+	primitives::tables::oscillator::interpolate_4 oscillator_2(values::sample_zero, static_cast<types::sample>(220.0 / sample_rate));
 	oscillator_2.table_set(table_length, table.channel_pointer_read(0));
 
 	// create multiplier_2
@@ -124,11 +124,102 @@ void phasor() {
 	helpers::io::wav_file_save("phasor.wav", sample_rate, 32, output_buffer);
 };
 
+void fm_simple_render(std::unordered_map<types::string, types::sample>& parameters, sample_buffer& buffer) {
+	// create output buffer
+	types::cont_64 sample_rate = 44100.0;
+	types::index block_size = 1024;
+
+	// retrieve parameters
+	types::sample i = parameters.find("i")->second;
+	types::sample f_m = parameters.find("f_m")->second;
+	types::sample f_c = parameters.find("f_c")->second;
+	types::sample a = parameters.find("a")->second;
+
+	// create sine wave table
+	types::index modulator_table_length = 2048;
+	sample_buffer modulator_table(1, modulator_table_length);
+	helpers::generators::sine(modulator_table_length, modulator_table.channel_pointer_write(values::channel_zero));
+
+	// create modulator
+	primitives::tables::oscillator::interpolate_4 modulator(values::sample_zero, static_cast<types::sample>(f_m / sample_rate));
+	modulator.table_set(modulator_table_length, modulator_table.channel_pointer_read(values::channel_zero));
+
+	// create multiplier_index
+	primitives::operators::multiply multiplier_index(i);
+
+	// create phasor
+	primitives::oscillators::phasor carrier_phasor(values::sample_zero, static_cast<types::sample>(f_c / sample_rate));
+
+	// create adder
+	primitives::operators::add adder(static_cast<types::channel>(2));
+
+	// create extended sine wave table
+	types::index carrier_table_length = 2048;
+	sample_buffer carrier_table(1, carrier_table_length);
+
+	// create carrier
+	primitives::tables::function::interpolate_4 carrier;
+	carrier.domain_set(values::sample_zero, values::sample_one);
+	carrier.table_set(carrier_table_length, carrier_table.channel_pointer_read(values::channel_zero));
+
+	// plug adder into carrier
+	parameters::signal phase_plug(0);
+	carrier.parameter_plug("phase", &phase_plug);
+
+	// create multiplier_amplitude
+	primitives::operators::multiply multiplier_amplitude(a);
+
+	// prepare
+	modulator.prepare(sample_rate, block_size);
+	multiplier_index.prepare(sample_rate, block_size);
+	carrier_phasor.prepare(sample_rate, block_size);
+	adder.prepare(sample_rate, block_size);
+	carrier.prepare(sample_rate, block_size);
+	multiplier_amplitude.prepare(sample_rate, block_size);
+
+	// clear output buffer
+	buffer.clear();
+
+	// perform
+	types::index samples_remaining = buffer.channel_buffer_length_get();
+	types::index samples_completed = 0;
+	while (samples_remaining > 0) {
+		types::index block_size_current = block_size;
+		if (samples_remaining < block_size) {
+			block_size_current = samples_remaining;
+		}
+
+		modulator.perform(buffer, block_size_current, 0, samples_completed);
+		multiplier_index.perform(buffer, block_size_current, 0, samples_completed);
+		carrier_phasor.perform(buffer, block_size_current, 1, samples_completed);
+		adder.perform(buffer, block_size_current, 0, samples_completed);
+		carrier.perform(buffer, block_size_current, 0, samples_completed);
+		multiplier_amplitude.perform(buffer, block_size_current, 0, samples_completed);
+
+		samples_remaining -= block_size_current;
+		samples_completed += block_size_current;
+	}
+
+	// release
+	modulator.release();
+	multiplier_index.release();
+	carrier_phasor.release();
+	adder.release();
+	carrier.release();
+	multiplier_amplitude.release();
+
+	// resize
+	buffer.resize(1, buffer.channel_buffer_length_get());
+
+	// save
+	helpers::io::wav_file_save("fm_simple.wav", sample_rate, 32, buffer);
+};
+
 int main (int argc, char* argv[]) {
 	argc;
 	argv;
 
-	two_sine_waves();
+	//two_sine_waves();
 
 	//phasor();
 

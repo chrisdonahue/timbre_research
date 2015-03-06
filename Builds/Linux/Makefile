@@ -56,14 +56,15 @@ OBJECTS := \
   $(OBJDIR)/graph_a29df966.o \
   $(OBJDIR)/helpers_d53a1e5d.o \
   $(OBJDIR)/parameter_e0b65cc1.o \
+  $(OBJDIR)/phasor_1e9aabe4.o \
+  $(OBJDIR)/table_function_2f0c2122.o \
+  $(OBJDIR)/tables_base_70504a5c.o \
+  $(OBJDIR)/table_oscillator_f23f70aa.o \
   $(OBJDIR)/envelopes_base_d4cad5f4.o \
   $(OBJDIR)/interpolate_linear_79514f2a.o \
   $(OBJDIR)/operators_base_63305c9c.o \
   $(OBJDIR)/add_d0d8a8f0.o \
   $(OBJDIR)/multiply_199420ff.o \
-  $(OBJDIR)/oscillators_base_6a377994.o \
-  $(OBJDIR)/phasor_1e9aabe4.o \
-  $(OBJDIR)/table_interpolate_4_bf0c1518.o \
   $(OBJDIR)/primitives_base_233d00d3.o \
   $(OBJDIR)/sample_buffer_1d88820d.o \
   $(OBJDIR)/kiss_fft_eaf1f82e.o \
@@ -118,6 +119,26 @@ $(OBJDIR)/parameter_e0b65cc1.o: ../../Source/cdsp/parameter.cpp
 	@echo "Compiling parameter.cpp"
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
+$(OBJDIR)/phasor_1e9aabe4.o: ../../Source/cdsp/primitives/oscillators/phasor.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling phasor.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/table_function_2f0c2122.o: ../../Source/cdsp/primitives/tables/table_function.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling table_function.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/tables_base_70504a5c.o: ../../Source/cdsp/primitives/tables/tables_base.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling tables_base.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/table_oscillator_f23f70aa.o: ../../Source/cdsp/primitives/tables/table_oscillator.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling table_oscillator.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
 $(OBJDIR)/envelopes_base_d4cad5f4.o: ../../Source/cdsp/primitives/envelopes/envelopes_base.cpp
 	-@mkdir -p $(OBJDIR)
 	@echo "Compiling envelopes_base.cpp"
@@ -141,21 +162,6 @@ $(OBJDIR)/add_d0d8a8f0.o: ../../Source/cdsp/primitives/operators/add.cpp
 $(OBJDIR)/multiply_199420ff.o: ../../Source/cdsp/primitives/operators/multiply.cpp
 	-@mkdir -p $(OBJDIR)
 	@echo "Compiling multiply.cpp"
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/oscillators_base_6a377994.o: ../../Source/cdsp/primitives/oscillators/oscillators_base.cpp
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling oscillators_base.cpp"
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/phasor_1e9aabe4.o: ../../Source/cdsp/primitives/oscillators/phasor.cpp
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling phasor.cpp"
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/table_interpolate_4_bf0c1518.o: ../../Source/cdsp/primitives/oscillators/table_interpolate_4.cpp
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling table_interpolate_4.cpp"
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
 $(OBJDIR)/primitives_base_233d00d3.o: ../../Source/cdsp/primitives/primitives_base.cpp

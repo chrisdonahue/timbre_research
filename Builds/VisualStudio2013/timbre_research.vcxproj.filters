@@ -14,14 +14,17 @@
     <Filter Include="timbre_research\Source\cdsp\primitives">
       <UniqueIdentifier>{8BCAED40-7EF7-BFA4-414F-4FE09F10459F}</UniqueIdentifier>
     </Filter>
+    <Filter Include="timbre_research\Source\cdsp\primitives\oscillators">
+      <UniqueIdentifier>{90C18C8D-2663-DB57-1271-7D2074373668}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="timbre_research\Source\cdsp\primitives\tables">
+      <UniqueIdentifier>{D80FD509-2857-D94E-69B3-D5FD48E60846}</UniqueIdentifier>
+    </Filter>
     <Filter Include="timbre_research\Source\cdsp\primitives\envelopes">
       <UniqueIdentifier>{4BDC3C49-83B3-83BB-BE2B-CC5230A123F3}</UniqueIdentifier>
     </Filter>
     <Filter Include="timbre_research\Source\cdsp\primitives\operators">
       <UniqueIdentifier>{9F92F99E-67FD-5938-215E-1EFCC4BCABFE}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="timbre_research\Source\cdsp\primitives\oscillators">
-      <UniqueIdentifier>{90C18C8D-2663-DB57-1271-7D2074373668}</UniqueIdentifier>
     </Filter>
     <Filter Include="timbre_research\Source\dependencies">
       <UniqueIdentifier>{C0395816-6CA1-653E-E9A2-5E6737C69589}</UniqueIdentifier>
@@ -193,6 +196,18 @@
     <ClCompile Include="..\..\Source\cdsp\parameter.cpp">
       <Filter>timbre_research\Source\cdsp</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\cdsp\primitives\oscillators\phasor.cpp">
+      <Filter>timbre_research\Source\cdsp\primitives\oscillators</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\cdsp\primitives\tables\table_function.cpp">
+      <Filter>timbre_research\Source\cdsp\primitives\tables</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\cdsp\primitives\tables\tables_base.cpp">
+      <Filter>timbre_research\Source\cdsp\primitives\tables</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\cdsp\primitives\tables\table_oscillator.cpp">
+      <Filter>timbre_research\Source\cdsp\primitives\tables</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\cdsp\primitives\envelopes\envelopes_base.cpp">
       <Filter>timbre_research\Source\cdsp\primitives\envelopes</Filter>
     </ClCompile>
@@ -207,15 +222,6 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\cdsp\primitives\operators\multiply.cpp">
       <Filter>timbre_research\Source\cdsp\primitives\operators</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\cdsp\primitives\oscillators\oscillators_base.cpp">
-      <Filter>timbre_research\Source\cdsp\primitives\oscillators</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\cdsp\primitives\oscillators\phasor.cpp">
-      <Filter>timbre_research\Source\cdsp\primitives\oscillators</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\cdsp\primitives\oscillators\table_interpolate_4.cpp">
-      <Filter>timbre_research\Source\cdsp\primitives\oscillators</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\cdsp\primitives\primitives_base.cpp">
       <Filter>timbre_research\Source\cdsp\primitives</Filter>
@@ -786,6 +792,18 @@
     <ClInclude Include="..\..\Source\cdsp\parameter.hpp">
       <Filter>timbre_research\Source\cdsp</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\cdsp\primitives\oscillators\phasor.hpp">
+      <Filter>timbre_research\Source\cdsp\primitives\oscillators</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\cdsp\primitives\tables\table_function.hpp">
+      <Filter>timbre_research\Source\cdsp\primitives\tables</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\cdsp\primitives\tables\tables_base.hpp">
+      <Filter>timbre_research\Source\cdsp\primitives\tables</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\cdsp\primitives\tables\table_oscillator.hpp">
+      <Filter>timbre_research\Source\cdsp\primitives\tables</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Source\cdsp\primitives\envelopes\envelopes_base.hpp">
       <Filter>timbre_research\Source\cdsp\primitives\envelopes</Filter>
     </ClInclude>
@@ -800,15 +818,6 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\cdsp\primitives\operators\multiply.hpp">
       <Filter>timbre_research\Source\cdsp\primitives\operators</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\cdsp\primitives\oscillators\oscillators_base.hpp">
-      <Filter>timbre_research\Source\cdsp\primitives\oscillators</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\cdsp\primitives\oscillators\phasor.hpp">
-      <Filter>timbre_research\Source\cdsp\primitives\oscillators</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\cdsp\primitives\oscillators\table_interpolate_4.hpp">
-      <Filter>timbre_research\Source\cdsp\primitives\oscillators</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\cdsp\primitives\primitives_base.hpp">
       <Filter>timbre_research\Source\cdsp\primitives</Filter>
