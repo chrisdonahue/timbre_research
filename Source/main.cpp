@@ -1,244 +1,142 @@
 #include "../JuceLibraryCode/JuceHeader.h"
 
-//#include "cmaes.h"
 #include <iostream>
 
+#include "cmaes.h"
+//#include "dependencies/kiss_fft130/kiss_fft.c"
 #include "cdsp/cdsp.hpp"
 
-//using namespace libcmaes;
-
+using namespace juce;
+using namespace libcmaes;
 using namespace cdsp;
-
-/*
-FitFunc fsphere = [](const double *x, const int N)
-{
-	double val = 0.0;
-	for (int i=0;i<N;i++)
-		val += x[i]*x[i];
-	return val;
-};
-*/
-
-void two_sine_waves() {
-	// create wavetable
-	types::disc_32_u table_length = 1024;
-	sample_buffer table(1, table_length);
-	helpers::generators::sine(table_length, table.channel_pointer_write(0));
-
-	// create output buffer
-	types::cont_64 sample_rate = 44100.0;
-	types::disc_32_u block_size = 1024;
-	types::disc_32_u output_buffer_length = block_size * 128;
-	sample_buffer output_buffer(2, output_buffer_length);
-	output_buffer.clear();
-
-	// create oscillator_1
-	primitives::tables::oscillator::interpolate_4 oscillator_1(values::sample_zero, static_cast<types::sample>(440.0 / sample_rate));
-	oscillator_1.table_set(table_length, table.channel_pointer_read(0));
-
-	// create multiplier_1
-	primitives::operators::multiply multiplier_1(static_cast<types::sample>(0.5f));
-
-	// create oscillator_2
-	primitives::tables::oscillator::interpolate_4 oscillator_2(values::sample_zero, static_cast<types::sample>(220.0 / sample_rate));
-	oscillator_2.table_set(table_length, table.channel_pointer_read(0));
-
-	// create multiplier_2
-	primitives::operators::multiply multiplier_2(static_cast<types::sample>(0.5f));
-
-	// create adder
-	primitives::operators::add adder(static_cast<types::channel>(2));
-
-	// create ramp
-	primitives::envelopes::interpolate_linear envelope;
-
-	// create multiplier_3
-	primitives::operators::multiply multiplier_3(static_cast<types::channel>(2));
-
-	// prepare
-	oscillator_1.prepare(sample_rate, block_size);
-	multiplier_1.prepare(sample_rate, block_size);
-	oscillator_2.prepare(sample_rate, block_size);
-	multiplier_2.prepare(sample_rate, block_size);
-	adder.prepare(sample_rate, block_size);
-	envelope.prepare(sample_rate, block_size);
-	multiplier_3.prepare(sample_rate, block_size);
-
-	// add envelope points
-	envelope.point_add(1.0, 1.0);
-	envelope.point_add(0.2, 0.5);
-	envelope.point_add(0.8, 0.0);
-
-	// perform
-	types::disc_32_u i;
-	for (i = 0; i < output_buffer_length / block_size; i++) {
-		oscillator_1.perform(output_buffer, block_size, 0, block_size * i);
-		multiplier_1.perform(output_buffer, block_size, 0, block_size * i);
-		oscillator_2.perform(output_buffer, block_size, 1, block_size * i);
-		multiplier_2.perform(output_buffer, block_size, 1, block_size * i);
-		adder.perform(output_buffer, block_size, 0, block_size * i);
-		envelope.perform(output_buffer, block_size, 1, block_size * i);
-		multiplier_3.perform(output_buffer, block_size, 0, block_size * i);
-	}
-
-	// release
-	oscillator_1.release();
-	multiplier_1.release();
-	oscillator_2.release();
-	multiplier_2.release();
-	adder.release();
-	envelope.release();
-	multiplier_3.release();
-
-	// resize
-	output_buffer.resize(1, output_buffer_length);
-
-	// save
-	helpers::io::wav_file_save("two_sine_waves.wav", sample_rate, 32, output_buffer);
-};
-
-void phasor() {
-	// create output buffer
-	types::cont_64 sample_rate = 44100.0;
-	types::disc_32_u block_size = 1024;
-	types::disc_32_u output_buffer_length = block_size * 32;
-	sample_buffer output_buffer(1, output_buffer_length);
-	output_buffer.clear();
-
-	// create phasor
-	primitives::oscillators::phasor phasor(values::sample_zero, static_cast<types::sample>(55.0 / sample_rate));
-
-	// prepare
-	phasor.prepare(sample_rate, block_size);
-
-	// perform
-	types::disc_32_u i;
-	for (i = 0; i < output_buffer_length / block_size; i++) {
-		phasor.perform(output_buffer, block_size, 0, block_size * i);
-	}
-
-	// release
-	phasor.release();
-
-	// save
-	helpers::io::wav_file_save("phasor.wav", sample_rate, 32, output_buffer);
-};
-
-void fm_simple_render(std::unordered_map<types::string, types::sample>& parameters, sample_buffer& buffer) {
-	// create output buffer
-	types::cont_64 sample_rate = 44100.0;
-	types::index block_size = 1024;
-
-	// retrieve parameters
-	types::sample i = parameters.find("i")->second;
-	types::sample f_m = parameters.find("f_m")->second;
-	types::sample f_c = parameters.find("f_c")->second;
-	types::sample a = parameters.find("a")->second;
-
-	// create sine wave table
-	types::index table_length = 2048;
-	sample_buffer table(1, table_length);
-	helpers::generators::sine(table_length, table.channel_pointer_write(values::channel_zero));
-
-	// create modulator
-	primitives::tables::oscillator::interpolate_4 modulator(values::sample_zero, static_cast<types::sample>(f_m / sample_rate));
-	modulator.table_set(table_length, table.channel_pointer_read(values::channel_zero));
-
-	// create multiplier_index
-	primitives::operators::multiply multiplier_index(i);
-
-	// create phasor
-	primitives::oscillators::phasor carrier_phasor(values::sample_zero, static_cast<types::sample>(f_c / sample_rate));
-
-	// create adder
-	primitives::operators::add adder(static_cast<types::channel>(2));
-
-	// create carrier
-	primitives::tables::phasor::interpolate_4 carrier;
-	carrier.table_set(table_length, table.channel_pointer_read(values::channel_zero));
-
-	// create multiplier_amplitude
-	primitives::operators::multiply multiplier_amplitude(a);
-
-	// prepare
-	modulator.prepare(sample_rate, block_size);
-	multiplier_index.prepare(sample_rate, block_size);
-	carrier_phasor.prepare(sample_rate, block_size);
-	adder.prepare(sample_rate, block_size);
-	carrier.prepare(sample_rate, block_size);
-	multiplier_amplitude.prepare(sample_rate, block_size);
-
-	// clear output buffer
-	buffer.clear();
-
-	// perform
-	types::index samples_remaining = buffer.channel_buffer_length_get();
-	types::index samples_completed = 0;
-	while (samples_remaining > 0) {
-		types::index block_size_current = block_size;
-		if (samples_remaining < block_size) {
-			block_size_current = samples_remaining;
-		}
-
-		modulator.perform(buffer, block_size_current, 0, samples_completed);
-		multiplier_index.perform(buffer, block_size_current, 0, samples_completed);
-		carrier_phasor.perform(buffer, block_size_current, 1, samples_completed);
-		adder.perform(buffer, block_size_current, 0, samples_completed);
-		carrier.perform(buffer, block_size_current, 0, samples_completed);
-		multiplier_amplitude.perform(buffer, block_size_current, 0, samples_completed);
-
-		samples_remaining -= block_size_current;
-		samples_completed += block_size_current;
-	}
-
-	// release
-	modulator.release();
-	multiplier_index.release();
-	carrier_phasor.release();
-	adder.release();
-	carrier.release();
-	multiplier_amplitude.release();
-
-	// resize
-	buffer.resize(1, buffer.channel_buffer_length_get());
-
-	// save
-	helpers::io::wav_file_save("fm_simple.wav", sample_rate, 32, buffer);
-};
 
 int main (int argc, char* argv[]) {
 	argc;
 	argv;
 
-	//two_sine_waves();
+	// read target
+    File file("./target.wav");
+    AudioFormatManager formatManager;
+    formatManager.registerBasicFormats();
+    ScopedPointer<AudioFormatReader> reader = formatManager.createReaderFor(file);
+    if (reader == 0) {
+		std::cout << "Couldn't find target.wav" << std::endl;
+		return -1;
+	}
+	AudioSampleBuffer buffer(reader->numChannels, reader->lengthInSamples);
+	reader->read(&buffer, 0, reader->lengthInSamples, 0, true, true);
 
-	//phasor();
-	
+	// target data
+	types::index target_length = static_cast<types::index>(reader->lengthInSamples);
+	types::cont_64 target_sample_rate = static_cast<types::cont_64>(reader->sampleRate);
+	const types::sample* target_buffer = reinterpret_cast<const types::sample*>(buffer.getReadPointer(0, 0));
 
-	// create parameters
-	std::unordered_map<types::string, types::sample> parameters;
-	parameters.insert(std::make_pair("i", 1.0f));
-	parameters.insert(std::make_pair("f_c", 440.0f));
-	parameters.insert(std::make_pair("f_m", 100.0f));
-	parameters.insert(std::make_pair("a", 0.5f));
+	// candidate data
+	sample_buffer candidate_buffer(2, target_length);
 
-	// create buffer
-	sample_buffer buffer(2, 1024 * 128);
-	fm_simple_render(parameters, buffer);
+	// sine wave table
+	types::index sine_table_length = 2048;
+	sample_buffer sine_table(1, sine_table_length);
+	helpers::generators::sine(sine_table_length, sine_table.channel_pointer_write(values::channel_zero));
 
-	// test cmaes
-	/*
-	int dim = 10; // problem dimensions.
-	std::vector<double> x0(dim,10.0);
+	// define fitness function
+	FitFunc fm_simple_amplitude_error = [sine_table_length, &sine_table, &candidate_buffer, target_sample_rate, target_length, &target_buffer](const double *x, const int N)
+	{
+		// retrieve parameters
+		types::sample i = static_cast<types::sample>(x[0]);
+		types::sample f_m = static_cast<types::sample>(x[1]);
+		types::sample f_c = static_cast<types::sample>(x[2]);
+		types::sample a = static_cast<types::sample>(x[3]);
+
+		// create modulator
+		primitives::tables::oscillator::interpolate_4 modulator(values::sample_zero, static_cast<types::sample>(f_m / target_sample_rate));
+		modulator.table_set(sine_table_length, sine_table.channel_pointer_read(values::channel_zero));
+
+		// create multiplier_index
+		primitives::operators::multiply multiplier_index(i);
+
+		// create phasor
+		primitives::oscillators::phasor carrier_phasor(values::sample_zero, static_cast<types::sample>(f_c / target_sample_rate));
+
+		// create adder
+		primitives::operators::add adder(static_cast<types::channel>(2));
+
+		// create carrier
+		primitives::tables::phasor::interpolate_4 carrier;
+		carrier.table_set(sine_table_length, sine_table.channel_pointer_read(values::channel_zero));
+
+		// create multiplier_amplitude
+		primitives::operators::multiply multiplier_amplitude(a);
+
+		// prepare
+		modulator.prepare(target_sample_rate, target_length);
+		multiplier_index.prepare(target_sample_rate, target_length);
+		carrier_phasor.prepare(target_sample_rate, target_length);
+		adder.prepare(target_sample_rate, target_length);
+		carrier.prepare(target_sample_rate, target_length);
+		multiplier_amplitude.prepare(target_sample_rate, target_length);
+
+		// clear output buffer
+		candidate_buffer.clear();
+
+		// perform
+		modulator.perform(candidate_buffer, target_length, 0, 0);
+		multiplier_index.perform(candidate_buffer, target_length, 0, 0);
+		carrier_phasor.perform(candidate_buffer, target_length, 1, 0);
+		adder.perform(candidate_buffer, target_length, 0, 0);
+		carrier.perform(candidate_buffer, target_length, 0, 0);
+		multiplier_amplitude.perform(candidate_buffer, target_length, 0, 0);
+
+		// release
+		modulator.release();
+		multiplier_index.release();
+		carrier_phasor.release();
+		adder.release();
+		carrier.release();
+		multiplier_amplitude.release();
+
+		// resize
+		//buffer.resize(1, buffer.channel_buffer_length_get());
+
+		// save
+		//helpers::io::wav_file_save("fm_simple.wav", target_sample_rate, 32, buffer);
+
+		// return fitness function result
+		types::sample error = 0.0;
+		types::index samples_remaining = target_length;
+		const types::sample* target = target_buffer;
+		const types::sample* candidate = candidate_buffer.channel_pointer_read(values::channel_zero);
+		while (samples_remaining--) {
+			error += fabs(*(target++) - *(candidate++));
+		}
+		return static_cast<double>(error);
+	};
+
+	// define cmaes parameters
+	// https://www.lri.fr/~hansen/cmaes_inmatlab.html#practical
+	// https://github.com/beniz/libcmaes/wiki/Practical-hints
+	int dim = 4;
 	double sigma = 0.1;
-	//int lambda = 100; // offsprings at each generation.
-	CMAParameters<> cmaparams(dim,&x0.front(),sigma);
-	//cmaparams.set_algo(BIPOP_CMAES);
-	CMASolutions cmasols = cmaes<>(fsphere,cmaparams);
+	int lambda = -1;
+	uint64_t seed = 0;
+
+	// define solution bounds
+	double lbounds[] = {0.0, 0.0, 0.0, 0.0};
+	double ubounds[] = {22050.0, 10.0, 44100.0, 1.0};
+	GenoPheno<pwqBoundStrategy> gp(lbounds, ubounds, dim);
+
+	// define solution initial values
+	std::vector<double> x0 = {100.0, 1.0, 440.0, 1.0};
+
+	// run cmaes
+	CMAParameters<GenoPheno<pwqBoundStrategy>> cmaparams(x0, sigma, lambda, seed, gp);
+	cmaparams.set_algo(aCMAES);
+	CMASolutions cmasols = cmaes<GenoPheno<pwqBoundStrategy>>(fm_simple_amplitude_error, cmaparams);
+
+	// output best
 	std::cout << "best solution: " << cmasols << std::endl;
 	std::cout << "optimization took " << cmasols.elapsed_time() / 1000.0 << " seconds\n";
-	return cmasols.run_status();
-	*/
 
-    //return 0;
+	// return
+	return cmasols.run_status();
 };
