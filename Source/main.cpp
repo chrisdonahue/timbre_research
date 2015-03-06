@@ -185,7 +185,7 @@ void fm_simple_render(std::unordered_map<types::string, types::sample>& paramete
 		carrier_phasor.perform(buffer, block_size_current, 1, samples_completed);
 		adder.perform(buffer, block_size_current, 0, samples_completed);
 		carrier.perform(buffer, block_size_current, 0, samples_completed);
-		//multiplier_amplitude.perform(buffer, block_size_current, 0, samples_completed);
+		multiplier_amplitude.perform(buffer, block_size_current, 0, samples_completed);
 
 		samples_remaining -= block_size_current;
 		samples_completed += block_size_current;

@@ -19,6 +19,17 @@ tables:
 	hard clip input for table_function
 
 questions:
+	UINTBIT32
+	cos(2*pi*f_c + I*cos(2*pi*f_m));
+		cos domain:
+			normal: [0, 2pi]
+			computer: [0, 1]
+
+		when (2*pi*f_c) should be ranging from [0, 2pi] in math
+		it is ranging from [0, 1] in computer
+		
+
+questions:
 	figure out using for constructors
 	initialization list used by all constructors?
 	shared_ptr for shared tables? (table_interpolate_4)
