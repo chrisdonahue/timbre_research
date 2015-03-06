@@ -69,6 +69,8 @@ OBJECTS := \
   $(OBJDIR)/primitives_base_233d00d3.o \
   $(OBJDIR)/sample_buffer_1d88820d.o \
   $(OBJDIR)/kiss_fft_eaf1f82e.o \
+  $(OBJDIR)/evaluation_158dd2a5.o \
+  $(OBJDIR)/synths_d6ea3ca0.o \
   $(OBJDIR)/main_8d1161a2.o \
   $(OBJDIR)/juce_audio_basics_181b4cb.o \
   $(OBJDIR)/juce_audio_devices_2d9302c9.o \
@@ -184,6 +186,16 @@ $(OBJDIR)/kiss_fft_eaf1f82e.o: ../../Source/dependencies/kiss_fft130/kiss_fft.c
 	-@mkdir -p $(OBJDIR)
 	@echo "Compiling kiss_fft.c"
 	@$(CC) $(CFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/evaluation_158dd2a5.o: ../../Source/evaluation.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling evaluation.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/synths_d6ea3ca0.o: ../../Source/synths.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling synths.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
 $(OBJDIR)/main_8d1161a2.o: ../../Source/main.cpp
 	-@mkdir -p $(OBJDIR)

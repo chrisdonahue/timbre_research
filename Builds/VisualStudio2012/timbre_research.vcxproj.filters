@@ -235,6 +235,12 @@
     <ClCompile Include="..\..\Source\dependencies\kiss_fft130\kiss_fft.c">
       <Filter>timbre_research\Source\dependencies\kiss_fft130</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\evaluation.cpp">
+      <Filter>timbre_research\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\synths.cpp">
+      <Filter>timbre_research\Source</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\main.cpp">
       <Filter>timbre_research\Source</Filter>
     </ClCompile>
@@ -845,6 +851,12 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\dependencies\kiss_fft130\kissfft.hh">
       <Filter>timbre_research\Source\dependencies\kiss_fft130</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\evaluation.hpp">
+      <Filter>timbre_research\Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\synths.hpp">
+      <Filter>timbre_research\Source</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\JUCE\modules\juce_audio_basics\buffers\juce_AudioDataConverters.h">
       <Filter>Juce Modules\juce_audio_basics\buffers</Filter>

@@ -10,6 +10,18 @@ using namespace juce;
 using namespace libcmaes;
 using namespace cdsp;
 
+class test {
+public:
+	test() : y(5) {};
+
+	double fitness_function(const double* x, const int N) {
+		std::cout << y << std::endl;
+		return 0.0;
+	};
+private:
+	int y;
+};
+
 int main (int argc, char* argv[]) {
 	argc;
 	argv;
@@ -128,10 +140,16 @@ int main (int argc, char* argv[]) {
 	// define solution initial values
 	std::vector<double> x0 = {100.0, 1.0, 440.0, 1.0};
 
+	// test
+	test a;
+	FitFunc afun = [&a](const double *x, const int N) {
+		return a.fitness_function(x, N);
+	};
+
 	// run cmaes
 	CMAParameters<GenoPheno<pwqBoundStrategy>> cmaparams(x0, sigma, lambda, seed, gp);
 	cmaparams.set_algo(aCMAES);
-	CMASolutions cmasols = cmaes<GenoPheno<pwqBoundStrategy>>(fm_simple_amplitude_error, cmaparams);
+	CMASolutions cmasols = cmaes<GenoPheno<pwqBoundStrategy>>(afun, cmaparams);
 
 	// output best
 	std::cout << "best solution: " << cmasols << std::endl;

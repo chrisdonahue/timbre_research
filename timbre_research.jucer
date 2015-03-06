@@ -81,6 +81,10 @@
           <FILE id="cZzrxV" name="kissfft.hh" compile="0" resource="0" file="Source/dependencies/kiss_fft130/kissfft.hh"/>
         </GROUP>
       </GROUP>
+      <FILE id="yQY1tI" name="evaluation.hpp" compile="0" resource="0" file="Source/evaluation.hpp"/>
+      <FILE id="UKBE9P" name="evaluation.cpp" compile="1" resource="0" file="Source/evaluation.cpp"/>
+      <FILE id="SRMRaF" name="synths.cpp" compile="1" resource="0" file="Source/synths.cpp"/>
+      <FILE id="DxUuVg" name="synths.hpp" compile="0" resource="0" file="Source/synths.hpp"/>
       <FILE id="eShtbO" name="main.cpp" compile="1" resource="0" file="Source/main.cpp"/>
     </GROUP>
   </MAINGROUP>
