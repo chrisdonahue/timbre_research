@@ -25,12 +25,16 @@
             <FILE id="Dzgncw" name="phasor.hpp" compile="0" resource="0" file="Source/cdsp/primitives/oscillators/phasor.hpp"/>
           </GROUP>
           <GROUP id="{C54C13D3-E0F4-CF3D-9DD2-4F83E118374B}" name="tables">
+            <FILE id="V97YYS" name="tables_base.cpp" compile="1" resource="0" file="Source/cdsp/primitives/tables/tables_base.cpp"/>
+            <FILE id="bQ9Me8" name="tables_base.hpp" compile="0" resource="0" file="Source/cdsp/primitives/tables/tables_base.hpp"/>
+            <FILE id="x0vTQT" name="table_phasor.cpp" compile="1" resource="0"
+                  file="Source/cdsp/primitives/tables/table_phasor.cpp"/>
+            <FILE id="g3h47j" name="table_phasor.hpp" compile="0" resource="0"
+                  file="Source/cdsp/primitives/tables/table_phasor.hpp"/>
             <FILE id="f6oCVN" name="table_function.cpp" compile="1" resource="0"
                   file="Source/cdsp/primitives/tables/table_function.cpp"/>
             <FILE id="npToL1" name="table_function.hpp" compile="0" resource="0"
                   file="Source/cdsp/primitives/tables/table_function.hpp"/>
-            <FILE id="V97YYS" name="tables_base.cpp" compile="1" resource="0" file="Source/cdsp/primitives/tables/tables_base.cpp"/>
-            <FILE id="bQ9Me8" name="tables_base.hpp" compile="0" resource="0" file="Source/cdsp/primitives/tables/tables_base.hpp"/>
             <FILE id="NVHefk" name="table_oscillator.cpp" compile="1" resource="0"
                   file="Source/cdsp/primitives/tables/table_oscillator.cpp"/>
             <FILE id="eH3G8y" name="table_oscillator.hpp" compile="0" resource="0"

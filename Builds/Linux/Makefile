@@ -57,8 +57,9 @@ OBJECTS := \
   $(OBJDIR)/helpers_d53a1e5d.o \
   $(OBJDIR)/parameter_e0b65cc1.o \
   $(OBJDIR)/phasor_1e9aabe4.o \
-  $(OBJDIR)/table_function_2f0c2122.o \
   $(OBJDIR)/tables_base_70504a5c.o \
+  $(OBJDIR)/table_phasor_bf0c9397.o \
+  $(OBJDIR)/table_function_2f0c2122.o \
   $(OBJDIR)/table_oscillator_f23f70aa.o \
   $(OBJDIR)/envelopes_base_d4cad5f4.o \
   $(OBJDIR)/interpolate_linear_79514f2a.o \
@@ -124,14 +125,19 @@ $(OBJDIR)/phasor_1e9aabe4.o: ../../Source/cdsp/primitives/oscillators/phasor.cpp
 	@echo "Compiling phasor.cpp"
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
-$(OBJDIR)/table_function_2f0c2122.o: ../../Source/cdsp/primitives/tables/table_function.cpp
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling table_function.cpp"
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
 $(OBJDIR)/tables_base_70504a5c.o: ../../Source/cdsp/primitives/tables/tables_base.cpp
 	-@mkdir -p $(OBJDIR)
 	@echo "Compiling tables_base.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/table_phasor_bf0c9397.o: ../../Source/cdsp/primitives/tables/table_phasor.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling table_phasor.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/table_function_2f0c2122.o: ../../Source/cdsp/primitives/tables/table_function.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling table_function.cpp"
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
 $(OBJDIR)/table_oscillator_f23f70aa.o: ../../Source/cdsp/primitives/tables/table_oscillator.cpp

@@ -136,13 +136,13 @@ void fm_simple_render(std::unordered_map<types::string, types::sample>& paramete
 	types::sample a = parameters.find("a")->second;
 
 	// create sine wave table
-	types::index modulator_table_length = 2048;
-	sample_buffer modulator_table(1, modulator_table_length);
-	helpers::generators::sine(modulator_table_length, modulator_table.channel_pointer_write(values::channel_zero));
+	types::index table_length = 2048;
+	sample_buffer table(1, table_length);
+	helpers::generators::sine(table_length, table.channel_pointer_write(values::channel_zero));
 
 	// create modulator
 	primitives::tables::oscillator::interpolate_4 modulator(values::sample_zero, static_cast<types::sample>(f_m / sample_rate));
-	modulator.table_set(modulator_table_length, modulator_table.channel_pointer_read(values::channel_zero));
+	modulator.table_set(table_length, table.channel_pointer_read(values::channel_zero));
 
 	// create multiplier_index
 	primitives::operators::multiply multiplier_index(i);
@@ -153,18 +153,9 @@ void fm_simple_render(std::unordered_map<types::string, types::sample>& paramete
 	// create adder
 	primitives::operators::add adder(static_cast<types::channel>(2));
 
-	// create extended sine wave table
-	types::index carrier_table_length = 2048;
-	sample_buffer carrier_table(1, carrier_table_length);
-
 	// create carrier
-	primitives::tables::function::interpolate_4 carrier;
-	carrier.domain_set(values::sample_zero, values::sample_one);
-	carrier.table_set(carrier_table_length, carrier_table.channel_pointer_read(values::channel_zero));
-
-	// plug adder into carrier
-	parameters::signal phase_plug(0);
-	carrier.parameter_plug("phase", &phase_plug);
+	primitives::tables::phasor::interpolate_4 carrier;
+	carrier.table_set(table_length, table.channel_pointer_read(values::channel_zero));
 
 	// create multiplier_amplitude
 	primitives::operators::multiply multiplier_amplitude(a);
@@ -194,7 +185,7 @@ void fm_simple_render(std::unordered_map<types::string, types::sample>& paramete
 		carrier_phasor.perform(buffer, block_size_current, 1, samples_completed);
 		adder.perform(buffer, block_size_current, 0, samples_completed);
 		carrier.perform(buffer, block_size_current, 0, samples_completed);
-		multiplier_amplitude.perform(buffer, block_size_current, 0, samples_completed);
+		//multiplier_amplitude.perform(buffer, block_size_current, 0, samples_completed);
 
 		samples_remaining -= block_size_current;
 		samples_completed += block_size_current;
@@ -222,6 +213,18 @@ int main (int argc, char* argv[]) {
 	//two_sine_waves();
 
 	//phasor();
+	
+
+	// create parameters
+	std::unordered_map<types::string, types::sample> parameters;
+	parameters.insert(std::make_pair("i", 1.0f));
+	parameters.insert(std::make_pair("f_c", 440.0f));
+	parameters.insert(std::make_pair("f_m", 100.0f));
+	parameters.insert(std::make_pair("a", 0.5f));
+
+	// create buffer
+	sample_buffer buffer(2, 1024 * 128);
+	fm_simple_render(parameters, buffer);
 
 	// test cmaes
 	/*

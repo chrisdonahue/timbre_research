@@ -14,7 +14,10 @@ everything:
 	create Makefile to compile it as a library for static linking
 	create TODO in cdsp
 	move primitives_base to cdsp/... oscillators_base to primitives/... etc;
-	
+
+tables:
+	hard clip input for table_function
+
 questions:
 	figure out using for constructors
 	initialization list used by all constructors?
