@@ -14,6 +14,9 @@ everything:
 	create Makefile to compile it as a library for static linking
 	create TODO in cdsp
 	move primitives_base to cdsp/... oscillators_base to primitives/... etc;
+	remove pluralism on namespace/folder names
+	make interpolate framework a templated parameter to any table oscillator <interpolate::four, interpolate::two, interpolate::truncate>
+	rethink value_next_set(time) stuff to be absolute time instead of relative (ala javascript audioparam)
 
 tables:
 	hard clip input for table_function
@@ -27,7 +30,7 @@ questions:
 
 		when (2*pi*f_c) should be ranging from [0, 2pi] in math
 		it is ranging from [0, 1] in computer
-		
+
 
 questions:
 	figure out using for constructors
