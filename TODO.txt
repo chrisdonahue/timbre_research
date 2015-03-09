@@ -1,3 +1,6 @@
+samples:
+http://theremin.music.uiowa.edu/MIS.html
+
 graph.hpp:
 	pretty much everything
 
