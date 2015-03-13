@@ -66,6 +66,7 @@
       <WarningLevel>Level4</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <AdditionalOptions>/I C:\Code\timbre_research\Source\dependencies\beagle-3.0.3\PACC /I C:\Code\timbre_research\Source\dependencies\beagle-3.0.3\beagle\include /I C:\Code\timbre_research\Source\dependencies\beagle-3.0.3\beagle\GA\include /I C:\Code\timbre_research\Source\cdsp\src /GR %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -80,6 +81,7 @@
       <TargetMachine>MachineX86</TargetMachine>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
       <LargeAddressAware>true</LargeAddressAware>
+      <AdditionalDependencies>C:\Code\timbre_research\Source\dependencies\beagle-3.0.3\MSVCPP\beagle\Debug\beagle.lib;C:\Code\timbre_research\Source\dependencies\beagle-3.0.3\MSVCPP\beagle-GA\Debug\beagle-GA.lib;C:\Code\timbre_research\Source\dependencies\beagle-3.0.3\MSVCPP\pacc-util\Debug\pacc-util.lib;C:\Code\timbre_research\Source\dependencies\beagle-3.0.3\MSVCPP\pacc-xml\Debug\pacc-xml.lib;C:\Code\timbre_research\Source\dependencies\beagle-3.0.3\MSVCPP\pacc-math\Debug\pacc-math.lib;;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Bscmake>
       <SuppressStartupBanner>true</SuppressStartupBanner>
@@ -107,6 +109,7 @@
       <WarningLevel>Level4</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <AdditionalOptions>/I C:\Code\timbre_research\Source\dependencies\beagle-3.0.3\PACC /I C:\Code\timbre_research\Source\dependencies\beagle-3.0.3\beagle\include /I C:\Code\timbre_research\Source\dependencies\beagle-3.0.3\beagle\GA\include /I C:\Code\timbre_research\Source\cdsp\src /GR %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -122,6 +125,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <LargeAddressAware>true</LargeAddressAware>
+      <AdditionalDependencies>C:\Code\timbre_research\Source\dependencies\beagle-3.0.3\MSVCPP\beagle\Debug\beagle.lib;C:\Code\timbre_research\Source\dependencies\beagle-3.0.3\MSVCPP\beagle-GA\Debug\beagle-GA.lib;C:\Code\timbre_research\Source\dependencies\beagle-3.0.3\MSVCPP\pacc-util\Debug\pacc-util.lib;C:\Code\timbre_research\Source\dependencies\beagle-3.0.3\MSVCPP\pacc-xml\Debug\pacc-xml.lib;C:\Code\timbre_research\Source\dependencies\beagle-3.0.3\MSVCPP\pacc-math\Debug\pacc-math.lib;;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Bscmake>
       <SuppressStartupBanner>true</SuppressStartupBanner>
@@ -129,26 +133,28 @@
     </Bscmake>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Source\cdsp\base.cpp"/>
-    <ClCompile Include="..\..\Source\cdsp\exceptions.cpp"/>
-    <ClCompile Include="..\..\Source\cdsp\graph.cpp"/>
-    <ClCompile Include="..\..\Source\cdsp\helpers.cpp"/>
-    <ClCompile Include="..\..\Source\cdsp\parameter.cpp"/>
-    <ClCompile Include="..\..\Source\cdsp\primitives\oscillators\phasor.cpp"/>
-    <ClCompile Include="..\..\Source\cdsp\primitives\tables\tables_base.cpp"/>
-    <ClCompile Include="..\..\Source\cdsp\primitives\tables\table_phasor.cpp"/>
-    <ClCompile Include="..\..\Source\cdsp\primitives\tables\table_function.cpp"/>
-    <ClCompile Include="..\..\Source\cdsp\primitives\tables\table_oscillator.cpp"/>
-    <ClCompile Include="..\..\Source\cdsp\primitives\envelopes\envelopes_base.cpp"/>
-    <ClCompile Include="..\..\Source\cdsp\primitives\envelopes\interpolate_linear.cpp"/>
-    <ClCompile Include="..\..\Source\cdsp\primitives\operators\operators_base.cpp"/>
-    <ClCompile Include="..\..\Source\cdsp\primitives\operators\add.cpp"/>
-    <ClCompile Include="..\..\Source\cdsp\primitives\operators\multiply.cpp"/>
-    <ClCompile Include="..\..\Source\cdsp\primitives\primitives_base.cpp"/>
-    <ClCompile Include="..\..\Source\cdsp\sample_buffer.cpp"/>
+    <ClCompile Include="..\..\Source\cdsp\src\abstraction\pm_voice.cpp"/>
+    <ClCompile Include="..\..\Source\cdsp\src\base.cpp"/>
+    <ClCompile Include="..\..\Source\cdsp\src\exceptions.cpp"/>
+    <ClCompile Include="..\..\Source\cdsp\src\graph.cpp"/>
+    <ClCompile Include="..\..\Source\cdsp\src\helpers.cpp"/>
+    <ClCompile Include="..\..\Source\cdsp\src\parameter.cpp"/>
+    <ClCompile Include="..\..\Source\cdsp\src\primitives\envelopes\adsr.cpp"/>
+    <ClCompile Include="..\..\Source\cdsp\src\primitives\envelopes\envelopes_base.cpp"/>
+    <ClCompile Include="..\..\Source\cdsp\src\primitives\envelopes\interpolate_linear.cpp"/>
+    <ClCompile Include="..\..\Source\cdsp\src\primitives\misc\fm_feedback.cpp"/>
+    <ClCompile Include="..\..\Source\cdsp\src\primitives\operators\add.cpp"/>
+    <ClCompile Include="..\..\Source\cdsp\src\primitives\operators\multiply.cpp"/>
+    <ClCompile Include="..\..\Source\cdsp\src\primitives\operators\operators_base.cpp"/>
+    <ClCompile Include="..\..\Source\cdsp\src\primitives\oscillators\phasor.cpp"/>
+    <ClCompile Include="..\..\Source\cdsp\src\primitives\primitives_base.cpp"/>
+    <ClCompile Include="..\..\Source\cdsp\src\primitives\tables\table_function.cpp"/>
+    <ClCompile Include="..\..\Source\cdsp\src\primitives\tables\table_oscillator.cpp"/>
+    <ClCompile Include="..\..\Source\cdsp\src\primitives\tables\table_phasor.cpp"/>
+    <ClCompile Include="..\..\Source\cdsp\src\primitives\tables\tables_base.cpp"/>
+    <ClCompile Include="..\..\Source\cdsp\src\sample_buffer.cpp"/>
     <ClCompile Include="..\..\Source\dependencies\kiss_fft130\kiss_fft.c"/>
     <ClCompile Include="..\..\Source\evaluation.cpp"/>
-    <ClCompile Include="..\..\Source\synths.cpp"/>
     <ClCompile Include="..\..\Source\main.cpp"/>
     <ClCompile Include="..\..\..\JUCE\modules\juce_audio_basics\buffers\juce_AudioDataConverters.cpp">
       <ExcludedFromBuild>true</ExcludedFromBuild>
@@ -636,6 +642,7 @@
     <ClCompile Include="..\..\..\JUCE\modules\juce_events\native\juce_win32_Messaging.cpp">
       <ExcludedFromBuild>true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\BinaryData.cpp"/>
     <ClCompile Include="..\..\..\JUCE\modules\juce_audio_basics\juce_audio_basics.cpp"/>
     <ClCompile Include="..\..\..\JUCE\modules\juce_audio_devices\juce_audio_devices.cpp"/>
     <ClCompile Include="..\..\..\JUCE\modules\juce_audio_formats\juce_audio_formats.cpp"/>
@@ -645,32 +652,34 @@
     <ClCompile Include="..\..\..\JUCE\modules\juce_events\juce_events.cpp"/>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Source\cdsp\base.hpp"/>
-    <ClInclude Include="..\..\Source\cdsp\cdsp.hpp"/>
-    <ClInclude Include="..\..\Source\cdsp\defines.hpp"/>
-    <ClInclude Include="..\..\Source\cdsp\exceptions.hpp"/>
-    <ClInclude Include="..\..\Source\cdsp\graph.hpp"/>
-    <ClInclude Include="..\..\Source\cdsp\helpers.hpp"/>
-    <ClInclude Include="..\..\Source\cdsp\parameter.hpp"/>
-    <ClInclude Include="..\..\Source\cdsp\primitives\oscillators\phasor.hpp"/>
-    <ClInclude Include="..\..\Source\cdsp\primitives\tables\tables_base.hpp"/>
-    <ClInclude Include="..\..\Source\cdsp\primitives\tables\table_phasor.hpp"/>
-    <ClInclude Include="..\..\Source\cdsp\primitives\tables\table_function.hpp"/>
-    <ClInclude Include="..\..\Source\cdsp\primitives\tables\table_oscillator.hpp"/>
-    <ClInclude Include="..\..\Source\cdsp\primitives\envelopes\envelopes_base.hpp"/>
-    <ClInclude Include="..\..\Source\cdsp\primitives\envelopes\interpolate_linear.hpp"/>
-    <ClInclude Include="..\..\Source\cdsp\primitives\operators\operators_base.hpp"/>
-    <ClInclude Include="..\..\Source\cdsp\primitives\operators\add.hpp"/>
-    <ClInclude Include="..\..\Source\cdsp\primitives\operators\multiply.hpp"/>
-    <ClInclude Include="..\..\Source\cdsp\primitives\primitives_base.hpp"/>
-    <ClInclude Include="..\..\Source\cdsp\sample_buffer.hpp"/>
-    <ClInclude Include="..\..\Source\cdsp\types.hpp"/>
-    <ClInclude Include="..\..\Source\cdsp\values.hpp"/>
+    <ClInclude Include="..\..\Source\cdsp\src\abstraction\pm_voice.hpp"/>
+    <ClInclude Include="..\..\Source\cdsp\src\base.hpp"/>
+    <ClInclude Include="..\..\Source\cdsp\src\cdsp.hpp"/>
+    <ClInclude Include="..\..\Source\cdsp\src\defines.hpp"/>
+    <ClInclude Include="..\..\Source\cdsp\src\exceptions.hpp"/>
+    <ClInclude Include="..\..\Source\cdsp\src\graph.hpp"/>
+    <ClInclude Include="..\..\Source\cdsp\src\helpers.hpp"/>
+    <ClInclude Include="..\..\Source\cdsp\src\parameter.hpp"/>
+    <ClInclude Include="..\..\Source\cdsp\src\primitives\envelopes\adsr.hpp"/>
+    <ClInclude Include="..\..\Source\cdsp\src\primitives\envelopes\envelopes_base.hpp"/>
+    <ClInclude Include="..\..\Source\cdsp\src\primitives\envelopes\interpolate_linear.hpp"/>
+    <ClInclude Include="..\..\Source\cdsp\src\primitives\misc\fm_feedback.hpp"/>
+    <ClInclude Include="..\..\Source\cdsp\src\primitives\operators\add.hpp"/>
+    <ClInclude Include="..\..\Source\cdsp\src\primitives\operators\multiply.hpp"/>
+    <ClInclude Include="..\..\Source\cdsp\src\primitives\operators\operators_base.hpp"/>
+    <ClInclude Include="..\..\Source\cdsp\src\primitives\oscillators\phasor.hpp"/>
+    <ClInclude Include="..\..\Source\cdsp\src\primitives\primitives_base.hpp"/>
+    <ClInclude Include="..\..\Source\cdsp\src\primitives\tables\table_function.hpp"/>
+    <ClInclude Include="..\..\Source\cdsp\src\primitives\tables\table_oscillator.hpp"/>
+    <ClInclude Include="..\..\Source\cdsp\src\primitives\tables\table_phasor.hpp"/>
+    <ClInclude Include="..\..\Source\cdsp\src\primitives\tables\tables_base.hpp"/>
+    <ClInclude Include="..\..\Source\cdsp\src\sample_buffer.hpp"/>
+    <ClInclude Include="..\..\Source\cdsp\src\types.hpp"/>
+    <ClInclude Include="..\..\Source\cdsp\src\values.hpp"/>
     <ClInclude Include="..\..\Source\dependencies\kiss_fft130\_kiss_fft_guts.h"/>
     <ClInclude Include="..\..\Source\dependencies\kiss_fft130\kiss_fft.h"/>
     <ClInclude Include="..\..\Source\dependencies\kiss_fft130\kissfft.hh"/>
     <ClInclude Include="..\..\Source\evaluation.hpp"/>
-    <ClInclude Include="..\..\Source\synths.hpp"/>
     <ClInclude Include="..\..\..\JUCE\modules\juce_audio_basics\buffers\juce_AudioDataConverters.h"/>
     <ClInclude Include="..\..\..\JUCE\modules\juce_audio_basics\buffers\juce_AudioSampleBuffer.h"/>
     <ClInclude Include="..\..\..\JUCE\modules\juce_audio_basics\buffers\juce_FloatVectorOperations.h"/>
@@ -880,9 +889,12 @@
     <ClInclude Include="..\..\..\JUCE\modules\juce_events\native\juce_win32_HiddenMessageWindow.h"/>
     <ClInclude Include="..\..\..\JUCE\modules\juce_events\juce_events.h"/>
     <ClInclude Include="..\..\JuceLibraryCode\AppConfig.h"/>
+    <ClInclude Include="..\..\JuceLibraryCode\BinaryData.h"/>
     <ClInclude Include="..\..\JuceLibraryCode\JuceHeader.h"/>
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\Source\cdsp\src\primitives\ideas.txt"/>
+    <None Include="..\..\Source\cdsp\src\primitives\tables\tables.txt"/>
     <None Include="..\..\..\JUCE\modules\juce_audio_basics\juce_module_info"/>
     <None Include="..\..\..\JUCE\modules\juce_audio_devices\juce_module_info"/>
     <None Include="..\..\..\JUCE\modules\juce_audio_formats\juce_module_info"/>

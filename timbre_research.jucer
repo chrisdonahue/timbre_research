@@ -6,71 +6,83 @@
               companyName="Chris Donahue">
   <MAINGROUP id="lWIu0b" name="timbre_research">
     <GROUP id="{D356937B-E896-924A-B5AB-DEF10E2A9EC7}" name="Source">
-      <GROUP id="{5A8F734A-24B8-CCA4-76DC-8A596943B5B5}" name="cdsp">
-        <FILE id="DgBe5x" name="base.cpp" compile="1" resource="0" file="Source/cdsp/base.cpp"/>
-        <FILE id="P9Wadm" name="base.hpp" compile="0" resource="0" file="Source/cdsp/base.hpp"/>
-        <FILE id="pSMKux" name="cdsp.hpp" compile="0" resource="0" file="Source/cdsp/cdsp.hpp"/>
-        <FILE id="pq6oUj" name="defines.hpp" compile="0" resource="0" file="Source/cdsp/defines.hpp"/>
-        <FILE id="GnX7h0" name="exceptions.cpp" compile="1" resource="0" file="Source/cdsp/exceptions.cpp"/>
-        <FILE id="wdDDsZ" name="exceptions.hpp" compile="0" resource="0" file="Source/cdsp/exceptions.hpp"/>
-        <FILE id="C33hCD" name="graph.cpp" compile="1" resource="0" file="Source/cdsp/graph.cpp"/>
-        <FILE id="Nw0rsD" name="graph.hpp" compile="0" resource="0" file="Source/cdsp/graph.hpp"/>
-        <FILE id="cpum7D" name="helpers.cpp" compile="1" resource="0" file="Source/cdsp/helpers.cpp"/>
-        <FILE id="v1pQJh" name="helpers.hpp" compile="0" resource="0" file="Source/cdsp/helpers.hpp"/>
-        <FILE id="J5DF9k" name="parameter.cpp" compile="1" resource="0" file="Source/cdsp/parameter.cpp"/>
-        <FILE id="yINb6W" name="parameter.hpp" compile="0" resource="0" file="Source/cdsp/parameter.hpp"/>
-        <GROUP id="{25CDBC2B-2FF5-099A-9819-1D875B011BFB}" name="primitives">
-          <GROUP id="{D29FF163-00C7-D868-BC35-0BCC63725727}" name="oscillators">
-            <FILE id="gVAd51" name="phasor.cpp" compile="1" resource="0" file="Source/cdsp/primitives/oscillators/phasor.cpp"/>
-            <FILE id="Dzgncw" name="phasor.hpp" compile="0" resource="0" file="Source/cdsp/primitives/oscillators/phasor.hpp"/>
-          </GROUP>
-          <GROUP id="{C54C13D3-E0F4-CF3D-9DD2-4F83E118374B}" name="tables">
-            <FILE id="V97YYS" name="tables_base.cpp" compile="1" resource="0" file="Source/cdsp/primitives/tables/tables_base.cpp"/>
-            <FILE id="bQ9Me8" name="tables_base.hpp" compile="0" resource="0" file="Source/cdsp/primitives/tables/tables_base.hpp"/>
-            <FILE id="x0vTQT" name="table_phasor.cpp" compile="1" resource="0"
-                  file="Source/cdsp/primitives/tables/table_phasor.cpp"/>
-            <FILE id="g3h47j" name="table_phasor.hpp" compile="0" resource="0"
-                  file="Source/cdsp/primitives/tables/table_phasor.hpp"/>
-            <FILE id="f6oCVN" name="table_function.cpp" compile="1" resource="0"
-                  file="Source/cdsp/primitives/tables/table_function.cpp"/>
-            <FILE id="npToL1" name="table_function.hpp" compile="0" resource="0"
-                  file="Source/cdsp/primitives/tables/table_function.hpp"/>
-            <FILE id="NVHefk" name="table_oscillator.cpp" compile="1" resource="0"
-                  file="Source/cdsp/primitives/tables/table_oscillator.cpp"/>
-            <FILE id="eH3G8y" name="table_oscillator.hpp" compile="0" resource="0"
-                  file="Source/cdsp/primitives/tables/table_oscillator.hpp"/>
-          </GROUP>
-          <GROUP id="{DDD6AE0E-725A-D83B-FF2F-0C3DABA8C26F}" name="envelopes">
-            <FILE id="KbT89C" name="envelopes_base.cpp" compile="1" resource="0"
-                  file="Source/cdsp/primitives/envelopes/envelopes_base.cpp"/>
-            <FILE id="ZxfwHv" name="envelopes_base.hpp" compile="0" resource="0"
-                  file="Source/cdsp/primitives/envelopes/envelopes_base.hpp"/>
-            <FILE id="ce6CII" name="interpolate_linear.cpp" compile="1" resource="0"
-                  file="Source/cdsp/primitives/envelopes/interpolate_linear.cpp"/>
-            <FILE id="sbZZnN" name="interpolate_linear.hpp" compile="0" resource="0"
-                  file="Source/cdsp/primitives/envelopes/interpolate_linear.hpp"/>
-          </GROUP>
-          <GROUP id="{0F27287E-3BEC-4259-AFDD-289D71CDFB58}" name="operators">
-            <FILE id="eaFTuE" name="operators_base.cpp" compile="1" resource="0"
-                  file="Source/cdsp/primitives/operators/operators_base.cpp"/>
-            <FILE id="BO9uLL" name="operators_base.hpp" compile="0" resource="0"
-                  file="Source/cdsp/primitives/operators/operators_base.hpp"/>
-            <FILE id="grezX9" name="add.cpp" compile="1" resource="0" file="Source/cdsp/primitives/operators/add.cpp"/>
-            <FILE id="Vy6p88" name="add.hpp" compile="0" resource="0" file="Source/cdsp/primitives/operators/add.hpp"/>
-            <FILE id="xU5P2g" name="multiply.cpp" compile="1" resource="0" file="Source/cdsp/primitives/operators/multiply.cpp"/>
-            <FILE id="kgFCWg" name="multiply.hpp" compile="0" resource="0" file="Source/cdsp/primitives/operators/multiply.hpp"/>
-          </GROUP>
-          <FILE id="IttRWN" name="primitives_base.cpp" compile="1" resource="0"
-                file="Source/cdsp/primitives/primitives_base.cpp"/>
-          <FILE id="awhtnS" name="primitives_base.hpp" compile="0" resource="0"
-                file="Source/cdsp/primitives/primitives_base.hpp"/>
+      <GROUP id="{A2A8B45E-8463-0D72-0FFA-BB441DD5ECD0}" name="cdsp">
+        <GROUP id="{720257AE-5D1A-CC80-0F7A-D90BF730CDC3}" name="abstraction">
+          <FILE id="qpsLrC" name="pm_voice.cpp" compile="1" resource="0" file="Source/cdsp/src/abstraction/pm_voice.cpp"/>
+          <FILE id="CjBWX6" name="pm_voice.hpp" compile="0" resource="0" file="Source/cdsp/src/abstraction/pm_voice.hpp"/>
         </GROUP>
-        <FILE id="WWdqOw" name="sample_buffer.cpp" compile="1" resource="0"
-              file="Source/cdsp/sample_buffer.cpp"/>
-        <FILE id="o4GKe0" name="sample_buffer.hpp" compile="0" resource="0"
-              file="Source/cdsp/sample_buffer.hpp"/>
-        <FILE id="W4rRug" name="types.hpp" compile="0" resource="0" file="Source/cdsp/types.hpp"/>
-        <FILE id="YZTekp" name="values.hpp" compile="0" resource="0" file="Source/cdsp/values.hpp"/>
+        <FILE id="v0nryZ" name="base.cpp" compile="1" resource="0" file="Source/cdsp/src/base.cpp"/>
+        <FILE id="LCjacD" name="base.hpp" compile="0" resource="0" file="Source/cdsp/src/base.hpp"/>
+        <FILE id="q1x6KA" name="cdsp.hpp" compile="0" resource="0" file="Source/cdsp/src/cdsp.hpp"/>
+        <FILE id="fmecjW" name="defines.hpp" compile="0" resource="0" file="Source/cdsp/src/defines.hpp"/>
+        <FILE id="XVTfVD" name="exceptions.cpp" compile="1" resource="0" file="Source/cdsp/src/exceptions.cpp"/>
+        <FILE id="b5gSGE" name="exceptions.hpp" compile="0" resource="0" file="Source/cdsp/src/exceptions.hpp"/>
+        <FILE id="kBNpaG" name="graph.cpp" compile="1" resource="0" file="Source/cdsp/src/graph.cpp"/>
+        <FILE id="Sdizsf" name="graph.hpp" compile="0" resource="0" file="Source/cdsp/src/graph.hpp"/>
+        <FILE id="fpCJnA" name="helpers.cpp" compile="1" resource="0" file="Source/cdsp/src/helpers.cpp"/>
+        <FILE id="HK4hOc" name="helpers.hpp" compile="0" resource="0" file="Source/cdsp/src/helpers.hpp"/>
+        <FILE id="RS9J24" name="parameter.cpp" compile="1" resource="0" file="Source/cdsp/src/parameter.cpp"/>
+        <FILE id="SwDhwn" name="parameter.hpp" compile="0" resource="0" file="Source/cdsp/src/parameter.hpp"/>
+        <GROUP id="{D8D26759-4F6E-4970-D8AF-C8E00A8ECE3D}" name="primitives">
+          <GROUP id="{8F779DE1-3C79-2C25-1145-3CBB8F687EBB}" name="envelopes">
+            <FILE id="H9iZts" name="adsr.cpp" compile="1" resource="0" file="Source/cdsp/src/primitives/envelopes/adsr.cpp"/>
+            <FILE id="avaab8" name="adsr.hpp" compile="0" resource="0" file="Source/cdsp/src/primitives/envelopes/adsr.hpp"/>
+            <FILE id="nlfhmL" name="envelopes_base.cpp" compile="1" resource="0"
+                  file="Source/cdsp/src/primitives/envelopes/envelopes_base.cpp"/>
+            <FILE id="zjdibT" name="envelopes_base.hpp" compile="0" resource="0"
+                  file="Source/cdsp/src/primitives/envelopes/envelopes_base.hpp"/>
+            <FILE id="dTjSsg" name="interpolate_linear.cpp" compile="1" resource="0"
+                  file="Source/cdsp/src/primitives/envelopes/interpolate_linear.cpp"/>
+            <FILE id="Ckltgm" name="interpolate_linear.hpp" compile="0" resource="0"
+                  file="Source/cdsp/src/primitives/envelopes/interpolate_linear.hpp"/>
+          </GROUP>
+          <FILE id="Ru1lqa" name="ideas.txt" compile="0" resource="1" file="Source/cdsp/src/primitives/ideas.txt"/>
+          <GROUP id="{29519005-47B6-F31D-839A-317EEBA71F63}" name="misc">
+            <FILE id="vzFzPM" name="fm_feedback.cpp" compile="1" resource="0" file="Source/cdsp/src/primitives/misc/fm_feedback.cpp"/>
+            <FILE id="OSgvH4" name="fm_feedback.hpp" compile="0" resource="0" file="Source/cdsp/src/primitives/misc/fm_feedback.hpp"/>
+          </GROUP>
+          <GROUP id="{0EA85BE3-5572-1A47-0DF1-1CF709D81B88}" name="operators">
+            <FILE id="aTKvJk" name="add.cpp" compile="1" resource="0" file="Source/cdsp/src/primitives/operators/add.cpp"/>
+            <FILE id="jXYAZU" name="add.hpp" compile="0" resource="0" file="Source/cdsp/src/primitives/operators/add.hpp"/>
+            <FILE id="ysAjdn" name="multiply.cpp" compile="1" resource="0" file="Source/cdsp/src/primitives/operators/multiply.cpp"/>
+            <FILE id="n4CMRv" name="multiply.hpp" compile="0" resource="0" file="Source/cdsp/src/primitives/operators/multiply.hpp"/>
+            <FILE id="ibGYfU" name="operators_base.cpp" compile="1" resource="0"
+                  file="Source/cdsp/src/primitives/operators/operators_base.cpp"/>
+            <FILE id="dFaQww" name="operators_base.hpp" compile="0" resource="0"
+                  file="Source/cdsp/src/primitives/operators/operators_base.hpp"/>
+          </GROUP>
+          <GROUP id="{A4A180D0-4699-F6DB-DC63-10A831972BAE}" name="oscillators">
+            <FILE id="CnClzQ" name="phasor.cpp" compile="1" resource="0" file="Source/cdsp/src/primitives/oscillators/phasor.cpp"/>
+            <FILE id="pLzB1W" name="phasor.hpp" compile="0" resource="0" file="Source/cdsp/src/primitives/oscillators/phasor.hpp"/>
+          </GROUP>
+          <FILE id="H7liUN" name="primitives_base.cpp" compile="1" resource="0"
+                file="Source/cdsp/src/primitives/primitives_base.cpp"/>
+          <FILE id="VS4Zrq" name="primitives_base.hpp" compile="0" resource="0"
+                file="Source/cdsp/src/primitives/primitives_base.hpp"/>
+          <GROUP id="{26F6F72F-8370-AE2C-FCD9-DDB2D9DC7C98}" name="tables">
+            <FILE id="u70hg0" name="table_function.cpp" compile="1" resource="0"
+                  file="Source/cdsp/src/primitives/tables/table_function.cpp"/>
+            <FILE id="MNF3r3" name="table_function.hpp" compile="0" resource="0"
+                  file="Source/cdsp/src/primitives/tables/table_function.hpp"/>
+            <FILE id="hvbCDC" name="table_oscillator.cpp" compile="1" resource="0"
+                  file="Source/cdsp/src/primitives/tables/table_oscillator.cpp"/>
+            <FILE id="SBlrOv" name="table_oscillator.hpp" compile="0" resource="0"
+                  file="Source/cdsp/src/primitives/tables/table_oscillator.hpp"/>
+            <FILE id="X2R7Lb" name="table_phasor.cpp" compile="1" resource="0"
+                  file="Source/cdsp/src/primitives/tables/table_phasor.cpp"/>
+            <FILE id="jH4v5N" name="table_phasor.hpp" compile="0" resource="0"
+                  file="Source/cdsp/src/primitives/tables/table_phasor.hpp"/>
+            <FILE id="wb8jvb" name="tables.txt" compile="0" resource="1" file="Source/cdsp/src/primitives/tables/tables.txt"/>
+            <FILE id="cmNxR6" name="tables_base.cpp" compile="1" resource="0" file="Source/cdsp/src/primitives/tables/tables_base.cpp"/>
+            <FILE id="XVoURM" name="tables_base.hpp" compile="0" resource="0" file="Source/cdsp/src/primitives/tables/tables_base.hpp"/>
+          </GROUP>
+        </GROUP>
+        <FILE id="hS92BH" name="sample_buffer.cpp" compile="1" resource="0"
+              file="Source/cdsp/src/sample_buffer.cpp"/>
+        <FILE id="jiKSO6" name="sample_buffer.hpp" compile="0" resource="0"
+              file="Source/cdsp/src/sample_buffer.hpp"/>
+        <FILE id="E1CqAc" name="types.hpp" compile="0" resource="0" file="Source/cdsp/src/types.hpp"/>
+        <FILE id="NssKcq" name="values.hpp" compile="0" resource="0" file="Source/cdsp/src/values.hpp"/>
       </GROUP>
       <GROUP id="{2DA222AC-2D63-5EE0-A6FC-7E46933E44B6}" name="dependencies">
         <GROUP id="{3151364B-D029-BD31-DA21-2FC924796763}" name="kiss_fft130">
@@ -83,8 +95,6 @@
       </GROUP>
       <FILE id="yQY1tI" name="evaluation.hpp" compile="0" resource="0" file="Source/evaluation.hpp"/>
       <FILE id="UKBE9P" name="evaluation.cpp" compile="1" resource="0" file="Source/evaluation.cpp"/>
-      <FILE id="SRMRaF" name="synths.cpp" compile="1" resource="0" file="Source/synths.cpp"/>
-      <FILE id="DxUuVg" name="synths.hpp" compile="0" resource="0" file="Source/synths.hpp"/>
       <FILE id="eShtbO" name="main.cpp" compile="1" resource="0" file="Source/main.cpp"/>
     </GROUP>
   </MAINGROUP>
@@ -124,7 +134,8 @@
         <MODULEPATH id="juce_audio_formats" path="../JUCE/modules"/>
       </MODULEPATHS>
     </LINUX_MAKE>
-    <VS2012 targetFolder="Builds/VisualStudio2012">
+    <VS2012 targetFolder="Builds/VisualStudio2012" extraCompilerFlags="/I C:\Code\timbre_research\Source\dependencies\beagle-3.0.3\PACC /I C:\Code\timbre_research\Source\dependencies\beagle-3.0.3\beagle\include /I C:\Code\timbre_research\Source\dependencies\beagle-3.0.3\beagle\GA\include /I C:\Code\timbre_research\Source\cdsp\src /GR"
+            extraLinkerFlags="" externalLibraries="C:\Code\timbre_research\Source\dependencies\beagle-3.0.3\MSVCPP\beagle\Debug\beagle.lib;C:\Code\timbre_research\Source\dependencies\beagle-3.0.3\MSVCPP\beagle-GA\Debug\beagle-GA.lib;C:\Code\timbre_research\Source\dependencies\beagle-3.0.3\MSVCPP\pacc-util\Debug\pacc-util.lib;C:\Code\timbre_research\Source\dependencies\beagle-3.0.3\MSVCPP\pacc-xml\Debug\pacc-xml.lib;C:\Code\timbre_research\Source\dependencies\beagle-3.0.3\MSVCPP\pacc-math\Debug\pacc-math.lib;">
       <CONFIGURATIONS>
         <CONFIGURATION name="Debug" winWarningLevel="4" generateManifest="1" winArchitecture="32-bit"
                        isDebug="1" optimisation="1" targetName="timbre_research"/>

@@ -2,21 +2,18 @@
 
 #include <iostream>
 
-#include "cmaes.h"
-//#include "dependencies/kiss_fft130/kiss_fft.c"
-#include "cdsp/cdsp.hpp"
+#include "dependencies/kiss_fft130/kiss_fft.h"
+#include "cdsp.hpp"
+#include "beagle/GA.hpp"
 
-#include "synths.hpp"
+#include "evaluation.hpp"
 
-using namespace juce;
-using namespace libcmaes;
+using namespace cdsp;
+using namespace Beagle;
 
-int main (int argc, char* argv[]) {
-	argc;
-	argv;
-
+int main (int argc, char** argv) {
 	// read target
-    File file("./target.wav");
+    File file("C:\Code\timbre_research\Builds\VisualStudio2012\Debug\target.wav");
     AudioFormatManager formatManager;
     formatManager.registerBasicFormats();
     ScopedPointer<AudioFormatReader> reader = formatManager.createReaderFor(file);
@@ -34,6 +31,7 @@ int main (int argc, char* argv[]) {
 
 	// candidate data
 	sample_buffer candidate_buffer(2, target_length);
+	types::index candidate_block_size = 1024;
 
 	// sine wave table
 	types::index sine_table_length = 2048;
@@ -41,81 +39,43 @@ int main (int argc, char* argv[]) {
 	helpers::generators::sine(sine_table_length, sine_table.channel_pointer_write(values::channel_zero));
 
 	// create voice
-	fm_voice voice_1;
+	abstraction::pm_voice voice_1;
 	voice_1.table_set(sine_table_length, sine_table.channel_pointer_read(values::channel_zero));
+	voice_1.prepare(target_sample_rate, candidate_block_size);
 
-	// test voice
-	voice_1.f_m_set(static_cast<types::sample>(99.7719/target_sample_rate));
-	voice_1.i_set(static_cast<types::sample>(1.65366));
-	voice_1.f_c_set(static_cast<types::sample>(438.909/target_sample_rate));
-	voice_1.a_set(static_cast<types::sample>(-0.55803));
-	voice_1.prepare(target_sample_rate, target_length);
-	voice_1.perform(candidate_buffer, target_length, 0, 0);
-	candidate_buffer.resize(1, target_length);
-	helpers::io::wav_file_save("voice_1_test_new2.wav", target_sample_rate, 32, candidate_buffer);
-	candidate_buffer.resize(2, target_length);
+	try {
+		// 1. Build the system.
+		System::Handle lSystem = new System;
+		// 2. Build evaluation operator.
+		PMOneVoiceEvalOp::Handle lEvalOp = new PMOneVoiceEvalOp;
+		// 2b. Build evaluation state
+		Register::Description hackDescription("Useless", "Hack", "Placeholder", "");
+		PMOneVoiceParams::Handle evalParams = new PMOneVoiceParams;
+		evalParams->target_sample_rate = target_sample_rate;
+		evalParams->target_buffer = target_buffer;
+		evalParams->candidate_block_size = candidate_block_size;
+		evalParams->candidate_sample_buffer = &candidate_buffer;
+		evalParams->voice_1 = &voice_1;
+		lSystem->getRegisterHandle()->addEntry("audio.state", evalParams, hackDescription);
+		// 3. Instanciate the evolver and the vivarium for float vectors GA population.
+		GA::FloatVector::Alloc::Handle lFVAlloc = new GA::FloatVector::Alloc;
+		Vivarium::Handle lVivarium = new Vivarium(lFVAlloc);
+		// 4. Set representation, float vectors of 5 values.
+		const unsigned int lVectorSize=5;  
+		// 5. Initialize the evolver and evolve the vivarium.
+		GA::EvolverFloatVector::Handle lEvolver = new GA::EvolverFloatVector(lEvalOp, lVectorSize);
+		lEvolver->initialize(lSystem, argc, argv);
+		lEvolver->evolve(lVivarium);
+	}
+	catch(Exception& inException) {
+		inException.terminate(std::cerr);
+	}
+	catch(std::exception& inException) {
+		std::cerr << "Standard exception catched:" << std::endl << std::flush;
+		std::cerr << inException.what() << std::endl << std::flush;
+		return 1;
+	}
 
-	// define fitness function
-	FitFunc fm_simple_error_amp = [&voice_1, &candidate_buffer, target_sample_rate, &target_buffer](const double *x, const int N)
-	{
-		// set parameters
-		voice_1.f_m_set(static_cast<types::sample>(x[0]/target_sample_rate));
-		voice_1.i_set(static_cast<types::sample>(x[1]));
-		voice_1.f_c_set(static_cast<types::sample>(x[2]/target_sample_rate));
-		voice_1.a_set(static_cast<types::sample>(x[3]));
-
-		std::cout << "{" << x[0] << ", "
-						<< x[1] << ", "
-						<< x[2] << ", "
-						<< x[3] << "}" << std::endl;
-
-		types::index target_length = candidate_buffer.channel_buffer_length_get();
-
-		// perform
-		voice_1.reset();
-		voice_1.perform(candidate_buffer, target_length, 0, 0);
-
-		// return fitness function result
-		types::sample error = 0.0;
-		types::index samples_remaining = target_length;
-		const types::sample* target = target_buffer;
-		const types::sample* candidate = candidate_buffer.channel_pointer_read(values::channel_zero);
-		while (samples_remaining--) {
-			error += fabs(*(target++) - *(candidate++));
-		}
-		return static_cast<double>(error);
-	};
-
-	// define cmaes parameters
-	// https://www.lri.fr/~hansen/cmaes_inmatlab.html#practical
-	// https://github.com/beniz/libcmaes/wiki/Practical-hints
-	int dim = 4;
-	double sigma = 0.1;
-	int lambda = -1;
-	uint64_t seed = 0;
-
-	// define solution bounds
-	double lbounds[] = {0.0, 0.0, 0.0, 0.0};
-	double ubounds[] = {target_sample_rate, 10.0, target_sample_rate, 1.0};
-	GenoPheno<pwqBoundStrategy> gp(lbounds, ubounds, dim);
-
-	// define solution initial values
-	std::vector<double> x0 = {100.0, 1.0, 440.0, 1.0};
-
-	// configure libcmaes
-	CMAParameters<GenoPheno<pwqBoundStrategy>> cmaparams(x0, sigma, lambda, seed, gp);
-	cmaparams.set_algo(aCMAES);
-
-	// run cmaes
-	CMASolutions cmasols = cmaes<GenoPheno<pwqBoundStrategy>>(fm_simple_error_amp, cmaparams);
-
-	// release voice
 	voice_1.release();
-
-	// output best
-	std::cout << "best solution: " << cmasols << std::endl;
-	std::cout << "optimization took " << cmasols.elapsed_time() / 1000.0 << " seconds\n";
-
-	// return
-	return cmasols.run_status();
+	return 0;
 };
