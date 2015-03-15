@@ -71,6 +71,7 @@ OBJECTS := \
   $(OBJDIR)/table_phasor_4505922.o \
   $(OBJDIR)/tables_base_62082771.o \
   $(OBJDIR)/sample_buffer_4d7f2922.o \
+  $(OBJDIR)/kiss_fftr_734e06ce.o \
   $(OBJDIR)/kiss_fft_eaf1f82e.o \
   $(OBJDIR)/evaluation_158dd2a5.o \
   $(OBJDIR)/main_8d1161a2.o \
@@ -199,6 +200,11 @@ $(OBJDIR)/sample_buffer_4d7f2922.o: ../../Source/cdsp/src/sample_buffer.cpp
 	-@mkdir -p $(OBJDIR)
 	@echo "Compiling sample_buffer.cpp"
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/kiss_fftr_734e06ce.o: ../../Source/dependencies/kiss_fft130/kiss_fftr.c
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling kiss_fftr.c"
+	@$(CC) $(CFLAGS) -o "$@" -c "$<"
 
 $(OBJDIR)/kiss_fft_eaf1f82e.o: ../../Source/dependencies/kiss_fft130/kiss_fft.c
 	-@mkdir -p $(OBJDIR)

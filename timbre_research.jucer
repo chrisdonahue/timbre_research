@@ -86,6 +86,8 @@
       </GROUP>
       <GROUP id="{2DA222AC-2D63-5EE0-A6FC-7E46933E44B6}" name="dependencies">
         <GROUP id="{3151364B-D029-BD31-DA21-2FC924796763}" name="kiss_fft130">
+          <FILE id="D5JzJ9" name="kiss_fftr.c" compile="1" resource="0" file="Source/dependencies/kiss_fft130/kiss_fftr.c"/>
+          <FILE id="lbtQTU" name="kiss_fftr.h" compile="0" resource="0" file="Source/dependencies/kiss_fft130/kiss_fftr.h"/>
           <FILE id="E9nXmK" name="_kiss_fft_guts.h" compile="0" resource="0"
                 file="Source/dependencies/kiss_fft130/_kiss_fft_guts.h"/>
           <FILE id="uAVujW" name="kiss_fft.c" compile="1" resource="0" file="Source/dependencies/kiss_fft130/kiss_fft.c"/>

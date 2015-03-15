@@ -42,19 +42,11 @@ int main (int argc, char** argv) {
 	voice_1.table_set(sine_table_length, sine_table.channel_pointer_read(values::channel_zero));
 	voice_1.prepare(target_sample_rate, candidate_block_size);
 
-	// create state
-	PMOneVoiceEvalOpState* state = new PMOneVoiceEvalOpState();
-	state->target_length = target_length;
-	state->target_buffer = target_buffer;
-	state->candidate_block_size = candidate_block_size;
-	state->candidate_sample_buffer = &candidate_buffer;
-	state->voice_1 = &voice_1;
-
 	try {
 		// 1. Build the system.
 		System::Handle lSystem = new System;
 		// 2. Build evaluation operator.
-		PMOneVoiceEvalOp::Handle lEvalOp = new PMOneVoiceEvalOp(state);
+		PMOneVoiceEvalOp::Handle lEvalOp = new PMOneVoiceEvalOp(target_length, target_buffer, &voice_1, window_type::hann, 1024, 512);
 		//PMOneVoiceEvalOp::Handle lEvalOp = new PMOneVoiceEvalOp;
 		// 3. Instanciate the evolver and the vivarium for float vectors GA population.
 		GA::FloatVector::Alloc::Handle lFVAlloc = new GA::FloatVector::Alloc;
@@ -74,9 +66,6 @@ int main (int argc, char** argv) {
 		std::cerr << inException.what() << std::endl << std::flush;
 		return 1;
 	}
-
-	// delete state
-	delete state;
 
 	// release pm voice
 	voice_1.release();

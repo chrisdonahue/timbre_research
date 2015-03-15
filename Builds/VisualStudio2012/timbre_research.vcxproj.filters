@@ -247,6 +247,9 @@
     <ClCompile Include="..\..\Source\cdsp\src\sample_buffer.cpp">
       <Filter>timbre_research\Source\cdsp</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\dependencies\kiss_fft130\kiss_fftr.c">
+      <Filter>timbre_research\Source\dependencies\kiss_fft130</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\dependencies\kiss_fft130\kiss_fft.c">
       <Filter>timbre_research\Source\dependencies\kiss_fft130</Filter>
     </ClCompile>
@@ -866,6 +869,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\cdsp\src\values.hpp">
       <Filter>timbre_research\Source\cdsp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\dependencies\kiss_fft130\kiss_fftr.h">
+      <Filter>timbre_research\Source\dependencies\kiss_fft130</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\dependencies\kiss_fft130\_kiss_fft_guts.h">
       <Filter>timbre_research\Source\dependencies\kiss_fft130</Filter>
