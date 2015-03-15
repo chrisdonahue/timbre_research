@@ -2,7 +2,6 @@
 
 #include <iostream>
 
-#include "dependencies/kiss_fft130/kiss_fft.h"
 #include "cdsp.hpp"
 #include "beagle/GA.hpp"
 
@@ -13,7 +12,7 @@ using namespace Beagle;
 
 int main (int argc, char** argv) {
 	// read target
-    File file("C:\Code\timbre_research\Builds\VisualStudio2012\Debug\target.wav");
+    File file("C:\\Code\\timbre_research\\Builds\\VisualStudio2012\\Debug\\target.wav");
     AudioFormatManager formatManager;
     formatManager.registerBasicFormats();
     ScopedPointer<AudioFormatReader> reader = formatManager.createReaderFor(file);
@@ -43,28 +42,28 @@ int main (int argc, char** argv) {
 	voice_1.table_set(sine_table_length, sine_table.channel_pointer_read(values::channel_zero));
 	voice_1.prepare(target_sample_rate, candidate_block_size);
 
+	// create state
+	PMOneVoiceEvalOpState* state = new PMOneVoiceEvalOpState();
+	state->target_length = target_length;
+	state->target_buffer = target_buffer;
+	state->candidate_block_size = candidate_block_size;
+	state->candidate_sample_buffer = &candidate_buffer;
+	state->voice_1 = &voice_1;
+
 	try {
 		// 1. Build the system.
 		System::Handle lSystem = new System;
 		// 2. Build evaluation operator.
-		PMOneVoiceEvalOp::Handle lEvalOp = new PMOneVoiceEvalOp;
-		// 2b. Build evaluation state
-		Register::Description hackDescription("Useless", "Hack", "Placeholder", "");
-		PMOneVoiceParams::Handle evalParams = new PMOneVoiceParams;
-		evalParams->target_sample_rate = target_sample_rate;
-		evalParams->target_buffer = target_buffer;
-		evalParams->candidate_block_size = candidate_block_size;
-		evalParams->candidate_sample_buffer = &candidate_buffer;
-		evalParams->voice_1 = &voice_1;
-		lSystem->getRegisterHandle()->addEntry("audio.state", evalParams, hackDescription);
+		PMOneVoiceEvalOp::Handle lEvalOp = new PMOneVoiceEvalOp(state);
+		//PMOneVoiceEvalOp::Handle lEvalOp = new PMOneVoiceEvalOp;
 		// 3. Instanciate the evolver and the vivarium for float vectors GA population.
 		GA::FloatVector::Alloc::Handle lFVAlloc = new GA::FloatVector::Alloc;
 		Vivarium::Handle lVivarium = new Vivarium(lFVAlloc);
 		// 4. Set representation, float vectors of 5 values.
-		const unsigned int lVectorSize=5;  
+		const unsigned int lVectorSize = 4;  
 		// 5. Initialize the evolver and evolve the vivarium.
 		GA::EvolverFloatVector::Handle lEvolver = new GA::EvolverFloatVector(lEvalOp, lVectorSize);
-		lEvolver->initialize(lSystem, argc, argv);
+		lEvolver->initialize(lSystem, "C:\\Code\\timbre_research\\Builds\\VisualStudio2012\\Debug\\cmaes_no_milestone.conf");
 		lEvolver->evolve(lVivarium);
 	}
 	catch(Exception& inException) {
@@ -76,6 +75,11 @@ int main (int argc, char** argv) {
 		return 1;
 	}
 
+	// delete state
+	delete state;
+
+	// release pm voice
 	voice_1.release();
+
 	return 0;
 };

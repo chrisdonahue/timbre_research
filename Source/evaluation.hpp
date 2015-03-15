@@ -1,27 +1,31 @@
 #ifndef EVALUATION_H_INCLUDED
 #define EVALUATION_H_INCLUDED
 
-#include "beagle/GA.hpp"
 #include <vector>
+
+#include "beagle/GA.hpp"
+
+#include "dependencies/kiss_fft130/kiss_fft.h"
 
 #include "cdsp.hpp"
 
-class PMOneVoiceParams : public Beagle::Object
+using namespace cdsp;
+
+void fft_buffer_size_calculate(types::index samples_num, types::index fft_n, types::index fft_overlap, types::index& fft_num_bins, types::index& fft_num_frames, types::index& fft_output_buffer_length) {
+	fft_num_frames = 0;
+	types::index fft_hop_size = fft_n - fft_overlap;
+	types::index samples_completed = 0;
+	types::index samples_remaining = samples_num;
+	while (samples_remaining > 0) {
+		fft_num_frames++;
+		i += fft_hop_size;
+	}
+};
+
+class PMOneVoiceEvalOpState
 {
 public:
-	//! PMOneVoiceParams allocator type.
-	typedef Beagle::AllocatorT<PMOneVoiceParams,Beagle::Object::Alloc>
-	Alloc;
-	//!< PMOneVoiceParams handle type.
-	typedef Beagle::PointerT<PMOneVoiceParams,Beagle::Object::Handle>
-	Handle;
-	//!< PMOneVoiceParams bag type.
-	typedef Beagle::ContainerT<PMOneVoiceParams,Beagle::Object::Bag>
-	Bag;
-
-	explicit PMOneVoiceParams();
-
-	cdsp::types::cont_64 target_sample_rate;
+	cdsp::types::index target_length;
 	const cdsp::types::sample* target_buffer;
 	cdsp::types::index candidate_block_size;
 	cdsp::sample_buffer* candidate_sample_buffer;
@@ -46,12 +50,13 @@ public:
   typedef Beagle::ContainerT<PMOneVoiceEvalOp,Beagle::EvaluationOp::Bag>
           Bag;
 
-  explicit PMOneVoiceEvalOp();
+  PMOneVoiceEvalOp(PMOneVoiceEvalOpState* _state) : Beagle::EvaluationOp("PMOneVoiceEvalOp"), state(_state) {};
 
   virtual Beagle::Fitness::Handle evaluate(Beagle::Individual& inIndividual,
                                            Beagle::Context& ioContext);
 
 private:
+	PMOneVoiceEvalOpState* state;
 };
 
 #endif // PMOneVoiceEvalOp_hpp
