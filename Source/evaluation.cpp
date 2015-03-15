@@ -146,18 +146,8 @@ Fitness::Handle PMOneVoiceEvalOp::evaluate(Individual& inIndividual, Context& io
 		error += fabs(target_magnitude_b[bin] - candidate_magnitude_b[bin]);
 	}
 	if (error < error_min) {
-		for (unsigned int i = 0; i < 4; i++) {
-			double lXi = (*lFloatVector)[i];
-			if(lXi > 1.0) {
-				lXi = 1.0;
-			}
-			if(lXi < -1.0) {
-				lXi = -1.0;
-			}
-			candidate_best_params[i] = lXi;
-		}
+		helpers::io::wav_file_save("best.wav", 44100.0, 32, candidate_sb, 0);
 		error_min = error;
-		//helpers::io::wav_file_save("best.wav", 44100.0, 32, candidate_sb, 0);
 	}
 	return new FitnessSimpleMin(static_cast<double>(error));
 }
