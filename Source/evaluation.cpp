@@ -12,12 +12,12 @@ void fft_buffer_size_calculate(types::index samples_num, types::index fft_n, typ
 	types::index samples_current;
 	while (samples_remaining > 0) {
 		samples_current = fft_n;
-		if (samples_remaining >= fft_n) {
+		if (samples_remaining < fft_n) {
 			samples_current = samples_remaining;
 		}
 		fft_num_frames++;
-		samples_completed += fft_hop_size;
-		samples_remaining -= fft_hop_size;
+		samples_completed += samples_current;
+		samples_remaining -= samples_current;
 	}
 	fft_bins_per_frame = ((fft_n / 2) + 1);
 	fft_output_buffer_length = fft_num_frames * fft_bins_per_frame;
@@ -63,8 +63,8 @@ void fft_real(types::index input_b_length, const types::sample* input_b, types::
 		for (i = 0; i < samples_current; i++) {
 			fft_in_b[i] = static_cast<kiss_fft_scalar>(input_b[samples_completed + i]);
 		}
-		samples_completed += fft_hop_size;
-		samples_remaining -= fft_hop_size;
+		samples_completed += samples_current;
+		samples_remaining -= samples_current;
 
 		// zero pad
 		for (; i < fft_n; i++) {
@@ -119,8 +119,11 @@ Fitness::Handle PMOneVoiceEvalOp::evaluate(Individual& inIndividual, Context& io
 	voice_1.reset();
 	envelope.reset();
 	voice_1.perform(candidate_sb, target_length, 0, 0);
+	helpers::io::wav_file_save("voice_1.wav", target_sample_rate, 32, candidate_sb, 0);
 	envelope.perform(candidate_sb, target_length, 1, 0);
+	helpers::io::wav_file_save("envelope.wav", target_sample_rate, 32, candidate_sb, 1);
 	multiplier.perform(candidate_sb, target_length, 0, 0);
+	helpers::io::wav_file_save("multiplied.wav", target_sample_rate, 32, candidate_sb, 0);
 
 	// fft
 	fft_real(target_length, candidate_sb.channel_pointer_read(0), fft_n, fft_hop_size, fft_window_sb.channel_pointer_read(0), fft_in_b, candidate_fft_out_b, candidate_magnitude_b, candidate_phase_b);
@@ -132,7 +135,10 @@ Fitness::Handle PMOneVoiceEvalOp::evaluate(Individual& inIndividual, Context& io
 		error += fabs(target_magnitude_b[bin] - candidate_magnitude_b[bin]);
 	}
 	if (error < error_min) {
-		helpers::io::wav_file_save("best.wav", target_sample_rate, 32, candidate_sb, 0);
+		std::ostringstream file_name;
+		file_name.precision(3);
+		file_name << error << ".wav";
+		helpers::io::wav_file_save(file_name.str(), target_sample_rate, 32, candidate_sb, 0);
 		error_min = error;
 	}
 	return new FitnessSimpleMin(static_cast<double>(error));

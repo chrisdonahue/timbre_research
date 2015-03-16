@@ -12,7 +12,7 @@ using namespace Beagle;
 
 int main (int argc, char** argv) {
 	// read target
-    File file("C:\\Code\\timbre_research\\samples\\BbClarinet.ff.D3.stereo.aif");
+    File file("C:\\Code\\timbre_research\\samples\\cleaned\\clarinet_d3.wav");
     AudioFormatManager formatManager;
     formatManager.registerBasicFormats();
     ScopedPointer<AudioFormatReader> reader = formatManager.createReaderFor(file);
@@ -31,16 +31,6 @@ int main (int argc, char** argv) {
 	// candidate data
 	sample_buffer candidate_buffer(2, target_length);
 	types::index candidate_block_size = 1024;
-
-	// sine wave table
-	types::index sine_table_length = 2048;
-	sample_buffer sine_table(1, sine_table_length);
-	helpers::generators::sine(sine_table_length, sine_table.channel_pointer_write(values::channel_zero));
-
-	// create voice
-	abstraction::pm_voice voice_1;
-	voice_1.table_set(sine_table_length, sine_table.channel_pointer_read(values::channel_zero));
-	voice_1.prepare(target_sample_rate, candidate_block_size);
 
 	try {
 		// 1. Build the system.
@@ -66,9 +56,6 @@ int main (int argc, char** argv) {
 		std::cerr << inException.what() << std::endl << std::flush;
 		return 1;
 	}
-
-	// release pm voice
-	voice_1.release();
 
 	return 0;
 };

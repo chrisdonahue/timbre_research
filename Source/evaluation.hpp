@@ -2,6 +2,7 @@
 #define EVALUATION_HPP_INCLUDED
 
 #include <cmath>
+#include <sstream>
 #include <vector>
 
 #include "beagle/GA.hpp"
