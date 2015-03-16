@@ -107,9 +107,9 @@ Fitness::Handle PMOneVoiceEvalOp::evaluate(Individual& inIndividual, Context& io
 	GA::FloatVector::Handle lFloatVector = castHandleT<GA::FloatVector>(inIndividual[0]);
 	Beagle_AssertM(lFloatVector->size() == 11);
 
-	voice_1.f_m_set(static_cast<types::sample>((*lFloatVector)[0]));
-	voice_1.i_set(static_cast<types::sample>((*lFloatVector)[1]));
-	voice_1.f_c_set(static_cast<types::sample>((*lFloatVector)[2]));
+	voice_1.f_m_set(static_cast<types::sample>((*lFloatVector)[0] * 0.5));
+	voice_1.i_set(static_cast<types::sample>((*lFloatVector)[1] * 5.0));
+	voice_1.f_c_set(static_cast<types::sample>((*lFloatVector)[2] * 0.5));
 	envelope.point_set(0, (*lFloatVector)[3], (*lFloatVector)[4]);
 	envelope.point_set(1, (*lFloatVector)[5], (*lFloatVector)[6]);
 	envelope.point_set(2, (*lFloatVector)[7], (*lFloatVector)[8]);
@@ -119,11 +119,11 @@ Fitness::Handle PMOneVoiceEvalOp::evaluate(Individual& inIndividual, Context& io
 	voice_1.reset();
 	envelope.reset();
 	voice_1.perform(candidate_sb, target_length, 0, 0);
-	helpers::io::wav_file_save("voice_1.wav", target_sample_rate, 32, candidate_sb, 0);
+	//helpers::io::wav_file_save("voice_1.wav", target_sample_rate, 32, candidate_sb, 0);
 	envelope.perform(candidate_sb, target_length, 1, 0);
-	helpers::io::wav_file_save("envelope.wav", target_sample_rate, 32, candidate_sb, 1);
+	//helpers::io::wav_file_save("envelope.wav", target_sample_rate, 32, candidate_sb, 1);
 	multiplier.perform(candidate_sb, target_length, 0, 0);
-	helpers::io::wav_file_save("multiplied.wav", target_sample_rate, 32, candidate_sb, 0);
+	//helpers::io::wav_file_save("multiplied.wav", target_sample_rate, 32, candidate_sb, 0);
 
 	// fft
 	fft_real(target_length, candidate_sb.channel_pointer_read(0), fft_n, fft_hop_size, fft_window_sb.channel_pointer_read(0), fft_in_b, candidate_fft_out_b, candidate_magnitude_b, candidate_phase_b);

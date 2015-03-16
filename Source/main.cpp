@@ -12,7 +12,7 @@ using namespace Beagle;
 
 int main (int argc, char** argv) {
 	// read target
-    File file("C:\\Code\\timbre_research\\samples\\cleaned\\clarinet_d3.wav");
+    File file("C:\\Code\\timbre_research\\samples\\cleaned\\marimba_c4.wav");
     AudioFormatManager formatManager;
     formatManager.registerBasicFormats();
     ScopedPointer<AudioFormatReader> reader = formatManager.createReaderFor(file);
@@ -45,7 +45,7 @@ int main (int argc, char** argv) {
 		const unsigned int lVectorSize = 11;  
 		// 5. Initialize the evolver and evolve the vivarium.
 		GA::EvolverFloatVector::Handle lEvolver = new GA::EvolverFloatVector(lEvalOp, lVectorSize);
-		lEvolver->initialize(lSystem, "C:\\Code\\timbre_research\\Builds\\VisualStudio2012\\Debug\\cmaes_no_milestone.conf");
+		lEvolver->initialize(lSystem, "C:\\Code\\timbre_research\\Builds\\cmaes_no_milestone.conf");
 		lEvolver->evolve(lVivarium);
 	}
 	catch(Exception& inException) {
