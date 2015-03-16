@@ -12,7 +12,7 @@ using namespace Beagle;
 
 int main (int argc, char** argv) {
 	// read target
-    File file("C:\\Code\\timbre_research\\Builds\\VisualStudio2012\\Debug\\target.wav");
+    File file("C:\\Code\\timbre_research\\samples\\BbClarinet.ff.D3.stereo.aif");
     AudioFormatManager formatManager;
     formatManager.registerBasicFormats();
     ScopedPointer<AudioFormatReader> reader = formatManager.createReaderFor(file);
@@ -46,13 +46,13 @@ int main (int argc, char** argv) {
 		// 1. Build the system.
 		System::Handle lSystem = new System;
 		// 2. Build evaluation operator.
-		PMOneVoiceEvalOp::Handle lEvalOp = new PMOneVoiceEvalOp(target_length, target_buffer, &voice_1, window_type::hann, 1024, 512);
+		PMOneVoiceEvalOp::Handle lEvalOp = new PMOneVoiceEvalOp(target_sample_rate, target_length, target_buffer, window_type::hann, 1024, 512);
 		//PMOneVoiceEvalOp::Handle lEvalOp = new PMOneVoiceEvalOp;
 		// 3. Instanciate the evolver and the vivarium for float vectors GA population.
 		GA::FloatVector::Alloc::Handle lFVAlloc = new GA::FloatVector::Alloc;
 		Vivarium::Handle lVivarium = new Vivarium(lFVAlloc);
 		// 4. Set representation, float vectors of 5 values.
-		const unsigned int lVectorSize = 4;  
+		const unsigned int lVectorSize = 11;  
 		// 5. Initialize the evolver and evolve the vivarium.
 		GA::EvolverFloatVector::Handle lEvolver = new GA::EvolverFloatVector(lEvalOp, lVectorSize);
 		lEvolver->initialize(lSystem, "C:\\Code\\timbre_research\\Builds\\VisualStudio2012\\Debug\\cmaes_no_milestone.conf");

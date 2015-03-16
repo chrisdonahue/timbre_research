@@ -105,36 +105,22 @@ Fitness::Handle PMOneVoiceEvalOp::evaluate(Individual& inIndividual, Context& io
 {
 	Beagle_AssertM(inIndividual.size() == 1);
 	GA::FloatVector::Handle lFloatVector = castHandleT<GA::FloatVector>(inIndividual[0]);
-	Beagle_AssertM(lFloatVector->size() == 4);
-	for (unsigned int i = 0; i < 4; i++) {
-		double lXi = (*lFloatVector)[i];
-		if(lXi > 1.0) {
-			lXi = 1.0;
-		}
-		if(lXi < -1.0) {
-			lXi = -1.0;
-		}
-		switch (i) {
-		case 0:
-			voice_1->f_m_set(static_cast<types::sample>(lXi));
-			break;
-		case 1:
-			voice_1->i_set(static_cast<types::sample>(lXi * 10.0));
-			break;
-		case 2:
-			voice_1->f_c_set(static_cast<types::sample>(lXi));
-			break;
-		case 3:
-			voice_1->a_set(static_cast<types::sample>(lXi));
-			break;
-		default:
-			continue;
-		}
-	}
+	Beagle_AssertM(lFloatVector->size() == 11);
+
+	voice_1.f_m_set(static_cast<types::sample>((*lFloatVector)[0]));
+	voice_1.i_set(static_cast<types::sample>((*lFloatVector)[1]));
+	voice_1.f_c_set(static_cast<types::sample>((*lFloatVector)[2]));
+	envelope.point_set(0, (*lFloatVector)[3], (*lFloatVector)[4]);
+	envelope.point_set(1, (*lFloatVector)[5], (*lFloatVector)[6]);
+	envelope.point_set(2, (*lFloatVector)[7], (*lFloatVector)[8]);
+	envelope.point_set(3, (*lFloatVector)[9], (*lFloatVector)[10]);
 
 	// perform
-	voice_1->reset();
-	voice_1->perform(candidate_sb, target_length, 0, 0);
+	voice_1.reset();
+	envelope.reset();
+	voice_1.perform(candidate_sb, target_length, 0, 0);
+	envelope.perform(candidate_sb, target_length, 1, 0);
+	multiplier.perform(candidate_sb, target_length, 0, 0);
 
 	// fft
 	fft_real(target_length, candidate_sb.channel_pointer_read(0), fft_n, fft_hop_size, fft_window_sb.channel_pointer_read(0), fft_in_b, candidate_fft_out_b, candidate_magnitude_b, candidate_phase_b);
@@ -146,7 +132,7 @@ Fitness::Handle PMOneVoiceEvalOp::evaluate(Individual& inIndividual, Context& io
 		error += fabs(target_magnitude_b[bin] - candidate_magnitude_b[bin]);
 	}
 	if (error < error_min) {
-		helpers::io::wav_file_save("best.wav", 44100.0, 32, candidate_sb, 0);
+		helpers::io::wav_file_save("best.wav", target_sample_rate, 32, candidate_sb, 0);
 		error_min = error;
 	}
 	return new FitnessSimpleMin(static_cast<double>(error));

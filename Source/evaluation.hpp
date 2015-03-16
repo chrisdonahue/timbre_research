@@ -38,17 +38,26 @@ public:
   typedef Beagle::ContainerT<PMOneVoiceEvalOp,Beagle::EvaluationOp::Bag>
           Bag;
 
-  PMOneVoiceEvalOp(types::index target_length, const types::sample* target_b, abstraction::pm_voice* voice_1, window_type fft_window_type, types::index fft_n, types::index fft_hop_size) :
+  PMOneVoiceEvalOp(types::cont_64 target_sample_rate, types::index target_length, const types::sample* target_b, window_type fft_window_type, types::index fft_n, types::index fft_hop_size) :
 	  Beagle::EvaluationOp("PMOneVoiceEvalOp"),
+	  table_sb(1, 2048),
+	  multiplier(static_cast<types::channel>(2)),
+	  target_sample_rate(target_sample_rate),
 	  target_length(target_length),
 	  target_b(target_b),
-	  voice_1(voice_1),
 	  candidate_sb(2, target_length),
 	  fft_n(fft_n),
 	  fft_hop_size(fft_hop_size),
 	  fft_window_sb(1, fft_n),
 	  error_min(values::infinity_64)
   {
+	  helpers::generators::sine(2048, table_sb.channel_pointer_write(0));
+	  voice_1.table_set(2048, table_sb.channel_pointer_read(0));
+	  voice_1.prepare(target_sample_rate, target_length);
+	  envelope.prepare(target_sample_rate, target_length);
+	  multiplier.prepare(target_sample_rate, target_length);
+	  voice_1.a_set(1.0f);
+
 	  fft_in_b = reinterpret_cast<kiss_fft_scalar*>(malloc(sizeof(kiss_fft_scalar) * fft_n));
 	  fft_window(fft_window_type, fft_window_sb);
 
@@ -68,6 +77,9 @@ public:
   };
 
   ~PMOneVoiceEvalOp() {
+	  voice_1.release();
+	  envelope.release();
+	  multiplier.release();
 	  free(fft_in_b);
 	  free(target_fft_out_b);
 	  free(target_magnitude_b);
@@ -82,13 +94,17 @@ public:
                                            Beagle::Context& ioContext);
 
 private:
+	// synthesizer
+	sample_buffer table_sb;
+	abstraction::pm_voice voice_1;
+	primitives::envelopes::interpolate_linear<4> envelope;
+	primitives::operators::multiply multiplier;
+	sample_buffer candidate_sb;
+
 	// target
+	types::cont_64 target_sample_rate;
 	types::index target_length;
 	const types::sample* target_b;
-
-	// synthesizer
-	abstraction::pm_voice* voice_1;
-	sample_buffer candidate_sb;
 
 	// fft params
 	types::index fft_n;
